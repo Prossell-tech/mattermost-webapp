@@ -38,7 +38,8 @@ import monokaiCSS from '!!file-loader?name=files/code_themes/[hash].[ext]!highli
 import solarizedDarkCSS from '!!file-loader?name=files/code_themes/[hash].[ext]!highlight.js/styles/solarized-dark.css';
 
 // eslint-disable-line import/order
-import solarizedLightCSS from '!!file-loader?name=files/code_themes/[hash].[ext]!highlight.js/styles/solarized-light.css'; // eslint-disable-line import/order
+import solarizedLightCSS
+    from '!!file-loader?name=files/code_themes/[hash].[ext]!highlight.js/styles/solarized-light.css'; // eslint-disable-line import/order
 
 export const SettingsTypes = {
     TYPE_TEXT: 'text',
@@ -970,30 +971,30 @@ export const Constants = {
     EMOJI_PICKER_WIDTH_OFFSET: 295,
     THEMES: {
         default: {
-            type: 'Mattermost',
-            sidebarBg: '#145dbf',
-            sidebarText: '#ffffff',
-            sidebarUnreadText: '#ffffff',
-            sidebarTextHoverBg: '#4578bf',
-            sidebarTextActiveBorder: '#579eff',
-            sidebarTextActiveColor: '#ffffff',
-            sidebarHeaderBg: '#1153ab',
-            sidebarHeaderTextColor: '#ffffff',
-            onlineIndicator: '#06d6a0',
-            awayIndicator: '#ffbc42',
-            dndIndicator: '#f74343',
-            mentionBg: '#ffffff',
-            mentionColor: '#145dbf',
-            centerChannelBg: '#ffffff',
-            centerChannelColor: '#3d3c40',
-            newMessageSeparator: '#ff8800',
-            linkColor: '#2389d7',
-            buttonBg: '#166de0',
-            buttonColor: '#ffffff',
-            errorTextColor: '#fd5960',
-            mentionHighlightBg: '#ffe577',
-            mentionHighlightLink: '#166de0',
-            codeTheme: 'github',
+            sidebarBg: "#357974",
+            sidebarText: "#ffffff",
+            sidebarUnreadText: "#ffffff",
+            sidebarTextHoverBg: "#619c98",
+            sidebarTextActiveBorder: "#d8ff6c",
+            sidebarTextActiveColor: "#ffffff",
+            sidebarHeaderBg: "#357974",
+            sidebarHeaderTextColor: "#ffffff",
+            onlineIndicator: "#87e210",
+            awayIndicator: "#ffca64",
+            dndIndicator: "#ff7e7e",
+            mentionBg: "#ffffff",
+            mentionBj: "#ffffff",
+            mentionColor: "#127cc5",
+            centerChannelBg: "#ffffff",
+            centerChannelColor: "#2e3133",
+            newMessageSeparator: "#b9f569",
+            linkColor: "#127cc5",
+            buttonBg: "#127cc5",
+            buttonColor: "#ffffff",
+            errorTextColor: "#fd5960",
+            mentionHighlightBg: "#fff5d3",
+            mentionHighlightLink: "#127cc5",
+            codeTheme: "github",
             image: mattermostThemeImage,
         },
         organization: {
@@ -1334,14 +1335,24 @@ export const Constants = {
         actionscript: {name: 'ActionScript', extensions: ['as'], aliases: ['as', 'as3']},
         applescript: {name: 'AppleScript', extensions: ['applescript', 'osascript', 'scpt']},
         bash: {name: 'Bash', extensions: ['sh'], aliases: ['sh']},
-        clojure: {name: 'Clojure', extensions: ['clj', 'boot', 'cl2', 'cljc', 'cljs', 'cljs.hl', 'cljscm', 'cljx', 'hic']},
-        coffeescript: {name: 'CoffeeScript', extensions: ['coffee', '_coffee', 'cake', 'cjsx', 'cson', 'iced'], aliases: ['coffee', 'coffee-script']},
+        clojure: {
+            name: 'Clojure',
+            extensions: ['clj', 'boot', 'cl2', 'cljc', 'cljs', 'cljs.hl', 'cljscm', 'cljx', 'hic']
+        },
+        coffeescript: {
+            name: 'CoffeeScript',
+            extensions: ['coffee', '_coffee', 'cake', 'cjsx', 'cson', 'iced'],
+            aliases: ['coffee', 'coffee-script']
+        },
         cpp: {name: 'C/C++', extensions: ['cpp', 'c', 'cc', 'h', 'c++', 'h++', 'hpp'], aliases: ['c++', 'c']},
         cs: {name: 'C#', extensions: ['cs', 'csharp'], aliases: ['c#', 'csharp']},
         css: {name: 'CSS', extensions: ['css']},
         d: {name: 'D', extensions: ['d', 'di'], aliases: ['dlang']},
         dart: {name: 'Dart', extensions: ['dart']},
-        delphi: {name: 'Delphi', extensions: ['delphi', 'dpr', 'dfm', 'pas', 'pascal', 'freepascal', 'lazarus', 'lpr', 'lfm']},
+        delphi: {
+            name: 'Delphi',
+            extensions: ['delphi', 'dpr', 'dfm', 'pas', 'pascal', 'freepascal', 'lazarus', 'lpr', 'lfm']
+        },
         diff: {name: 'Diff', extensions: ['diff', 'patch'], aliases: ['patch', 'udiff']},
         django: {name: 'Django', extensions: ['django', 'jinja']},
         dockerfile: {name: 'Dockerfile', extensions: ['dockerfile', 'docker'], aliases: ['docker']},
@@ -1352,7 +1363,11 @@ export const Constants = {
         gcode: {name: 'G-Code', extensions: ['gcode', 'nc']},
         go: {name: 'Go', extensions: ['go'], aliases: ['golang']},
         groovy: {name: 'Groovy', extensions: ['groovy']},
-        handlebars: {name: 'Handlebars', extensions: ['handlebars', 'hbs', 'html.hbs', 'html.handlebars'], aliases: ['hbs', 'mustache']},
+        handlebars: {
+            name: 'Handlebars',
+            extensions: ['handlebars', 'hbs', 'html.hbs', 'html.handlebars'],
+            aliases: ['hbs', 'mustache']
+        },
         haskell: {name: 'Haskell', extensions: ['hs'], aliases: ['hs']},
         haxe: {name: 'Haxe', extensions: ['hx']},
         java: {name: 'Java', extensions: ['java', 'jsp']},
@@ -1369,7 +1384,11 @@ export const Constants = {
         objectivec: {name: 'Objective C', extensions: ['mm', 'objc', 'obj-c'], aliases: ['objective_c', 'objc']},
         ocaml: {name: 'OCaml', extensions: ['ml']},
         perl: {name: 'Perl', extensions: ['perl', 'pl'], aliases: ['pl']},
-        pgsql: {name: 'PostgreSQL', extensions: ['pgsql', 'postgres', 'postgresql'], aliases: ['postgres', 'postgresql']},
+        pgsql: {
+            name: 'PostgreSQL',
+            extensions: ['pgsql', 'postgres', 'postgresql'],
+            aliases: ['postgres', 'postgresql']
+        },
         php: {name: 'PHP', extensions: ['php', 'php3', 'php4', 'php5', 'php6'], aliases: ['php3', 'php4', 'php5']},
         powershell: {name: 'PowerShell', extensions: ['ps', 'ps1'], aliases: ['posh']},
         puppet: {name: 'Puppet', extensions: ['pp'], aliases: ['pp']},
@@ -1492,12 +1511,19 @@ export const Constants = {
 
 export const AcceptedProfileImageTypes = ['image/jpeg', 'image/png', 'image/bmp'];
 
-export const searchHintOptions = [{searchTerm: 'From:', message: {id: t('search_list_option.from'), defaultMessage: 'Messages from a user'}},
+export const searchHintOptions = [{
+    searchTerm: 'From:',
+    message: {id: t('search_list_option.from'), defaultMessage: 'Messages from a user'}
+},
     {searchTerm: 'In:', message: {id: t('search_list_option.in'), defaultMessage: 'Messages in a channel'}},
     {searchTerm: 'On:', message: {id: t('search_list_option.on'), defaultMessage: 'Messages on a date'}},
     {searchTerm: 'Before:', message: {id: t('search_list_option.before'), defaultMessage: 'Messages before a date'}},
     {searchTerm: 'After:', message: {id: t('search_list_option.after'), defaultMessage: 'Messages after a date'}},
-    {searchTerm: '-', message: {id: t('search_list_option.exclude'), defaultMessage: 'Exclude search terms'}, additionalDisplay: '—'},
+    {
+        searchTerm: '-',
+        message: {id: t('search_list_option.exclude'), defaultMessage: 'Exclude search terms'},
+        additionalDisplay: '—'
+    },
     {searchTerm: '""', message: {id: t('search_list_option.phrases'), defaultMessage: 'Messages with phrases'}},
 ];
 
