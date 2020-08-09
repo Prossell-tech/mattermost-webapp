@@ -971,6 +971,7 @@ export const Constants = {
     EMOJI_PICKER_WIDTH_OFFSET: 295,
     THEMES: {
         default: {
+            type: 'Mattermost',
             sidebarBg: "#357974",
             sidebarText: "#ffffff",
             sidebarUnreadText: "#ffffff",
