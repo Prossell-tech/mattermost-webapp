@@ -988,7 +988,7 @@ export const Constants = {
             mentionColor: '#127cc5',
             centerChannelBg: '#ffffff',
             centerChannelColor: '#2e3133',
-            newMessageSeparator: '#b9f569',
+            newMessageSeparator:'#9bb379',
             linkColor: '#127cc5',
             buttonBg: '#127cc5',
             buttonColor: '#ffffff',
