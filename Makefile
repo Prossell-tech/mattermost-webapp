@@ -1,8 +1,8 @@
 .PHONY: build test run clean stop check-style fix-style run-unit emojis help package-ci storybook build-storybook update-dependencies
 
-BUILD_SERVER_DIR = ../mattermost-server
-BUILD_WEBAPP_DIR = ../mattermost-webapp
-MM_UTILITIES_DIR = ../mattermost-utilities
+BUILD_SERVER_DIR = ../prossell-server
+BUILD_WEBAPP_DIR = ../prossell-webapp
+MM_UTILITIES_DIR = ../prossell-utilities
 EMOJI_TOOLS_DIR = ./build/emoji
 
 build-storybook: node_modules ## Build the storybook
@@ -47,7 +47,7 @@ package: build ## Packages app
 
 	mkdir tmp
 	mv dist tmp/client
-	tar -C tmp -czf mattermost-webapp.tar.gz client
+	tar -C tmp -czf prossell-webapp.tar.gz client
 	mv tmp/client dist
 	rmdir tmp
 
@@ -61,7 +61,7 @@ package-ci: ## used in the CI to build the package and bypass the npm install
 
 	mkdir tmp
 	mv dist tmp/client
-	tar -C tmp -czf mattermost-webapp.tar.gz client
+	tar -C tmp -czf prossell-webapp.tar.gz client
 	mv tmp/client dist
 	rmdir tmp
 
