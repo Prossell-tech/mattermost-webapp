@@ -10,7 +10,6 @@ import ExternalImage from 'components/external_image';
 
 export default class YoutubeVideo extends React.PureComponent {
     static propTypes = {
-        postId: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         show: PropTypes.bool.isRequired,
         metadata: PropTypes.object,

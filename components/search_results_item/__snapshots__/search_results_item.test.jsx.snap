@@ -10,7 +10,6 @@ exports[`components/SearchResultsItem should match snapshot for DM 1`] = `
   />
   <div
     className="a11y__section post post--thread post--compact"
-    id="searchResult_id"
     onFocus={[Function]}
   >
     <div
@@ -132,6 +131,7 @@ exports[`components/SearchResultsItem should match snapshot for DM 1`] = `
               <FormattedMessage
                 defaultMessage="Jump"
                 id="search_item.jump"
+                values={Object {}}
               />
             </a>
           </div>
@@ -217,7 +217,6 @@ exports[`components/SearchResultsItem should match snapshot for archived channel
   />
   <div
     className="a11y__section post post--thread post--compact"
-    id="searchResult_id"
     onFocus={[Function]}
   >
     <div
@@ -234,6 +233,7 @@ exports[`components/SearchResultsItem should match snapshot for archived channel
         <FormattedMessage
           defaultMessage="Archived"
           id="search_item.channelArchived"
+          values={Object {}}
         />
       </span>
     </div>
@@ -350,6 +350,7 @@ exports[`components/SearchResultsItem should match snapshot for archived channel
               <FormattedMessage
                 defaultMessage="Jump"
                 id="search_item.jump"
+                values={Object {}}
               />
             </a>
           </div>
@@ -435,7 +436,6 @@ exports[`components/SearchResultsItem should match snapshot for channel 1`] = `
   />
   <div
     className="a11y__section post post--thread post--compact"
-    id="searchResult_id"
     onFocus={[Function]}
   >
     <div
@@ -557,6 +557,7 @@ exports[`components/SearchResultsItem should match snapshot for channel 1`] = `
               <FormattedMessage
                 defaultMessage="Jump"
                 id="search_item.jump"
+                values={Object {}}
               />
             </a>
           </div>
@@ -642,7 +643,6 @@ exports[`components/SearchResultsItem should match snapshot for deleted message 
   />
   <div
     className="a11y__section post post--thread post--compact"
-    id="searchResult_id"
     onFocus={[Function]}
   >
     <div
@@ -734,6 +734,7 @@ exports[`components/SearchResultsItem should match snapshot for deleted message 
               <FormattedMessage
                 defaultMessage="(message deleted)"
                 id="post_body.deleted"
+                values={Object {}}
               />
             </p>
             <Connect(FileAttachmentList)
@@ -784,7 +785,6 @@ exports[`components/SearchResultsItem should match snapshot for deleted message 
   />
   <div
     className="a11y__section post post--thread post--compact"
-    id="searchResult_id"
     onFocus={[Function]}
   >
     <div
@@ -876,6 +876,7 @@ exports[`components/SearchResultsItem should match snapshot for deleted message 
               <FormattedMessage
                 defaultMessage="(message deleted)"
                 id="post_body.deleted"
+                values={Object {}}
               />
             </p>
             <Connect(FileAttachmentList)

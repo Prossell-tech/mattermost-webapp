@@ -8,11 +8,8 @@ import {FormattedMessage} from 'react-intl';
 
 import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 import MattermostLogo from 'components/widgets/icons/mattermost_logo';
-import Nbsp from 'components/html_entities/nbsp';
 
 import {AboutLinks} from 'utils/constants';
-
-import AboutBuildModalCloud from './about_build_modal_cloud/about_build_modal_cloud';
 
 export default class AboutBuildModal extends React.PureComponent {
     static defaultProps = {
@@ -61,16 +58,6 @@ export default class AboutBuildModal extends React.PureComponent {
     render() {
         const config = this.props.config;
         const license = this.props.license;
-
-        if (license.Cloud === 'true') {
-            return (
-                <AboutBuildModalCloud
-                    {...this.props}
-                    {...this.state}
-                    doHide={this.doHide}
-                />
-            );
-        }
 
         let title = (
             <FormattedMessage
@@ -147,7 +134,7 @@ export default class AboutBuildModal extends React.PureComponent {
                             id='about.licensed'
                             defaultMessage='Licensed to:'
                         />
-                        <Nbsp/>{license.Company}
+                        &nbsp;{license.Company}
                     </div>
                 );
             }
@@ -289,26 +276,26 @@ export default class AboutBuildModal extends React.PureComponent {
                                 id='about.hash'
                                 defaultMessage='Build Hash:'
                             />
-                            <Nbsp/>{config.BuildHash}
+                            &nbsp;{config.BuildHash}
                             <br/>
                             <FormattedMessage
                                 id='about.hashee'
                                 defaultMessage='EE Build Hash:'
                             />
-                            <Nbsp/>{config.BuildHashEnterprise}
+                            &nbsp;{config.BuildHashEnterprise}
                             <br/>
                             <FormattedMessage
                                 id='about.hashwebapp'
                                 defaultMessage='Webapp Build Hash:'
                             />
-                            <Nbsp/>{/* global COMMIT_HASH */ this.props.webappBuildHash || (typeof COMMIT_HASH === 'undefined' ? '' : COMMIT_HASH)}
+                            &nbsp;{/* global COMMIT_HASH */ this.props.webappBuildHash || (typeof COMMIT_HASH === 'undefined' ? '' : COMMIT_HASH)}
                         </p>
                         <p>
                             <FormattedMessage
                                 id='about.date'
                                 defaultMessage='Build Date:'
                             />
-                            <Nbsp/>{config.BuildDate}
+                            &nbsp;{config.BuildDate}
                         </p>
                     </div>
                 </Modal.Body>

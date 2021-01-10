@@ -20,7 +20,7 @@ describe('Messaging', () => {
         });
     });
 
-    it('MM-T96 Trying to type in middle of text should not send the cursor to end of textbox', () => {
+    it('M18683-Trying to type in middle of text should not send the cursor to end of textbox', () => {
         // # Type message to use
         cy.get('#post_textbox').clear().type('aa');
 

@@ -13,7 +13,7 @@ import MenuIcon from '../icons/menu_icon';
 import Menu from './menu';
 import MenuWrapper from './menu_wrapper';
 
-storiesOf('Widgets/Menus', module).
+storiesOf('Menus', module).
     addDecorator(withKnobs).
     add(
         'simple menu',

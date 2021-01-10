@@ -19,7 +19,9 @@ import {
     makeGetCommentCountForPost,
     makeGetMessageInHistoryItem,
 } from 'mattermost-redux/selectors/entities/posts';
-import {getAssociatedGroupsForReferenceByMention} from 'mattermost-redux/selectors/entities/groups';
+import {
+    getAssociatedGroupsForReference,
+} from 'mattermost-redux/selectors/entities/groups';
 import {
     addMessageIntoHistory,
     moveHistoryIndexBack,
@@ -91,7 +93,6 @@ function makeMapStateToProps() {
         });
         const channelMemberCountsByGroup = selectChannelMemberCountsByGroup(state, currentChannel.id);
         const currentTeamId = getCurrentTeamId(state);
-        const groupsWithAllowReference = useGroupMentions ? getAssociatedGroupsForReferenceByMention(state, currentTeamId, currentChannel.id) : null;
 
         return {
             currentTeamId,
@@ -123,7 +124,7 @@ function makeMapStateToProps() {
             canPost,
             useChannelMentions,
             shouldShowPreview: showPreviewOnCreatePost(state),
-            groupsWithAllowReference,
+            groupsWithAllowReference: new Map(getAssociatedGroupsForReference(state, currentTeamId, currentChannel.id).map((group) => [`@${group.name}`, group])),
             useGroupMentions,
             channelMemberCountsByGroup,
             isLDAPEnabled,

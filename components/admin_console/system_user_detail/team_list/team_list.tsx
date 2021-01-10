@@ -5,8 +5,6 @@ import React from 'react';
 
 import {ActionFunc} from 'mattermost-redux/types/actions';
 
-import {TeamMembership} from 'mattermost-redux/types/teams';
-
 import {filterAndSortTeamsByDisplayName} from 'utils/team_utils.jsx';
 import {t} from 'utils/i18n';
 
@@ -55,13 +53,12 @@ type Props = {
         removeUserFromTeam: (teamId: string, userId: string) => ActionFunc & Partial<{error: Error}>;
         updateTeamMemberSchemeRoles: (teamId: string, userId: string, isSchemeUser: boolean, isSchemeAdmin: boolean) => ActionFunc & Partial<{error: Error}>;
     };
-    userDetailCallback: (teamsId: TeamMembership[]) => void;
+    userDetailCallback: (teamsId: Record<string, any>) => void;
     refreshTeams: boolean;
-    readOnly?: boolean;
 }
 
 type State = {
-    teamsWithMemberships: Array<Record<string, any>>;
+    teamsWithMemberships: Record<string, any>[];
     serverError: string | null;
 }
 
@@ -102,7 +99,7 @@ export default class TeamList extends React.PureComponent<Props, State> {
     }
 
     // check this out
-    private mergeTeamsWithMemberships = (data: Array<Record<string, any>>): TeamMembership[] => {
+    private mergeTeamsWithMemberships = (data: Record<string, any>[]): Record<string, any>[] => {
         const teams = data[0].data;
         const memberships = data[1].data;
         let teamsWithMemberships = teams.map((object: {[x: string]: string}) => {
@@ -175,7 +172,6 @@ export default class TeamList extends React.PureComponent<Props, State> {
                 doRemoveUserFromTeam={this.doRemoveUserFromTeam}
                 doMakeUserTeamAdmin={this.doMakeUserTeamAdmin}
                 doMakeUserTeamMember={this.doMakeUserTeamMember}
-                readOnly={this.props.readOnly}
             />
         );
     }

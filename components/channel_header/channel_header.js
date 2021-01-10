@@ -18,7 +18,7 @@ import EditChannelHeaderModal from 'components/edit_channel_header_modal';
 import Markdown from 'components/markdown';
 import OverlayTrigger from 'components/overlay_trigger';
 import PopoverListMembers from 'components/popover_list_members';
-import Search from 'components/search/index.tsx';
+import SearchBar from 'components/search_bar';
 import StatusIcon from 'components/status_icon';
 import FlagIcon from 'components/widgets/icons/flag_icon';
 import MentionsIcon from 'components/widgets/icons/mentions_icon';
@@ -96,7 +96,6 @@ class ChannelHeader extends React.PureComponent {
         this.toggleFavoriteRef = React.createRef();
         this.headerDescriptionRef = React.createRef();
         this.headerPopoverTextMeasurerRef = React.createRef();
-        this.headerOverlayRef = React.createRef();
 
         this.state = {showSearchBar: ChannelHeader.getShowSearchBar(props), popoverOverlayWidth: 0, showChannelHeaderPopover: false, leftOffset: 0, topOffset: 0};
 
@@ -134,7 +133,7 @@ class ChannelHeader extends React.PureComponent {
     }
 
     static getShowSearchBar(props) {
-        return !Utils.isMobile() && (Utils.windowWidth() > SEARCH_BAR_MINIMUM_WINDOW_SIZE || props.rhsOpen);
+        return (Utils.windowWidth() > SEARCH_BAR_MINIMUM_WINDOW_SIZE) || props.rhsOpen;
     }
 
     handleResize = () => {
@@ -250,8 +249,8 @@ class ChannelHeader extends React.PureComponent {
     }
 
     showEditChannelHeaderModal = () => {
-        if (this.headerOverlayRef.current) {
-            this.headerOverlayRef.current.hide();
+        if (this.refs.headerOverlay) {
+            this.refs.headerOverlay.hide();
         }
 
         const {actions, channel} = this.props;
@@ -488,7 +487,7 @@ class ChannelHeader extends React.PureComponent {
                             placement='bottom'
                             rootClose={true}
                             target={this.headerDescriptionRef.current}
-                            ref={this.headerOverlayRef}
+                            ref='headerOverlay'
                             onEnter={this.setPopoverOverlayWidth}
                             onHide={() => this.setState({showChannelHeaderPopover: false})}
                         >{popoverContent}</Overlay>
@@ -765,12 +764,14 @@ class ChannelHeader extends React.PureComponent {
                         onClick={this.showPinnedPosts}
                         tooltipKey={'pinnedPosts'}
                     />
+
                     {this.state.showSearchBar ? (
                         <div
                             id='searchbarContainer'
                             className='flex-child search-bar__container'
                         >
-                            <Search
+                            <SearchBar
+                                showMentionFlagBtns={false}
                                 isFocus={Utils.isMobile() || (this.props.rhsOpen && Boolean(this.props.rhsState))}
                             />
                         </div>

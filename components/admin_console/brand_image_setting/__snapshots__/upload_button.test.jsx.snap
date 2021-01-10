@@ -6,7 +6,6 @@ exports[`components/admin_console/brand_image_setting/UploadButton should match 
   disabled={false}
   id="upload-button"
   onClick={[Function]}
-  type="button"
 >
   <LoadingWrapper
     loading={false}
@@ -23,7 +22,6 @@ exports[`components/admin_console/brand_image_setting/UploadButton should match 
   disabled={false}
   id="upload-button"
   onClick={[Function]}
-  type="button"
 >
   <LoadingWrapper
     loading={true}
@@ -40,7 +38,6 @@ exports[`components/admin_console/brand_image_setting/UploadButton should match 
   disabled={false}
   id="upload-button"
   onClick={[Function]}
-  type="button"
 >
   <LoadingWrapper
     loading={false}
@@ -61,7 +58,6 @@ exports[`components/admin_console/brand_image_setting/UploadButton should match 
   disabled={true}
   id="upload-button"
   onClick={[Function]}
-  type="button"
 >
   <LoadingWrapper
     loading={false}

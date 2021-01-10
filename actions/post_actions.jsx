@@ -24,7 +24,7 @@ import {
 import {matchEmoticons} from 'utils/emoticons';
 import * as UserAgent from 'utils/user_agent';
 
-import {completePostReceive} from './new_post';
+import {completePostReceive} from './post_utils';
 
 export function handleNewPost(post, msg) {
     return async (dispatch, getState) => {
@@ -41,7 +41,7 @@ export function handleNewPost(post, msg) {
             await dispatch(getMyChannelMember(post.channel_id));
         }
 
-        dispatch(completePostReceive(post, websocketMessageProps, myChannelMemberDoesntExist));
+        dispatch(completePostReceive(post, websocketMessageProps));
 
         if (msg && msg.data) {
             const currentUserId = getCurrentUserId(state);
@@ -135,7 +135,6 @@ export function searchForTerm(term) {
     return (dispatch) => {
         dispatch(RhsActions.updateSearchTerms(term));
         dispatch(RhsActions.showSearchResults());
-        return {data: true};
     };
 }
 

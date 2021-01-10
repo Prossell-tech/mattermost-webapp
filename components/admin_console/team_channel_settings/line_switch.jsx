@@ -31,7 +31,6 @@ export default class LineSwitch extends React.PureComponent {
                     className='line-switch__toggle'
                 >
                     <Toggle
-                        id={id}
                         disabled={disabled}
                         onToggle={onToggle}
                         toggled={toggled}

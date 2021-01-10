@@ -13,7 +13,7 @@ describe('Reducers.channel', () => {
         loadingPosts: {},
         focusedPostId: '',
         mobileView: false,
-        lastUnreadChannel: null,
+        keepChannelIdAsUnread: null,
         lastGetPosts: {},
         toastStatus: false,
         channelPrefetchStatus: {},

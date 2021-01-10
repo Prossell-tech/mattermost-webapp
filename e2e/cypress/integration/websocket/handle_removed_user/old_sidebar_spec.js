@@ -15,7 +15,7 @@ import {getRandomId} from '../../../utils';
 import {
     createNewTeamAndMoveToOffTopic,
     removeMeFromCurrentChannel,
-    shouldRemoveSavedPostsInRHS,
+    shouldRemoveFlaggedPostsInRHS,
     shouldRemoveMentionsInRHS,
 } from './helpers';
 
@@ -49,6 +49,6 @@ describe('Handle removed user - old sidebar', () => {
     it('should remove flagged posts from RHS', () => {
         const teamName = `team-${getRandomId()}`;
         createNewTeamAndMoveToOffTopic(teamName, sidebarItemClass);
-        shouldRemoveSavedPostsInRHS(teamName, sidebarItemClass);
+        shouldRemoveFlaggedPostsInRHS(teamName, sidebarItemClass);
     });
 });

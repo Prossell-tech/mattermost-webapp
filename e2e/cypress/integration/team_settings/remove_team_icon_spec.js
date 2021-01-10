@@ -47,7 +47,7 @@ describe('Teams Settings', () => {
         });
     });
 
-    it('MM-T391 Remove team icon', () => {
+    it('TS14632 Remove Team Icon', () => {
         // function to open the team settings dialog
         openTeamSettingsDialog();
 

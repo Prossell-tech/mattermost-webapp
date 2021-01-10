@@ -188,14 +188,14 @@ module.exports = {
                         expect(addResponse.status).to.equal(201);
 
                         // explicitly wait to give some to index before searching
-                        cy.wait(TIMEOUTS.TWO_SEC);
+                        cy.wait(TIMEOUTS.HALF_SEC);
                         return cy.wrap(channel);
                     });
                 });
             }
 
             // explicitly wait to give some to index before searching
-            cy.wait(TIMEOUTS.TWO_SEC);
+            cy.wait(TIMEOUTS.HALF_SEC);
             return cy.wrap(channel);
         });
     },
@@ -204,7 +204,7 @@ module.exports = {
         cy.typeCmdOrCtrl().type('k');
 
         // Clear out and type in the name
-        cy.findByRole('textbox', {name: 'quick switch input'}).
+        cy.get('#quickSwitchInput').
             should('be.visible').
             as('input').
             clear().
@@ -215,7 +215,7 @@ module.exports = {
         cy.typeCmdOrCtrl().type('k');
 
         // # Search for channel's display name
-        cy.findByRole('textbox', {name: 'quick switch input'}).
+        cy.get('#quickSwitchInput').
             should('be.visible').
             as('input').
             clear().

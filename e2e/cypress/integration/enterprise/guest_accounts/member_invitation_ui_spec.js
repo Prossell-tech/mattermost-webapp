@@ -8,7 +8,7 @@
 // ***************************************************************
 
 // Stage: @prod
-// Group: @enterprise @guest_account
+// Group: @guest_account
 
 /**
  * Note: This test requires Enterprise license to be uploaded
@@ -105,6 +105,7 @@ describe('Guest Account - Member Invitation Flow', () => {
             },
             ServiceSettings: {
                 EnableEmailInvitations: true,
+                IdleTimeout: 300,
             },
         });
 

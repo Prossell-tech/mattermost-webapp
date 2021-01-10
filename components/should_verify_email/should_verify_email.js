@@ -45,10 +45,7 @@ export default class ShouldVerifyEmail extends React.PureComponent {
             resendConfirm = (
                 <div>
                     <br/>
-                    <p
-                        data-testid='emailVerifySentMessage'
-                        className='alert alert-success'
-                    >
+                    <p className='alert alert-success'>
                         <SuccessIcon/>
                         <FormattedMessage
                             id='email_verify.sent'
@@ -86,7 +83,7 @@ export default class ShouldVerifyEmail extends React.PureComponent {
                 <BackButton/>
                 <div className='col-sm-12'>
                     <div className='signup-team__container'>
-                        <h3 data-testid='emailVerifyAlmost'>
+                        <h3>
                             <FormattedMessage
                                 id='email_verify.almost'
                                 defaultMessage='{siteName}: You are almost done'
@@ -96,14 +93,13 @@ export default class ShouldVerifyEmail extends React.PureComponent {
                             />
                         </h3>
                         <div>
-                            <p data-testid='emailVerifyNotVerifiedBody'>
+                            <p>
                                 <FormattedMessage
                                     id='email_verify.notVerifiedBody'
                                     defaultMessage='Please verify your email address. Check your inbox for an email.'
                                 />
                             </p>
                             <button
-                                data-testid='emailVerifyResend'
                                 onClick={this.handleResend}
                                 className='btn btn-primary'
                             >

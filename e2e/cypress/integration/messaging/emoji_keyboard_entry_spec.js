@@ -10,7 +10,7 @@
 // Stage: @prod
 // Group: @messaging
 
-describe('MM-T154 Use keyboard navigation in emoji picker', () => {
+describe('M16738 - Use keyboard navigation in emoji picker', () => {
     before(() => {
         // # Login as test user and visit town-square
         cy.apiInitSetup({loginAfter: true}).then(({team}) => {

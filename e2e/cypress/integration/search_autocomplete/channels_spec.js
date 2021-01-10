@@ -23,7 +23,15 @@ describe('Autocomplete without Elasticsearch - Channel', () => {
     let testUser;
 
     before(() => {
-        cy.shouldHaveElasticsearchDisabled();
+        // # Disable elastic search via API
+        cy.apiUpdateConfig({
+            ElasticsearchSettings: {
+                EnableAutocomplete: false,
+                EnableIndexing: false,
+                EnableSearching: false,
+                Sniff: false,
+            },
+        });
 
         // # Login as test user and go to town-square
         cy.apiInitSetup({loginAfter: true}).then(({team, user}) => {
@@ -120,8 +128,8 @@ describe('Autocomplete without Elasticsearch - Channel', () => {
             const name = 'hellothere';
 
             // # Create a new channel
-            cy.apiCreateChannel(testTeam.id, name, name).then(({channel}) => {
-                channelId = channel.id;
+            cy.apiCreateChannel(testTeam.id, name, name).then((channelResponse) => {
+                channelId = channelResponse.body.id;
             });
 
             // * Verify channel without special characters appears normally

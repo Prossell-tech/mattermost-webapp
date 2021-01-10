@@ -79,6 +79,7 @@ exports[`components/Toast should match snapshot for showing toast 1`] = `
           <FormattedMessage
             defaultMessage="Close"
             id="general_button.close"
+            values={Object {}}
           />
           <div
             className="tooltip__shortcut--txt"
@@ -86,6 +87,7 @@ exports[`components/Toast should match snapshot for showing toast 1`] = `
             <FormattedMessage
               defaultMessage="esc"
               id="general_button.esc"
+              values={Object {}}
             />
           </div>
         </Tooltip>
@@ -142,6 +144,7 @@ exports[`components/Toast should match snapshot for toast width less than 780px 
           <FormattedMessage
             defaultMessage="Close"
             id="general_button.close"
+            values={Object {}}
           />
           <div
             className="tooltip__shortcut--txt"
@@ -149,6 +152,7 @@ exports[`components/Toast should match snapshot for toast width less than 780px 
             <FormattedMessage
               defaultMessage="esc"
               id="general_button.esc"
+              values={Object {}}
             />
           </div>
         </Tooltip>
@@ -205,6 +209,7 @@ exports[`components/Toast should match snapshot to have extraClasses 1`] = `
           <FormattedMessage
             defaultMessage="Close"
             id="general_button.close"
+            values={Object {}}
           />
           <div
             className="tooltip__shortcut--txt"
@@ -212,6 +217,7 @@ exports[`components/Toast should match snapshot to have extraClasses 1`] = `
             <FormattedMessage
               defaultMessage="esc"
               id="general_button.esc"
+              values={Object {}}
             />
           </div>
         </Tooltip>

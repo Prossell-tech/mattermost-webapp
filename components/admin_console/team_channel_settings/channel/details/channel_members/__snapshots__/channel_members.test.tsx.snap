@@ -47,6 +47,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
       <FormattedMessage
         defaultMessage="Add Members"
         id="admin.team_settings.team_details.add_members"
+        values={Object {}}
       />
     </ModalToggleButton>
   }
@@ -76,12 +77,14 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
             "name": <FormattedMessage
               defaultMessage="Role"
               id="admin.user_grid.role"
+              values={Object {}}
             />,
             "values": Object {
               "channel_admin": Object {
                 "name": <FormattedMessage
                   defaultMessage="Channel Admin"
                   id="admin.user_grid.channel_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -89,6 +92,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="Member"
                   id="admin.user_item.member"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -96,6 +100,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="System Admin"
                   id="admin.user_grid.system_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -103,6 +108,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="Guest"
                   id="admin.user_grid.guest"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -172,9 +178,9 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
         },
       }
     }
-    onSearch={[Function]}
     removeUser={[Function]}
     scope="channel"
+    search={[Function]}
     term=""
     totalCount={3}
     updateMembership={[Function]}
@@ -362,6 +368,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
       <FormattedMessage
         defaultMessage="Add Members"
         id="admin.team_settings.team_details.add_members"
+        values={Object {}}
       />
     </ModalToggleButton>
   }
@@ -391,12 +398,14 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
             "name": <FormattedMessage
               defaultMessage="Role"
               id="admin.user_grid.role"
+              values={Object {}}
             />,
             "values": Object {
               "channel_admin": Object {
                 "name": <FormattedMessage
                   defaultMessage="Channel Admin"
                   id="admin.user_grid.channel_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -404,6 +413,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="Member"
                   id="admin.user_item.member"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -411,6 +421,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="System Admin"
                   id="admin.user_grid.system_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -418,6 +429,7 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
                 "name": <FormattedMessage
                   defaultMessage="Guest"
                   id="admin.user_grid.guest"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -430,9 +442,9 @@ exports[`admin_console/team_channel_settings/channel/ChannelMembers should match
     loadPage={[Function]}
     loading={true}
     memberships={Object {}}
-    onSearch={[Function]}
     removeUser={[Function]}
     scope="channel"
+    search={[Function]}
     term=""
     totalCount={0}
     updateMembership={[Function]}

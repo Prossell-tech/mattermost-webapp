@@ -12,7 +12,7 @@ type Props = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default class SpinnerButton extends PureComponent<Props & React.ButtonHTMLAttributes<HTMLButtonElement>> {
+export default class SpinnerButton extends PureComponent<Props> {
     public static defaultProps: Partial<Props> = {
         spinning: false,
     }
@@ -22,6 +22,7 @@ export default class SpinnerButton extends PureComponent<Props & React.ButtonHTM
 
         return (
             <button
+                className='btn btn-primary'
                 disabled={spinning}
                 {...props}
             >

@@ -3,14 +3,22 @@
 
 import React from 'react';
 
-import LocalizedIcon from 'components/localized_icon';
-import {t} from 'utils/i18n';
+import {FormattedMessage} from 'react-intl';
 
-export default function SelectIcon() {
-    return (
-        <LocalizedIcon
-            className='fa fa fa-plus-square'
-            title={{id: t('generic_icons.select'), defaultMessage: 'Select Icon'}}
-        />
-    );
+export default class SelectIcon extends React.PureComponent {
+    render() {
+        return (
+            <FormattedMessage
+                id='generic_icons.select'
+                defaultMessage='Select Icon'
+            >
+                {(title) => (
+                    <i
+                        className='fa fa fa-plus-square'
+                        title={title}
+                    />
+                )}
+            </FormattedMessage>
+        );
+    }
 }

@@ -14,7 +14,7 @@ import AdminPanelWithLink from './admin_panel_with_link';
 import AdminHeader from './admin_header';
 import FormattedAdminHeader from './formatted_admin_header';
 
-storiesOf('Widgets/Admin Console', module).
+storiesOf('Admin Console', module).
     addDecorator(withKnobs).
     add(
         'admin panel',

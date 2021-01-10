@@ -13,7 +13,7 @@
 import * as TIMEOUTS from '../../fixtures/timeouts';
 import {getAdminAccount} from '../../support/env';
 
-describe('MM-T940 Users - Revoke all sessions', () => {
+describe('SC17020 - Revoke All Sessions from System Console', () => {
     const admin = getAdminAccount();
 
     it('Verify for System Admin', () => {

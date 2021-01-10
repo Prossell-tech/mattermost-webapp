@@ -8,9 +8,9 @@ import {Dictionary} from 'mattermost-redux/types/utilities';
 import {ServerError} from 'mattermost-redux/types/errors';
 import {UserProfile, UsersStats, GetFilteredUsersStatsOpts} from 'mattermost-redux/types/users';
 
-import {filterProfilesStartingWithTerm, profileListToMap} from 'mattermost-redux/utils/user_utils';
+import {filterProfilesMatchingTerm, profileListToMap} from 'mattermost-redux/utils/user_utils';
 
-import {ActionResult, ActionFunc, GenericAction} from 'mattermost-redux/types/actions';
+import {GenericAction, ActionFunc} from 'mattermost-redux/types/actions';
 import {ChannelStats} from 'mattermost-redux/types/channels';
 
 import {getChannelStats} from 'mattermost-redux/actions/channels';
@@ -36,22 +36,26 @@ type Actions = {
     getChannelStats: (channelId: string) => Promise<{
         data: boolean;
     }>;
-    loadProfilesAndReloadChannelMembers: (page: number, perPage: number, channelId?: string, sort?: string, options?: {[key: string]: any}) => Promise<{
+    loadProfilesAndReloadChannelMembers: (page: number, perPage: number, channelId?: string, sort?: string, options?: {}) => Promise<{
         data: boolean;
     }>;
-    searchProfilesAndChannelMembers: (term: string, options?: {[key: string]: any}) => Promise<{
+    searchProfilesAndChannelMembers: (term: string, options?: {}) => Promise<{
         data: boolean;
     }>;
     getFilteredUsersStats: (filters: GetFilteredUsersStatsOpts) => Promise<{
         data?: UsersStats;
         error?: ServerError;
     }>;
-    setUserGridSearch: (term: string) => ActionResult;
-    setUserGridFilters: (filters: GetFilteredUsersStatsOpts) => ActionResult;
+    setUserGridSearch: (term: string) => Promise<{
+        data: boolean;
+    }>;
+    setUserGridFilters: (filters: GetFilteredUsersStatsOpts) => Promise<{
+        data: boolean;
+    }>;
 };
 
 function searchUsersToAdd(users: Dictionary<UserProfile>, term: string): Dictionary<UserProfile> {
-    const profiles = filterProfilesStartingWithTerm(Object.values(users), term);
+    const profiles = filterProfilesMatchingTerm(Object.keys(users).map((key) => users[key]), term);
     const filteredProfilesMap = filterProfiles(profileListToMap(profiles), {});
 
     return filteredProfilesMap;
@@ -112,7 +116,7 @@ function makeMapStateToProps() {
 
 function mapDispatchToProps(dispatch: Dispatch<GenericAction>) {
     return {
-        actions: bindActionCreators<ActionCreatorsMapObject<ActionFunc | GenericAction>, Actions>({
+        actions: bindActionCreators<ActionCreatorsMapObject<ActionFunc>, Actions>({
             getChannelStats,
             loadProfilesAndReloadChannelMembers,
             searchProfilesAndChannelMembers,

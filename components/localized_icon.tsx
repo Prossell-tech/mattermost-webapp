@@ -1,42 +1,51 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import React, {HTMLAttributes} from 'react';
-import {useIntl, MessageDescriptor} from 'react-intl';
-import {PrimitiveType, FormatXMLElementFn} from 'intl-messageformat';
+import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
-type Props = Omit<HTMLAttributes<HTMLSpanElement | HTMLElement>, 'title' | 'component'> & {
-    component?: 'i' | 'span';
-    title: MessageDescriptor & {
-        values?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
+type Props = {
+    className?: string;
+    component?: string;
+    title: {
+        id: string;
+        defaultMessage: string;
+        values?: {string: any};
     };
 }
 
-const LocalizedIcon = React.forwardRef((props: Props, ref?: React.Ref<HTMLSpanElement | HTMLElement>) => {
+const LocalizedIcon = React.forwardRef((props: Props, ref?: React.Ref<HTMLElement>) => {
     const {
-        component: Component = 'i',
-        title: {
-            id,
-            defaultMessage,
-            values,
-        },
+        component,
+        title,
         ...otherProps
     } = props;
 
-    if (Component !== 'i' && Component !== 'span') {
+    if (component !== 'i' && component !== 'span') {
         return null;
     }
 
-    const {formatMessage} = useIntl();
+    const Component = component!; // Use an uppercase name since React thinks anything lowercase is an HTML tag
 
     return (
-        <Component
-            {...otherProps}
-            ref={ref}
-            title={formatMessage({id, defaultMessage}, values)}
-        />
+        <FormattedMessage
+            id={title.id}
+            defaultMessage={title.defaultMessage}
+            values={title.values}
+        >
+            {(localizedTitle: (string | JSX.Element)) => (
+                <Component
+                    {...otherProps}
+                    ref={ref}
+                    title={localizedTitle as string}
+                />
+            )}
+        </FormattedMessage>
     );
 });
+LocalizedIcon.defaultProps = {
+    component: 'i',
+};
 LocalizedIcon.displayName = 'LocalizedIcon';
 
 export default LocalizedIcon;

@@ -30,8 +30,8 @@ describe('toasts', () => {
             testTeam = team;
             otherChannel = channel;
 
-            cy.apiGetChannelByName(testTeam.name, 'town-square').then((out) => {
-                townsquareChannelId = out.channel.id;
+            cy.apiGetChannelByName(testTeam.name, 'town-square').then((res) => {
+                townsquareChannelId = res.body.id;
             });
 
             cy.apiCreateUser().then(({user: user1}) => {
@@ -228,8 +228,13 @@ describe('toasts', () => {
         scrollUp();
 
         cy.getNthPostId(40).then((postId) => {
+            cy.get(`#post_${postId}`).trigger('mouseover');
+            cy.clickPostDotMenu(postId, 'CENTER');
+
             // # Mark post as unread
-            cy.uiClickPostDropdownMenu(postId, 'Mark as Unread');
+            cy.get('.dropdown-menu').should('be.visible').within(() => {
+                cy.findByText('Mark as Unread').should('be.visible').click();
+            });
 
             // # Visit another channel and come back to the same channel again
             cy.get('#sidebarItem_off-topic').should('be.visible').scrollIntoView().click();
@@ -239,7 +244,7 @@ describe('toasts', () => {
             // # Scroll up so bottom is not visible
             scrollUp();
 
-            // * Verify toast is visible with correct message
+            // * Verify toast is visible with correct messsage
             cy.get('div.toast').should('be.visible').contains('new messages today');
         });
     });
@@ -281,8 +286,8 @@ describe('toasts', () => {
 
     it('Archive toast should be shown when visiting a post which is not at bottom', () => {
         // # Create new channel and add other user to channel
-        cy.apiCreateChannel(testTeam.id, 'channel-test', 'Channel').then(({channel}) => {
-            const testChannelId = channel.id;
+        cy.apiCreateChannel(testTeam.id, 'channel-test', 'Channel').then((channelRes) => {
+            const testChannelId = channelRes.body.id;
             cy.apiAddUserToChannel(testChannelId, otherUser.id);
 
             // # Add one message
@@ -351,8 +356,13 @@ describe('toasts', () => {
         }
 
         cy.getNthPostId(2).then((postId) => {
+            cy.get(`#post_${postId}`).trigger('mouseover');
+            cy.clickPostDotMenu(postId, 'CENTER');
+
             // # Mark post as unread
-            cy.uiClickPostDropdownMenu(postId, 'Mark as Unread');
+            cy.get('.dropdown-menu').should('be.visible').within(() => {
+                cy.findByText('Mark as Unread').should('be.visible').click();
+            });
         });
 
         // * Verify toast is visible with correct message
@@ -363,8 +373,13 @@ describe('toasts', () => {
 
         // # Move to the second last message in the channel and mark as unread
         cy.getNthPostId(-2).then((postId) => {
+            cy.get(`#post_${postId}`).trigger('mouseover');
+            cy.clickPostDotMenu(postId, 'CENTER');
+
             // # Mark post as unread
-            cy.uiClickPostDropdownMenu(postId, 'Mark as Unread');
+            cy.get('.dropdown-menu').should('be.visible').within(() => {
+                cy.findByText('Mark as Unread').should('be.visible').click();
+            });
         });
 
         // * Verify toast is not visible

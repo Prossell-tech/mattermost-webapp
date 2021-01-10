@@ -17,7 +17,7 @@ import {Constants} from 'utils/constants';
 import * as Utils from 'utils/utils.jsx';
 import {t} from 'utils/i18n';
 import {getSiteURL} from 'utils/url';
-import {emitUserLoggedOutEvent} from 'actions/global_actions';
+import {emitUserLoggedOutEvent} from 'actions/global_actions.jsx';
 import ConfirmModal from 'components/confirm_modal';
 import SystemPermissionGate from 'components/permissions_gates/system_permission_gate';
 
@@ -27,7 +27,7 @@ import Menu from 'components/widgets/menu/menu';
 const ROWS_FROM_BOTTOM_TO_OPEN_UP = 3;
 const TOTAL_USERS_TO_OPEN_UP = 5;
 
-export type Props = {
+type Props = {
     user: UserProfile;
     currentUser: UserProfile;
     mfaEnabled: boolean;
@@ -38,13 +38,12 @@ export type Props = {
     config: DeepPartial<AdminConfig>;
     bots: Dictionary<Bot>;
     isLicensed: boolean;
-    isDisabled: boolean;
     actions: {
         updateUserActive: (id: string, active: boolean) => Promise<{error: ServerError}>;
         revokeAllSessionsForUser: (id: string) => Promise<{error: ServerError; data: any}>;
         promoteGuestToUser: (id: string) => Promise<{error: ServerError}>;
         demoteUserToGuest: (id: string) => Promise<{error: ServerError}>;
-        loadBots: (page?: number, size?: number) => Promise<unknown>;
+        loadBots: (page?: number, size?: number) => Promise<{}>;
     };
     doPasswordReset: (user: UserProfile) => void;
     doEmailReset: (user: UserProfile) => void;
@@ -455,7 +454,7 @@ export default class SystemUsersDropdown extends React.PureComponent<Props, Stat
     }
 
     render() {
-        const {currentUser, user, isLicensed, config} = this.props;
+        const {currentUser, user, isLicensed} = this.props;
         const isGuest = Utils.isGuest(user);
         if (!user) {
             return <div/>;
@@ -522,9 +521,7 @@ export default class SystemUsersDropdown extends React.PureComponent<Props, Stat
                 {revokeSessionsModal}
                 {promoteToUserModal}
                 {demoteToGuestModal}
-                <MenuWrapper
-                    isDisabled={this.props.isDisabled}
-                >
+                <MenuWrapper>
                     <div className='text-right'>
                         <a>
                             <span>{currentRoles} </span>
@@ -590,7 +587,7 @@ export default class SystemUsersDropdown extends React.PureComponent<Props, Stat
                             text={Utils.localizeMessage('admin.user_item.promoteToUser', 'Promote to User')}
                         />
                         <Menu.ItemAction
-                            show={!isGuest && user.id !== currentUser.id && isLicensed && config.GuestAccountsSettings?.Enable}
+                            show={!isGuest && user.id !== currentUser.id && isLicensed}
                             onClick={this.handleDemoteToGuest}
                             text={Utils.localizeMessage('admin.user_item.demoteToGuest', 'Demote to Guest')}
                         />

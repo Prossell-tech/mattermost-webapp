@@ -14,8 +14,10 @@ import * as TIMEOUTS from '../../fixtures/timeouts';
 
 const timestamp = Date.now();
 
-function verifyChannel(channel, verifyExistence = true) {
-    // # Wait for Channel to be created
+function verifyChannel(res, verifyExistence = true) {
+    const channel = res.body;
+
+    // # Wait for Channel to be c
     cy.wait(TIMEOUTS.HALF_SEC);
 
     // # Hover on the channel name
@@ -61,8 +63,8 @@ describe('channel name tooltips', () => {
             testTeam.id,
             'channel-test',
             `Public channel with a long name-${timestamp}`,
-        ).then(({channel}) => {
-            verifyChannel(channel);
+        ).then((res) => {
+            verifyChannel(res);
         });
     });
 
@@ -73,8 +75,8 @@ describe('channel name tooltips', () => {
             'channel-test',
             `Private channel with a long name-${timestamp}`,
             'P',
-        ).then(({channel}) => {
-            verifyChannel(channel);
+        ).then((res) => {
+            verifyChannel(res);
         });
     });
 
@@ -84,8 +86,8 @@ describe('channel name tooltips', () => {
             testTeam.id,
             'channel-test',
             'Public channel',
-        ).then(({channel}) => {
-            verifyChannel(channel, false);
+        ).then((res) => {
+            verifyChannel(res, false);
         });
     });
 
@@ -96,8 +98,8 @@ describe('channel name tooltips', () => {
             'channel-test',
             'Private channel',
             'P',
-        ).then(({channel}) => {
-            verifyChannel(channel, false);
+        ).then((res) => {
+            verifyChannel(res, false);
         });
     });
 

@@ -2,15 +2,23 @@
 // See LICENSE.txt for license information.
 
 import React from 'react';
-import {useIntl} from 'react-intl';
 
-export default function BackIcon() {
-    const {formatMessage} = useIntl();
-    return (
-        <i
-            className='fa fa-angle-left'
-            title={formatMessage({id: 'generic_icons.back', defaultMessage: 'Back Icon'})}
-        />
-    );
+import {FormattedMessage} from 'react-intl';
+
+export default class BackIcon extends React.PureComponent {
+    render() {
+        return (
+            <FormattedMessage
+                id='generic_icons.back'
+                defaultMessage='Back Icon'
+            >
+                {(title) => (
+                    <i
+                        className='fa fa-angle-left'
+                        title={title}
+                    />
+                )}
+            </FormattedMessage>
+        );
+    }
 }
-

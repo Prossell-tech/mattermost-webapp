@@ -27,7 +27,7 @@ describe('Edit Message', () => {
         cy.visit(townsquareLink);
     });
 
-    it('MM-T121 Escape should not close modal when an autocomplete drop down is in use', () => {
+    it('M13909 Escape should not close modal when an autocomplete drop down is in use', () => {
         // # Post a message
         cy.postMessage('Hello World!');
 
@@ -77,7 +77,7 @@ describe('Edit Message', () => {
         cy.get('#emojiPicker').should('not.exist');
     });
 
-    it('MM-T102 Timestamp on edited post shows original post time', () => {
+    it('M13482 Display correct timestamp for edited message', () => {
         // # Post a message
         cy.postMessage('Checking timestamp');
 
@@ -114,12 +114,12 @@ describe('Edit Message', () => {
                 cy.get('#rhsContainer').should('be.visible');
 
                 // * Check that the RHS timeStamp equals the original post timeStamp
-                cy.get(`#CENTER_time_${postId}`).find('time').invoke('attr', 'dateTime').should('equal', originalTimeStamp);
+                cy.get(`#CENTER_time_${postId}`).find('time').invoke('attr', 'dateTime').should('be', originalTimeStamp);
             });
         });
     });
 
-    it('MM-T97 Open edit modal immediately after making a post', () => {
+    it('M15519 Open edit modal immediately after making a post when post is pending', () => {
         // # Enter first message
         const firstMessage = 'Hello';
         cy.postMessage(firstMessage);

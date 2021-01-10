@@ -8,6 +8,8 @@ import {getConfig} from 'mattermost-redux/selectors/entities/general';
 import {shouldShowTermsOfService, getCurrentUserId} from 'mattermost-redux/selectors/entities/users';
 import {getTeam} from 'mattermost-redux/selectors/entities/teams';
 
+import {getWarnMetricsStatus} from 'mattermost-redux/actions/general';
+
 import {loadMeAndConfig} from 'actions/views/root';
 import LocalStorageStore from 'stores/local_storage_store';
 
@@ -22,9 +24,9 @@ function mapStateToProps(state) {
     const permalinkRedirectTeam = getTeam(state, teamId);
 
     return {
-        telemetryEnabled: config.DiagnosticsEnabled === 'true',
+        diagnosticsEnabled: config.DiagnosticsEnabled === 'true',
         noAccounts: config.NoAccounts === 'true',
-        telemetryId: config.DiagnosticId,
+        diagnosticId: config.DiagnosticId,
         permalinkRedirectTeamName: permalinkRedirectTeam ? permalinkRedirectTeam.name : '',
         showTermsOfService,
         plugins,
@@ -35,6 +37,7 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({
             loadMeAndConfig,
+            getWarnMetricsStatus,
         }, dispatch),
     };
 }

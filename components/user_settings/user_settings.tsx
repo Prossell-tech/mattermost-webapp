@@ -12,7 +12,7 @@ import NotificationsTab from './notifications';
 import SecurityTab from './security';
 import SidebarTab from './sidebar';
 
-export type Props = {
+type Props = {
     user: UserProfile;
     activeTab?: string;
     activeSection?: string;
@@ -22,9 +22,9 @@ export type Props = {
     collapseModal: () => void;
     setEnforceFocus: () => void;
     setRequireConfirm: () => void;
-};
+}
 
-export default class UserSettings extends React.PureComponent<Props> {
+export default class UserSettings extends React.PureComponent<Props, {}> {
     render() {
         if (this.props.activeTab === 'general') {
             return (

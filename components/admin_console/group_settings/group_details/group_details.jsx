@@ -31,7 +31,6 @@ export default class GroupDetails extends React.PureComponent {
         groupChannels: PropTypes.arrayOf(PropTypes.object),
         members: PropTypes.arrayOf(PropTypes.object),
         memberCount: PropTypes.number.isRequired,
-        isDisabled: PropTypes.bool,
         actions: PropTypes.shape({
             getGroup: PropTypes.func.isRequired,
             getMembers: PropTypes.func.isRequired,
@@ -364,16 +363,10 @@ export default class GroupDetails extends React.PureComponent {
                     serverError = result.error?.message;
                 }
             }
-            this.setState({
-                allowReference,
-                groupMentionName: lcGroupMentionName,
-                serverError,
-                hasAllowReferenceChanged: result.error ? hasAllowReferenceChanged : false,
-                hasGroupMentionNameChanged: result.error ? hasGroupMentionNameChanged : false,
-            });
+            this.setState({allowReference, groupMentionName: lcGroupMentionName, serverError});
         }
 
-        return !serverError;
+        return true;
     };
 
     handleRolesToUpdate = async () => {
@@ -441,7 +434,7 @@ export default class GroupDetails extends React.PureComponent {
     }
 
     render = () => {
-        const {group, members, memberCount, isDisabled} = this.props;
+        const {group, members, memberCount} = this.props;
         const {groupTeams, groupChannels} = this.state;
         const {allowReference, groupMentionName, saving, saveNeeded, serverError} = this.state;
 
@@ -477,7 +470,6 @@ export default class GroupDetails extends React.PureComponent {
                             allowReference={allowReference}
                             onToggle={this.onMentionToggle}
                             onChange={this.onMentionChange}
-                            readOnly={isDisabled}
                         />
 
                         <AdminPanel
@@ -488,11 +480,8 @@ export default class GroupDetails extends React.PureComponent {
                             subtitleDefault='Set default teams and channels for group members. Teams added will include default channels, town-square, and off-topic. Adding a channel without setting the team will add the implied team to the listing below.'
                             button={(
                                 <div className='group-profile-add-menu'>
-                                    <MenuWrapper
-                                        isDisabled={isDisabled}
-                                    >
+                                    <MenuWrapper>
                                         <button
-                                            type='button'
                                             id='add_team_or_channel'
                                             className='btn btn-primary'
                                         >
@@ -527,7 +516,6 @@ export default class GroupDetails extends React.PureComponent {
                                 unlink={this.props.actions.unlink}
                                 onChangeRoles={this.onChangeRoles}
                                 onRemoveItem={this.onRemoveTeamOrChannel}
-                                isDisabled={isDisabled}
                             />
                         </AdminPanel>
                         {this.state.addTeamOpen &&

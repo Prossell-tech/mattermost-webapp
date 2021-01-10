@@ -31,8 +31,8 @@ describe('Group Synced Team - Bot invitation flow', () => {
         });
 
         // # Get the first bot on the server
-        cy.apiGetBots().then(({bots}) => {
-            bot = bots[0];
+        cy.apiGetBots().then((response) => {
+            bot = response.body[0];
         });
     });
 
@@ -48,8 +48,11 @@ describe('Group Synced Team - Bot invitation flow', () => {
         // # Visit the group constrained team
         cy.visit(`/${groupConstrainedTeam.name}`);
 
-        // # Click 'Invite People' at main menu
-        cy.uiOpenMainMenu('Invite People');
+        // # Click hamburger main menu
+        cy.get('#sidebarHeaderDropdownButton').should('be.visible').click();
+
+        // # Click invite people
+        cy.get('#invitePeople').should('be.visible').click();
 
         cy.findByTestId('inputPlaceholder').should('be.visible').within(() => {
             // # Type the first letters of a bot
@@ -65,14 +68,17 @@ describe('Group Synced Team - Bot invitation flow', () => {
         // # Invite the bot
         cy.get('#inviteMembersButton').click();
 
-        // * Ensure that the response message was not an error
+        // * Ensure that the response messsage was not an error
         cy.get('.InvitationModalConfirmStepRow').find('.reason').should('not.contain', 'Error');
 
         // # Visit the group constrained team
         cy.visit(`/${groupConstrainedTeam.name}`);
 
-        // # Click 'Manage Members' at main menu
-        cy.uiOpenMainMenu('Manage Members');
+        // # Click hamburger main menu
+        cy.get('#sidebarHeaderDropdownButton').should('be.visible').click();
+
+        // # Open the manage members modal
+        cy.get('#manageMembers').should('be.visible').click();
 
         // # Search for the bot that we want to remove
         cy.get('#searchUsersInput').should('be.visible').type(bot.username);

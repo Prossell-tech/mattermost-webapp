@@ -2,8 +2,7 @@
 // See LICENSE.txt for license information.
 
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-import {ChartData} from 'chart.js';
+import {shallow, mount, ReactWrapper} from 'enzyme';
 
 import DoughnutChart from 'components/analytics/doughnut_chart';
 
@@ -24,7 +23,7 @@ describe('components/analytics/doughnut_chart.tsx', () => {
 
     test('should match snapshot, loaded without data', () => {
         const Chart = jest.requireMock('chart.js');
-        const data: ChartData = {};
+        const data = {};
 
         const wrapper = mount(
             <DoughnutChart
@@ -41,7 +40,7 @@ describe('components/analytics/doughnut_chart.tsx', () => {
 
     test('should match snapshot, loaded with data', () => {
         const Chart = jest.requireMock('chart.js');
-        const data: ChartData = {
+        const data = {
             datasets: [
                 {data: [1, 2, 3]},
             ],
@@ -62,21 +61,21 @@ describe('components/analytics/doughnut_chart.tsx', () => {
     test('should create and destroy the chart on mount and unmount with data', () => {
         const Chart = jest.requireMock('chart.js');
 
-        const data: ChartData = {
+        const data = {
             datasets: [
                 {data: [1, 2, 3]},
             ],
             labels: ['test1', 'test2', 'test3'],
         };
 
-        const wrapper = mount<DoughnutChart>(
+        const wrapper = mount(
             <DoughnutChart
                 title='Test'
                 height={400}
                 width={600}
                 data={data}
             />,
-        );
+        ) as ReactWrapper<{}, {}, DoughnutChart>;
 
         expect(Chart).toBeCalled();
         const chartDestroy = wrapper.instance().chart!.destroy;
@@ -87,28 +86,28 @@ describe('components/analytics/doughnut_chart.tsx', () => {
     test('should update the chart on data change', () => {
         const Chart = jest.requireMock('chart.js');
 
-        const oldData: ChartData = {
+        const oldData = {
             datasets: [
                 {data: [1, 2, 3]},
             ],
             labels: ['test1', 'test2', 'test3'],
         };
 
-        const newData: ChartData = {
+        const newData = {
             datasets: [
                 {data: [1, 2, 3, 4]},
             ],
             labels: ['test1', 'test2', 'test3', 'test4'],
         };
 
-        const wrapper = mount<DoughnutChart>(
+        const wrapper = mount(
             <DoughnutChart
                 title='Test'
                 height={400}
                 width={600}
                 data={oldData}
             />,
-        );
+        ) as ReactWrapper<{}, {}, DoughnutChart>;
 
         expect(Chart).toBeCalled();
         expect((wrapper.instance().chart as Chart).update).not.toBeCalled();

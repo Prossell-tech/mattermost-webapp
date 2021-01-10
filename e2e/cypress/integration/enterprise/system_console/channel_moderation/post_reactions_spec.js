@@ -17,8 +17,8 @@ import {checkboxesTitleToIdMap} from './constants';
 
 import {
     deleteOrEditTeamScheme,
-    disablePermission,
-    enablePermission,
+    disableChannelModeratedPermission,
+    enableChannelModeratedPermission,
     goToPermissionsAndCreateTeamOverrideScheme,
     goToSystemScheme,
     saveConfigForChannel,
@@ -63,7 +63,7 @@ describe('MM-23102 - Channel Moderation - Post Reactions', () => {
         visitChannelConfigPage(testChannel);
 
         // # Uncheck the post reactions option for Guests and save
-        disablePermission(checkboxesTitleToIdMap.POST_REACTIONS_GUESTS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.POST_REACTIONS_GUESTS);
         saveConfigForChannel();
 
         // # Login as a Guest user and visit the same channel
@@ -78,7 +78,7 @@ describe('MM-23102 - Channel Moderation - Post Reactions', () => {
 
         // # Visit test channel configuration page and enable post reactions for guest and save
         visitChannelConfigPage(testChannel);
-        enablePermission(checkboxesTitleToIdMap.POST_REACTIONS_GUESTS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.POST_REACTIONS_GUESTS);
         saveConfigForChannel();
 
         visitChannel(guestUser, testChannel, testTeam);
@@ -95,7 +95,7 @@ describe('MM-23102 - Channel Moderation - Post Reactions', () => {
         visitChannelConfigPage(testChannel);
 
         // # Uncheck the Create reactions option for Members and save
-        disablePermission(checkboxesTitleToIdMap.POST_REACTIONS_MEMBERS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.POST_REACTIONS_MEMBERS);
         saveConfigForChannel();
 
         // # Login as a Member user and visit the same channel
@@ -110,7 +110,7 @@ describe('MM-23102 - Channel Moderation - Post Reactions', () => {
 
         // # Visit test Channel configuration page and enable post reactions for members and save
         visitChannelConfigPage(testChannel);
-        enablePermission(checkboxesTitleToIdMap.POST_REACTIONS_MEMBERS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.POST_REACTIONS_MEMBERS);
         saveConfigForChannel();
 
         // # Login as a Member user and visit the same channel

@@ -50,21 +50,12 @@ export function sendMembersInvites(teamId, users, emails) {
                 response = {data: emails.map((email) => ({email, error: {error: localizeMessage('invite.members.unable-to-add-the-user-to-the-team', 'Unable to add the user to the team.')}}))};
             }
             const invitesWithErrors = response.data || [];
-            if (response.error) {
-                if (response.error.server_error_id === 'app.email.rate_limit_exceeded.app_error') {
-                    response.error.message = localizeMessage('invite.rate-limit-exceeded', 'Invite emails rate limit exceeded.');
-                }
-                for (const email of emails) {
-                    notSent.push({email, reason: response.error.message});
-                }
-            } else {
-                for (const email of emails) {
-                    const inviteWithError = invitesWithErrors.find((i) => email.toLowerCase() === i.email && i.error);
-                    if (inviteWithError) {
-                        notSent.push({email, reason: inviteWithError.error.message});
-                    } else {
-                        sent.push({email, reason: localizeMessage('invite.members.invite-sent', 'An invitation email has been sent.')});
-                    }
+            for (const email of emails) {
+                const inviteWithError = invitesWithErrors.find((i) => email === i.email && i.error);
+                if (inviteWithError) {
+                    notSent.push({email, reason: inviteWithError.error.message});
+                } else {
+                    sent.push({email, reason: localizeMessage('invite.members.invite-sent', 'An invitation email has been sent.')});
                 }
             }
         }
@@ -138,20 +129,11 @@ export function sendGuestsInvites(teamId, channels, users, emails, message) {
                 response = {data: emails.map((email) => ({email, error: {error: localizeMessage('invite.guests.unable-to-add-the-user-to-the-channels', 'Unable to add the guest to the channels.')}}))};
             }
 
-            if (response.error) {
-                if (response.error.server_error_id === 'app.email.rate_limit_exceeded.app_error') {
-                    response.error.message = localizeMessage('invite.rate-limit-exceeded', 'Invite emails rate limit exceeded.');
-                }
-                for (const email of emails) {
-                    notSent.push({email, reason: response.error.message});
-                }
-            } else {
-                for (const res of (response.data || [])) {
-                    if (res.error) {
-                        notSent.push({email: res.email, reason: res.error.message});
-                    } else {
-                        sent.push({email: res.email, reason: localizeMessage('invite.guests.added-to-channel', 'An invitation email has been sent.')});
-                    }
+            for (const res of (response.data || [])) {
+                if (res.error) {
+                    notSent.push({email: res.email, reason: res.error.message});
+                } else {
+                    sent.push({email: res.email, reason: localizeMessage('invite.guests.added-to-channel', 'An invitation email has been sent.')});
                 }
             }
         }

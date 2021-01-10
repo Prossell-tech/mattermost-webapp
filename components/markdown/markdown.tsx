@@ -22,7 +22,7 @@ type Props = {
      * An array of URL schemes that should be turned into links. Anything that looks
      * like a link will be turned into a link if this is not provided.
      */
-    autolinkedUrlSchemes?: string[];
+    autolinkedUrlSchemes?: Array<string>;
 
     /*
      * Whether or not to do Markdown rendering
@@ -35,14 +35,9 @@ type Props = {
     isRHS?: boolean;
 
     /*
-     * An array of paths on the server that are managed by another server
-     */
-    managedResourcePaths?: string[];
-
-    /*
      * An array of words that can be used to mention a user
      */
-    mentionKeys?: MentionKey[];
+    mentionKeys?: Array<MentionKey>;
 
     /*
      * The text to be rendered
@@ -52,7 +47,7 @@ type Props = {
     /*
      * Any additional text formatting options to be used
      */
-    options: Partial<TextFormattingOptions>;
+    options: TextFormattingOptions;
 
     /*
      * The root Site URL for the page
@@ -82,7 +77,6 @@ type Props = {
     /**
      * Any extra props that should be passed into the image component
      */
-    // eslint-disable-next-line @typescript-eslint/ban-types
     imageProps?: object;
 
     /**
@@ -130,7 +124,6 @@ export default class Markdown extends React.PureComponent<Props> {
             proxyImages: this.props.hasImageProxy && this.props.proxyImages,
             team: this.props.team,
             minimumHashtagLength: this.props.minimumHashtagLength,
-            managedResourcePaths: this.props.managedResourcePaths,
         }, this.props.options);
 
         const htmlFormattedText = formatText(this.props.message, options, this.props.emojiMap);

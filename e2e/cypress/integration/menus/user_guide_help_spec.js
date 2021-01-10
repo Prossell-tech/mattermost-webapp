@@ -11,7 +11,6 @@
 // Group: @menu
 
 import {getAdminAccount} from '../../support/env';
-import {FixedCloudConfig} from '../../utils/constants';
 
 describe('Main menu', () => {
     let testTeam;
@@ -30,11 +29,6 @@ describe('Main menu', () => {
 
     describe('user help guide', () => {
         it('Should have all the menu items on click', () => {
-            const {
-                HELP_LINK,
-                REPORT_A_PROBLEM_LINK,
-            } = FixedCloudConfig.SupportSettings;
-
             cy.apiLogin(testUser);
             cy.visit(`/${testTeam.name}/channels/town-square`);
             cy.get('#channel-header').should('be.visible').then(() => {
@@ -44,10 +38,10 @@ describe('Main menu', () => {
                     cy.get('#askTheCommunityLink a').should('have.attr', 'href', 'https://mattermost.com/pl/default-ask-mattermost-community/');
 
                     cy.get('#helpResourcesLink').should('be.visible');
-                    cy.get('#helpResourcesLink a').should('have.attr', 'href', testConfig.SupportSettings.HelpLink || HELP_LINK);
+                    cy.get('#helpResourcesLink a').should('have.attr', 'href', testConfig.SupportSettings.HelpLink);
 
                     cy.get('#reportAProblemLink').should('be.visible');
-                    cy.get('#reportAProblemLink a').should('have.attr', 'href', testConfig.SupportSettings.ReportAProblemLink || REPORT_A_PROBLEM_LINK);
+                    cy.get('#reportAProblemLink a').should('have.attr', 'href', testConfig.SupportSettings.ReportAProblemLink);
 
                     cy.get('#keyboardShortcuts').should('be.visible');
                     cy.get('#keyboardShortcuts button').click();

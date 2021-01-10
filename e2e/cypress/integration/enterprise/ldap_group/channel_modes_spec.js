@@ -7,6 +7,7 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
+// Stage: @prod
 // Group: @enterprise @ldap_group
 
 describe('Test channel public/private toggle', () => {
@@ -17,7 +18,12 @@ describe('Test channel public/private toggle', () => {
         cy.apiRequireLicenseForFeature('LDAPGroups');
 
         // Enable LDAP and LDAP group sync
-        cy.apiUpdateConfig({LdapSettings: {Enable: true}});
+        cy.apiUpdateConfig({
+            LdapSettings: {
+                Enable: true,
+                EnableSync: true,
+            },
+        });
 
         // # Check and run LDAP Sync job
         if (Cypress.env('runLDAPSync')) {
@@ -31,7 +37,8 @@ describe('Test channel public/private toggle', () => {
     });
 
     it('Verify that System Admin can change channel privacy using toggle', () => {
-        cy.apiCreateChannel(testTeam.id, 'test-channel', 'Test Channel').then(({channel}) => {
+        cy.apiCreateChannel(testTeam.id, 'test-channel', 'Test Channel').then((res) => {
+            const channel = res.body;
             assert(channel.type === 'O');
             cy.visit(`/admin_console/user_management/channels/${channel.id}`);
             cy.get('#channel_profile').contains(channel.display_name);
@@ -39,7 +46,8 @@ describe('Test channel public/private toggle', () => {
             cy.get('#saveSetting').click();
             cy.get('#confirmModalButton').click();
             return cy.apiGetChannel(channel.id);
-        }).then(({channel}) => {
+        }).then((res) => {
+            const channel = res.body;
             assert(channel.type === 'P');
             cy.visit(`/admin_console/user_management/channels/${channel.id}`);
             cy.get('#channel_profile').contains(channel.display_name);
@@ -47,13 +55,15 @@ describe('Test channel public/private toggle', () => {
             cy.get('#saveSetting').click();
             cy.get('#confirmModalButton').click();
             return cy.apiGetChannel(channel.id);
-        }).then(({channel}) => {
+        }).then((res) => {
+            const channel = res.body;
             assert(channel.type === 'O');
         });
     });
 
     it('Verify that resetting sync toggle doesn\'t alter channel privacy toggle', () => {
-        cy.apiCreateChannel(testTeam.id, 'test-channel', 'Test Channel').then(({channel}) => {
+        cy.apiCreateChannel(testTeam.id, 'test-channel', 'Test Channel').then((res) => {
+            const channel = res.body;
             assert(channel.type === 'O');
             cy.visit(`/admin_console/user_management/channels/${channel.id}`);
             cy.get('#channel_profile').contains(channel.display_name);

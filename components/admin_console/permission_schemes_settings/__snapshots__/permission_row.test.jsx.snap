@@ -15,6 +15,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_row sho
   >
     <FormattedMessage
       id="admin.permissions.permission.id.name"
+      values={Object {}}
     />
   </span>
   <injectIntl(PermissionDescription)
@@ -46,6 +47,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_row sho
   >
     <FormattedMessage
       id="admin.permissions.permission.id.name"
+      values={Object {}}
     />
   </span>
   <injectIntl(PermissionDescription)
@@ -72,6 +74,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_row sho
   >
     <FormattedMessage
       id="admin.permissions.permission.id.name"
+      values={Object {}}
     />
   </span>
   <injectIntl(PermissionDescription)
@@ -98,6 +101,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_row sho
   >
     <FormattedMessage
       id="admin.permissions.permission.id.name"
+      values={Object {}}
     />
   </span>
   <injectIntl(PermissionDescription)

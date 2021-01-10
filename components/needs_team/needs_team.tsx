@@ -7,12 +7,10 @@ import iNoBounce from 'inobounce';
 
 import {Channel, ChannelMembership} from 'mattermost-redux/types/channels';
 import {Team, TeamMembership} from 'mattermost-redux/types/teams';
-import {Group} from 'mattermost-redux/types/groups';
-import {UserStatus} from 'mattermost-redux/types/users';
 
 import {startPeriodicStatusUpdates, stopPeriodicStatusUpdates} from 'actions/status_actions.jsx';
 import {startPeriodicSync, stopPeriodicSync, reconnect} from 'actions/websocket_actions.jsx';
-import * as GlobalActions from 'actions/global_actions';
+import * as GlobalActions from 'actions/global_actions.jsx';
 
 import Constants from 'utils/constants';
 import * as UserAgent from 'utils/user_agent';
@@ -47,19 +45,20 @@ type Props = {
     useLegacyLHS: boolean;
     actions: {
         fetchMyChannelsAndMembers: (teamId: string) => Promise<{data: {channels: Channel[]; members: ChannelMembership[]}}>;
-        getMyTeamUnreads: () => Promise<{data: any; error?: any}>;
+        getMyTeamUnreads: () => Promise<{}>;
         viewChannel: (channelId: string, prevChannelId?: string | undefined) => Promise<{data: boolean}>;
-        markChannelAsReadOnFocus: (channelId: string) => Promise<{data: any; error?: any}>;
+        markChannelAsReadOnFocus: (channelId: string) => Promise<{}>;
         getTeamByName: (teamName: string) => Promise<{data: Team}>;
         addUserToTeam: (teamId: string, userId?: string) => Promise<{data: TeamMembership; error?: any}>;
         selectTeam: (team: Team) => Promise<{data: boolean}>;
         setPreviousTeamId: (teamId: string) => Promise<{data: boolean}>;
-        loadStatusesForChannelAndSidebar: () => Promise<{data: UserStatus[]}>;
-        loadProfilesForDirect: () => Promise<{data: boolean}>;
-        getAllGroupsAssociatedToChannelsInTeam: (teamId: string, filterAllowReference: boolean) => Promise<{data: Group[]}>;
-        getAllGroupsAssociatedToTeam: (teamId: string, filterAllowReference: boolean) => Promise<{data: Group[]}>;
-        getGroupsByUserId: (userID: string) => Promise<{data: Group[]}>;
-        getGroups: (filterAllowReference: boolean, page: number, perPage: number) => Promise<{data: Group[]}>;
+        loadStatusesForChannelAndSidebar: () => Promise<{}>;
+        loadProfilesForDirect: () => Promise<{}>;
+        getAllGroupsAssociatedToChannelsInTeam: (teamId: string, filterAllowReference: boolean) => Promise<{}>;
+        getAllGroupsAssociatedToTeam: (teamId: string, filterAllowReference: boolean) => Promise<{}>;
+        getGroupsByUserId: (userID: string) => Promise<{}>;
+        getGroups: (filterAllowReference: boolean, page: number, perPage: number) => Promise<{}>;
+
     };
     mfaRequired: boolean;
     match: {

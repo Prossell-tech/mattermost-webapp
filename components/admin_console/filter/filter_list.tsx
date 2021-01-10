@@ -15,13 +15,8 @@ type Props = {
 
 class FilterList extends React.PureComponent<Props> {
     updateOption = async (value: boolean, key: string) => {
-        const values = {
-            ...this.props.option.values,
-            [key]: {
-                ...this.props.option.values[key],
-                value,
-            },
-        };
+        const values = {...this.props.option.values};
+        values[key].value = value;
         await this.props.updateValues(values, this.props.optionKey);
     }
 

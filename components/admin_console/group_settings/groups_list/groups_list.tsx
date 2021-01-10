@@ -19,7 +19,6 @@ const LDAP_GROUPS_PAGE_SIZE = 200;
 type Props = {
     groups: MixedUnlinkedGroupRedux[];
     total: number;
-    readOnly?: boolean;
     actions: {
         getLdapGroups: (page?: number, perPage?: number, opts?: GroupSearchOpts) => Promise<any>;
         link: (key: string) => Promise<any>;
@@ -56,7 +55,7 @@ type State = {
     filterIsUnlinked?: boolean;
 }
 
-type FilterUpdates = [string, boolean];
+type filterUpdates = [string, boolean];
 
 const FILTER_STATE_SEARCH_KEY_MAPPING: FilterSearchMap = {
     filterIsConfigured: {filter: 'is:configured', option: {is_configured: true}},
@@ -85,7 +84,7 @@ export default class GroupsList extends React.PureComponent<Props, State> {
         };
     }
 
-    public closeFilters = () => {
+    public closeFilters() {
         this.setState({showFilters: false});
     }
 
@@ -153,10 +152,8 @@ export default class GroupsList extends React.PureComponent<Props, State> {
         case 'link':
             return (
                 <button
-                    type='button'
                     className='btn btn-primary'
                     onClick={() => this.linkSelectedGroups()}
-                    disabled={this.props.readOnly}
                 >
                     <i className='icon fa fa-link'/>
                     <FormattedMessage
@@ -168,10 +165,8 @@ export default class GroupsList extends React.PureComponent<Props, State> {
         case 'unlink':
             return (
                 <button
-                    type='button'
                     className='btn btn-primary'
                     onClick={() => this.unlinkSelectedGroups()}
-                    disabled={this.props.readOnly}
                 >
                     <i className='icon fa fa-unlink'/>
                     <FormattedMessage
@@ -183,9 +178,7 @@ export default class GroupsList extends React.PureComponent<Props, State> {
         default:
             return (
                 <button
-                    type='button'
                     className='btn btn-inactive disabled'
-                    disabled={this.props.readOnly}
                 >
                     <i className='icon fa fa-link'/>
                     <FormattedMessage
@@ -250,7 +243,6 @@ export default class GroupsList extends React.PureComponent<Props, State> {
                     failed={item.failed}
                     checked={Boolean(this.state.checked[item.primary_key])}
                     onCheckToggle={(key: string) => this.onCheckToggle(key)}
-                    readOnly={this.props.readOnly}
                     actions={{
                         link: this.props.actions.link,
                         unlink: this.props.actions.unlink,
@@ -331,9 +323,9 @@ export default class GroupsList extends React.PureComponent<Props, State> {
         return newSearchString.replace(/\s{2,}/g, ' ');
     }
 
-    public handleFilterCheck(updates: FilterUpdates[]) {
+    public handleFilterCheck(updates: filterUpdates[]) {
         let {searchString} = this.state;
-        updates.forEach((item: FilterUpdates) => {
+        updates.forEach((item: filterUpdates) => {
             searchString = this.newSearchString(searchString, item[0], item[1]);
             this.setState({[item[0]]: item[1]} as any);
         });
@@ -500,7 +492,6 @@ export default class GroupsList extends React.PureComponent<Props, State> {
                             />
                         </div>
                         <button
-                            type='button'
                             className={'btn btn-link prev ' + (firstPage ? 'disabled' : '')}
                             onClick={(e: any) => this.previousPage(e)}
                             disabled={firstPage}
@@ -508,7 +499,6 @@ export default class GroupsList extends React.PureComponent<Props, State> {
                             <PreviousIcon/>
                         </button>
                         <button
-                            type='button'
                             className={'btn btn-link next ' + (lastPage ? 'disabled' : '')}
                             onClick={(e: any) => this.nextPage(e)}
                             disabled={lastPage}

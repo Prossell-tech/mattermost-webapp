@@ -3,7 +3,6 @@
 
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import classNames from 'classnames';
 
 import AdminPanel from './admin_panel';
 
@@ -27,7 +26,7 @@ const AdminPanelWithButton: React.FC<Props> = (props: Props) => {
         const buttonId = (props.buttonTextDefault || '').split(' ').join('-').toLowerCase();
         button = (
             <a
-                className={classNames('btn', 'btn-primary', {disabled: props.disabled})}
+                className='btn btn-primary'
                 onClick={props.disabled ? (e) => e.preventDefault() : props.onButtonClick}
                 data-testid={buttonId}
             >

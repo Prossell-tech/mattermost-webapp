@@ -102,14 +102,18 @@ export function setupTestData(data, {team, admin, anotherAdmin}) {
     cy.get('#postListContent', {timeout: TIMEOUTS.HALF_MIN}).should('be.visible');
     cy.postMessage(todayMessage).wait(TIMEOUTS.ONE_SEC);
 
-    cy.apiGetChannelByName(team.name, 'town-square').then(({channel: townSquareChannel}) => {
+    cy.apiGetChannelByName(team.name, 'town-square').then((townSquareRes) => {
+        const townSquareChannel = townSquareRes.body;
+
         // # Post message as new admin to Town Square
         cy.postMessageAs({sender: anotherAdmin, message: firstMessage, channelId: townSquareChannel.id, createAt: firstDateEarly.ms});
 
         // # Post message as sysadmin to Town Square
         cy.postMessageAs({sender: admin, message: secondMessage, channelId: townSquareChannel.id, createAt: secondDateEarly.ms});
 
-        cy.apiGetChannelByName(team.name, 'off-topic').then(({channel: offTopicChannel}) => {
+        cy.apiGetChannelByName(team.name, 'off-topic').then((offTopicRes) => {
+            const offTopicChannel = offTopicRes.body;
+
             // # Post message as sysadmin to off topic
             cy.postMessageAs({sender: admin, message: firstOffTopicMessage, channelId: offTopicChannel.id, createAt: firstDateLater.ms});
 

@@ -28,7 +28,7 @@ describe('Header', () => {
         });
     });
 
-    it('MM-T88 An ellipsis indicates the channel header is too long - public or private channel Quote icon displays at beginning of channel header', () => {
+    it('M13564 Ellipsis indicates the channel header is too long', () => {
         // * Verify with short channel header
         updateAndVerifyChannelHeader('>', 'newheader');
 
@@ -42,7 +42,7 @@ describe('Header', () => {
         updateAndVerifyChannelHeader('>', header);
     });
 
-    it('MM-T89 An ellipsis indicates the channel header is too long - DM', () => {
+    it('M14784 - An ellipsis indicates the channel header is too long - DM', () => {
         // # Open Account Setting and enable Compact View on the Display tab
         cy.uiChangeMessageDisplaySetting('COMPACT');
 

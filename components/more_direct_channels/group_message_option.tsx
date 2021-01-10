@@ -12,7 +12,6 @@ type Props = {
     channel: (Channel & Value & {profiles: UserProfile[]});
     isSelected: boolean;
     onAdd: (users: UserProfile[]) => void;
-    selectedItemRef: React.RefObject<HTMLDivElement>;
 }
 
 export default class GroupMessageOption extends React.PureComponent<Props> {
@@ -42,7 +41,6 @@ export default class GroupMessageOption extends React.PureComponent<Props> {
                 key={this.props.channel.id}
                 className={'more-modal__row clickable ' + this.getStyle()}
                 onClick={this.addValue}
-                ref={this.props.isSelected ? this.props.selectedItemRef : this.props.channel.id}
             >
                 <div className='more-modal__gm-icon bg-text-200'>
                     {this.props.channel.profiles.length}

@@ -21,7 +21,6 @@ import settings from './settings';
 import marketplace from './marketplace';
 import channelSidebar from './channel_sidebar';
 import textbox from './textbox';
-import nextSteps from './next_steps';
 
 export default combineReducers({
     admin,
@@ -42,5 +41,4 @@ export default combineReducers({
     marketplace,
     textbox,
     channelSidebar,
-    nextSteps,
 });

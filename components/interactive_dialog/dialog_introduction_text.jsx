@@ -5,7 +5,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as Markdown from 'utils/markdown';
-import {getSiteURL} from 'utils/url';
 
 export default class DialogIntroductionText extends React.PureComponent {
     static propTypes = {
@@ -21,7 +20,6 @@ export default class DialogIntroductionText extends React.PureComponent {
                 breaks: true,
                 sanitize: true,
                 gfm: true,
-                siteURL: getSiteURL(),
             },
             this.props.emojiMap,
         );

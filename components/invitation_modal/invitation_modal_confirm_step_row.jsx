@@ -9,7 +9,6 @@ import {FormattedMessage} from 'react-intl';
 import EmailIcon from 'components/widgets/icons/mail_icon';
 import AlertIcon from 'components/widgets/icons/alert_icon';
 import GuestBadge from 'components/widgets/badges/guest_badge';
-import BotBadge from 'components/widgets/badges/bot_badge';
 import Avatar from 'components/widgets/users/avatar';
 
 import {imageURLForUser, isGuest, getLongDisplayName} from 'utils/utils.jsx';
@@ -27,8 +26,6 @@ export default class InvitationModalConfirmStepRow extends React.PureComponent {
         let username;
         let className;
         let guestBadge;
-        let botBadge;
-
         if (invitation.user) {
             className = 'name';
             const profileImg = imageURLForUser(invitation.user.id, invitation.user.last_picture_update);
@@ -40,9 +37,6 @@ export default class InvitationModalConfirmStepRow extends React.PureComponent {
                 />
             );
             username = getLongDisplayName(invitation.user);
-            if (invitation.user.is_bot) {
-                botBadge = <BotBadge/>;
-            }
             if (isGuest(invitation.user)) {
                 guestBadge = <GuestBadge/>;
             }
@@ -73,7 +67,6 @@ export default class InvitationModalConfirmStepRow extends React.PureComponent {
                     {icon}
                     <span className={className}>
                         {username}
-                        {botBadge}
                         {guestBadge}
                     </span>
                 </div>

@@ -21,7 +21,7 @@ describe('Message Draft', () => {
         });
     });
 
-    it('MM-T130 Message Draft Pencil Icon- Text', () => {
+    it('M13473 Message Draft - Pencil Icon', () => {
         // # Got to a test channel on the side bar
         cy.get('#sidebarItem_town-square').click({force: true});
 

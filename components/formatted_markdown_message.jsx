@@ -21,7 +21,7 @@ export class CustomRenderer extends marked.Renderer {
             return text;
         }
         if (href[0] === TARGET_BLANK_URL_PREFIX) {
-            return `<a href="${href.substring(1, href.length)}" rel="noopener noreferrer" target="_blank">${text}</a>`;
+            return `<a href="${href.substring(1, href.length)}" rel="noreferrer" target="_blank">${text}</a>`;
         }
         return `<a href="${href}">${text}</a>`;
     }
@@ -61,20 +61,15 @@ class FormattedMarkdownMessage extends React.PureComponent {
     }
 
     render() {
-        const {
-            intl,
-            id,
-            defaultMessage,
-            values,
-            disableLinks,
-        } = this.props;
-
-        const origMsg = intl.formatMessage({id, defaultMessage}, values);
+        const origMsg = this.props.intl.formatMessage({
+            id: this.props.id,
+            defaultMessage: this.props.defaultMessage,
+        }, this.props.values);
 
         const markedUpMessage = marked(origMsg, {
             breaks: true,
             sanitize: true,
-            renderer: new CustomRenderer(disableLinks),
+            renderer: new CustomRenderer(this.props.disableLinks),
         });
 
         return (<span dangerouslySetInnerHTML={{__html: markedUpMessage}}/>);

@@ -13,10 +13,10 @@ import {t} from 'utils/i18n';
 
 import LineSwitch from 'components/admin_console/team_channel_settings/line_switch.jsx';
 
-const GroupSettingsToggle = ({isDefault, allowReference, onToggle, isDisabled}) => (
+const GroupSettingsToggle = ({isDefault, allowReference, onToggle}) => (
     <LineSwitch
         id={'allowReferenceSwitch'}
-        disabled={isDisabled || isDefault}
+        disabled={isDefault}
         toggled={allowReference}
         last={true}
         onToggle={() => {
@@ -44,10 +44,9 @@ GroupSettingsToggle.propTypes = {
     isDefault: PropTypes.bool.isRequired,
     allowReference: PropTypes.bool.isRequired,
     onToggle: PropTypes.func.isRequired,
-    isDisabled: PropTypes.bool,
 };
 
-export const GroupProfileAndSettings = ({displayname, mentionname, allowReference, onToggle, onChange, readOnly}) => (
+export const GroupProfileAndSettings = ({displayname, mentionname, allowReference, onToggle, onChange}) => (
     <AdminPanel
         id='group_profile'
         titleId={t('admin.group_settings.group_detail.groupProfileTitle')}
@@ -70,7 +69,6 @@ export const GroupProfileAndSettings = ({displayname, mentionname, allowReferenc
                     isDefault={false}
                     allowReference={allowReference}
                     onToggle={onToggle}
-                    isDisabled={readOnly}
                 />
             </div>
         </div>
@@ -80,7 +78,7 @@ export const GroupProfileAndSettings = ({displayname, mentionname, allowReferenc
                 title={t('admin.group_settings.group_details.group_mention.name')}
                 titleDefault={'Group Mention:'}
                 customID={'groupMention'}
-                isDisabled={readOnly}
+                isDisabled={false}
                 showAtMention={true}
                 onChange={onChange}
             />
@@ -93,5 +91,4 @@ GroupProfileAndSettings.propTypes = {
     allowReference: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     onToggle: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool,
 };

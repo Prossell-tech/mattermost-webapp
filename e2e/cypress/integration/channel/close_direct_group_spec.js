@@ -62,7 +62,9 @@ describe('Close direct messages', () => {
     });
 
     function createAndVisitDMChannel(userIds) {
-        return cy.apiCreateDirectChannel(userIds).then(({channel}) => {
+        return cy.apiCreateDirectChannel(userIds).then((res) => {
+            const channel = res.body;
+
             // # Visit the new channel
             cy.visit(`/${testTeam.name}/channels/${channel.name}`);
 
@@ -122,7 +124,9 @@ describe('Close group messages', () => {
 
     function createAndVisitGMChannel(users = []) {
         const userIds = users.map((user) => user.id);
-        return cy.apiCreateGroupChannel(userIds).then(({channel}) => {
+        return cy.apiCreateGroupChannel(userIds).then((res) => {
+            const channel = res.body;
+
             // # Visit the new channel
             cy.visit(`/${testTeam.name}/channels/${channel.name}`);
 

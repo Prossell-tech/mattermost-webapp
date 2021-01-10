@@ -13,7 +13,7 @@ type Props = {
     /**
      * Permissions enough to pass the gate (binary OR)
      */
-    permissions: string[];
+    permissions: Array<string>;
 
     /**
      * Has permission

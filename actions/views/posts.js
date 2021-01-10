@@ -34,7 +34,5 @@ export function selectAttachmentMenuAction(postId, actionId, cookie, dataSource,
         });
 
         dispatch(PostActions.doPostActionWithCookie(postId, actionId, cookie, value));
-
-        return {data: true};
     };
 }

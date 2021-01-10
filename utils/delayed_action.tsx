@@ -2,10 +2,10 @@
 // See LICENSE.txt for license information.
 
 export default class DelayedAction {
-    private action: () => void;
+    private action: Function;
     private timer: number;
 
-    public constructor(action: () => void) {
+    public constructor(action: Function) {
         this.action = action;
 
         this.timer = -1;

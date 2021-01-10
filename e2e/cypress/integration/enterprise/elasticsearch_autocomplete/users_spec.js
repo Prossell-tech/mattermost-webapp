@@ -173,7 +173,7 @@ describe('Autocomplete with Elasticsearch - Users', () => {
         describe('search for user in channel switcher', () => {
             const area = {
                 getInput: () => {
-                    cy.findByRole('textbox', {name: 'quick switch input'}).
+                    cy.get('#quickSwitchInput').
                         should('be.visible').
                         as('input').
                         clear();
@@ -191,7 +191,7 @@ describe('Autocomplete with Elasticsearch - Users', () => {
                 // # Navigate to the new teams town square
                 cy.visit(`/${testTeam.name}/channels/town-square`);
                 cy.typeCmdOrCtrl().type('k');
-                cy.findByRole('textbox', {name: 'quick switch input'}).should('be.visible');
+                cy.get('#quickSwitchInput').should('be.visible');
             });
 
             describe('by @username', () => {
@@ -301,7 +301,9 @@ describe('Autocomplete with Elasticsearch - Users', () => {
 
             // # Create new channel and add user to channel
             const channelName = `new-channel-${timestamp}`;
-            cy.apiCreateChannel(testTeam.id, channelName, channelName).then(({channel}) => {
+            cy.apiCreateChannel(testTeam.id, channelName, channelName).then((channelResponse) => {
+                const channel = channelResponse.body;
+
                 cy.apiGetUserByEmail(thor.email).then(({user}) => {
                     cy.apiAddUserToChannel(channel.id, user.id);
                 });

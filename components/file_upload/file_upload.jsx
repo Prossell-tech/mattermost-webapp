@@ -471,8 +471,6 @@ class FileUpload extends PureComponent {
                 return;
             }
 
-            e.preventDefault();
-
             const files = [];
 
             for (let i = 0; i < items.length; i++) {

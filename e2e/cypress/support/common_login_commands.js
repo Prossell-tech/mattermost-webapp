@@ -1,24 +1,22 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import * as TIMEOUTS from '../fixtures/timeouts';
-
 Cypress.Commands.add('checkLoginPage', (settings = {}) => {
+    // * Check the title
+    cy.title().should('include', settings.siteName);
+
     // * Check elements in the body
-    cy.get('#loginId', {timeout: TIMEOUTS.ONE_MIN}).should('be.visible').and(($loginTextbox) => {
+    cy.get('#loginId').should('be.visible').and(($loginTextbox) => {
         const placeholder = $loginTextbox[0].placeholder;
         expect(placeholder).to.match(/Email/);
         expect(placeholder).to.match(/Username/);
     });
     cy.get('#loginPassword').should('be.visible').and('have.attr', 'placeholder', 'Password');
     cy.findByText('Sign in').should('be.visible');
-
-    // * Check the title
-    cy.title().should('include', settings.siteName);
 });
 
 Cypress.Commands.add('checkLoginFailed', () => {
-    cy.get('#login_section', {timeout: TIMEOUTS.ONE_MIN}).find('.form-group').should('have.class', 'has-error');
+    cy.get('div').should('have.class', 'has-error');
 });
 
 Cypress.Commands.add('checkGuestNoChannels', () => {
@@ -54,18 +52,18 @@ Cypress.Commands.add('checkLeftSideBar', (settings = {}) => {
 });
 
 Cypress.Commands.add('checkInvitePeoplePage', (settings = {}) => {
-    cy.findByText('Copy Link', {timeout: TIMEOUTS.ONE_MIN}).should('be.visible');
     if (settings.teamName != null && settings.teamName.length > 0) {
         cy.findByText('Invite people to ' + settings.teamName).should('be.visible');
     }
+    cy.findByText('Copy Link').should('be.visible');
 });
 
 Cypress.Commands.add('checkInvitePeopleAdminPage', (settings = {}) => {
-    cy.findByText('Members', {timeout: TIMEOUTS.ONE_MIN}).should('be.visible');
-    cy.findByText('Guests').should('be.visible');
     if (settings.teamName != null && settings.teamName.length > 0) {
         cy.findByText('Invite people to ' + settings.teamName).should('be.visible');
     }
+    cy.findByText('Members').should('be.visible');
+    cy.findByText('Guests').should('be.visible');
 });
 
 Cypress.Commands.add('doLogoutFromSignUp', () => {
@@ -79,7 +77,6 @@ Cypress.Commands.add('doMemberLogoutFromSignUp', () => {
 });
 
 Cypress.Commands.add('skipOrCreateTeam', (settings, userId) => {
-    cy.wait(TIMEOUTS.FIVE_SEC);
     return cy.get('body').then((body) => {
         let teamName = '';
 
@@ -89,7 +86,7 @@ Cypress.Commands.add('skipOrCreateTeam', (settings, userId) => {
 
             cy.checkCreateTeamPage(settings);
 
-            cy.get('#createNewTeamLink').scrollIntoView().should('be.visible').click();
+            cy.findByText('Create a team').scrollIntoView().should('be.visible').click();
             cy.get('#teamNameInput').should('be.visible').type(teamName, {force: true});
             cy.findByText('Next').should('be.visible').click();
             cy.findByText('Finish').should('be.visible').click();

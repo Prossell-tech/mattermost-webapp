@@ -8,7 +8,7 @@
 // ***************************************************************
 
 // Stage: @prod
-// Group: @not_cloud @system_console
+// Group: @system_console
 
 // # Goes to the System Scheme page as System Admin
 const goToSessionLengths = () => {
@@ -43,8 +43,6 @@ const saveConfig = (waitUntilConfigSaved = true, clickConfirmationButton = false
 
 describe('MM-T2574 Session Lengths', () => {
     before(() => {
-        cy.shouldNotRunOnCloudEdition();
-
         goToSessionLengths();
     });
 

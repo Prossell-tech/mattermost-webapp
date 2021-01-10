@@ -1,153 +1,66 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import merge from 'deepmerge';
+import merge from 'merge-deep';
 
-import {Constants} from '../../utils';
-
-import onPremDefaultConfig from './on_prem_default_config.json';
-import cloudDefaultConfig from './cloud_default_config.json';
+import partialDefaultConfig from '../../fixtures/partial_default_config.json';
 
 // *****************************************************************************
 // System
 // https://api.mattermost.com/#tag/system
 // *****************************************************************************
 
-function hasLicenseForFeature(license, key) {
-    let hasLicense = false;
-
-    for (const [k, v] of Object.entries(license)) {
-        if (k === key && v === 'true') {
-            hasLicense = true;
-            break;
-        }
-    }
-
-    return hasLicense;
-}
-
 Cypress.Commands.add('apiGetClientLicense', () => {
     return cy.request('/api/v4/license/client?format=old').then((response) => {
         expect(response.status).to.equal(200);
-
-        const license = response.body;
-        const isLicensed = license.IsLicensed === 'true';
-        const isCloudLicensed = hasLicenseForFeature(license, 'Cloud');
-
-        return cy.wrap({
-            license: response.body,
-            isLicensed,
-            isCloudLicensed,
-        });
+        return cy.wrap({license: response.body});
     });
 });
 
 Cypress.Commands.add('apiRequireLicenseForFeature', (key = '') => {
-    Cypress.log({name: 'EE License', message: `Checking if server has license for feature: __${key}__.`});
+    return cy.apiGetClientLicense().then(({license}) => {
+        expect(license.IsLicensed, 'Server has no Enterprise license.').to.equal('true');
 
-    return uploadLicenseIfNotExist().then((data) => {
-        const {license, isLicensed} = data;
-        const hasLicenseMessage = `Server ${isLicensed ? 'has' : 'has no'} EE license.`;
-        expect(isLicensed, hasLicenseMessage).to.equal(true);
+        let hasLicenseKey = false;
+        for (const [k, v] of Object.entries(license)) {
+            if (k === key && v === 'true') {
+                hasLicenseKey = true;
+                break;
+            }
+        }
 
-        const hasLicenseKey = hasLicenseForFeature(license, key);
-        const hasLicenseKeyMessage = `Server ${hasLicenseKey ? 'has' : 'has no'} EE license for feature: __${key}__`;
-        expect(hasLicenseKey, hasLicenseKeyMessage).to.equal(true);
+        expect(hasLicenseKey, `No license for feature: ${key}`).to.equal(true);
 
-        return cy.wrap(data);
+        return cy.wrap({license});
     });
 });
 
 Cypress.Commands.add('apiRequireLicense', () => {
-    Cypress.log({name: 'EE License', message: 'Checking if server has license.'});
+    return cy.apiGetClientLicense().then(({license}) => {
+        expect(license.IsLicensed, 'Server has no Enterprise license.').to.equal('true');
 
-    return uploadLicenseIfNotExist().then((data) => {
-        const hasLicenseMessage = `Server ${data.isLicensed ? 'has' : 'has no'} EE license.`;
-        expect(data.isLicensed, hasLicenseMessage).to.equal(true);
-
-        return cy.wrap(data);
-    });
-});
-
-Cypress.Commands.add('apiUploadLicense', (filePath) => {
-    cy.apiUploadFile('license', filePath, {url: '/api/v4/license', method: 'POST', successStatus: 200});
-});
-
-Cypress.Commands.add('apiInstallTrialLicense', () => {
-    return cy.request({
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        url: '/api/v4/trial-license',
-        method: 'POST',
-        body: {
-            trialreceive_emails_accepted: true,
-            terms_accepted: true,
-            users: Cypress.env('numberOfTrialUsers'),
-        },
-    }).then((response) => {
-        expect(response.status).to.equal(200);
-        return cy.wrap(response.body);
-    });
-});
-
-Cypress.Commands.add('apiDeleteLicense', () => {
-    return cy.request({
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        url: '/api/v4/license',
-        method: 'DELETE',
-    }).then((response) => {
-        expect(response.status).to.equal(200);
-        return cy.wrap({response});
+        return cy.wrap({license});
     });
 });
 
 const getDefaultConfig = () => {
-    const cypressEnv = Cypress.env();
-
     const fromCypressEnv = {
         LdapSettings: {
-            LdapServer: cypressEnv.ldapServer,
-            LdapPort: cypressEnv.ldapPort,
+            LdapServer: Cypress.env('ldapServer'),
+            LdapPort: Cypress.env('ldapPort'),
         },
-        ServiceSettings: {
-            AllowedUntrustedInternalConnections: `localhost,${cypressEnv.ciBaseUrl}`,
-            SiteURL: Cypress.config('baseUrl'),
-        },
+        ServiceSettings: {SiteURL: Cypress.config('baseUrl')},
     };
 
-    const isCloud = cypressEnv.serverEdition === Constants.ServerEdition.CLOUD;
-    const defaultConfig = isCloud ? cloudDefaultConfig : onPremDefaultConfig;
-
-    return merge(defaultConfig, fromCypressEnv);
-};
-
-const expectConfigToBeUpdatable = (currentConfig, newConfig) => {
-    function errorMessage(name) {
-        return `${name} is restricted or not available to update. You may check user/sysadmin access, license requirement, server version or edition (on-prem/cloud) compatibility.`;
-    }
-
-    Object.entries(newConfig).forEach(([newMainKey, newSubSetting]) => {
-        const setting = currentConfig[newMainKey];
-
-        if (setting) {
-            Object.keys(newSubSetting).forEach((newSubKey) => {
-                const isAvailable = setting.hasOwnProperty(newSubKey);
-                const name = `${newMainKey}.${newSubKey}`;
-                expect(isAvailable, isAvailable ? `${name} setting can be updated.` : errorMessage(name)).to.equal(true);
-            });
-        } else {
-            const withSetting = Boolean(setting);
-            expect(withSetting, withSetting ? `${newMainKey} setting can be updated.` : errorMessage(newMainKey)).to.equal(true);
-        }
-    });
+    return merge(partialDefaultConfig, fromCypressEnv);
 };
 
 Cypress.Commands.add('apiUpdateConfig', (newConfig = {}) => {
-    // # Get current config
-    return cy.apiGetConfig().then(({config: currentConfig}) => {
-        // * Check if config can be updated
-        expectConfigToBeUpdatable(currentConfig, newConfig);
+    // # Get current settings
+    return cy.request('/api/v4/config').then((response) => {
+        const oldConfig = response.body;
 
-        const config = merge.all([currentConfig, getDefaultConfig(), newConfig]);
+        const config = merge(oldConfig, getDefaultConfig(), newConfig);
 
         // # Set the modified config
         return cy.request({
@@ -157,26 +70,14 @@ Cypress.Commands.add('apiUpdateConfig', (newConfig = {}) => {
             body: config,
         }).then((updateResponse) => {
             expect(updateResponse.status).to.equal(200);
-            return cy.apiGetConfig();
+            return cy.wrap({config: response.body});
         });
     });
 });
 
-Cypress.Commands.add('apiReloadConfig', () => {
-    // # Reload the config
-    return cy.request({
-        url: '/api/v4/config/reload',
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        method: 'POST',
-    }).then((reloadResponse) => {
-        expect(reloadResponse.status).to.equal(200);
-        return cy.apiGetConfig();
-    });
-});
-
-Cypress.Commands.add('apiGetConfig', (old = false) => {
+Cypress.Commands.add('apiGetConfig', () => {
     // # Get current settings
-    return cy.request(`/api/v4/config${old ? '/client?format=old' : ''}`).then((response) => {
+    return cy.request('/api/v4/config').then((response) => {
         expect(response.status).to.equal(200);
         return cy.wrap({config: response.body});
     });
@@ -187,10 +88,13 @@ Cypress.Commands.add('apiGetAnalytics', () => {
 
     return cy.request('/api/v4/analytics/old').then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({analytics: response.body});
+        cy.wrap({analytics: response.body});
     });
 });
 
+/**
+ * Invalidate all the caches
+ */
 Cypress.Commands.add('apiInvalidateCache', () => {
     return cy.request({
         url: '/api/v4/caches/invalidate',
@@ -198,83 +102,6 @@ Cypress.Commands.add('apiInvalidateCache', () => {
         method: 'POST',
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap(response);
+        cy.wrap(response);
     });
 });
-
-function isCloudEdition() {
-    const isCloudServer = Cypress.env('serverEdition') === Constants.ServerEdition.CLOUD;
-    if (isCloudServer) {
-        return cy.wrap(true);
-    }
-
-    return cy.apiGetClientLicense().then(({isCloudLicensed}) => {
-        return cy.wrap(isCloudLicensed);
-    });
-}
-
-Cypress.Commands.add('shouldNotRunOnCloudEdition', () => {
-    isCloudEdition().then((isCloud) => {
-        expect(isCloud, isCloud ? 'Should not run on Cloud server' : '').to.equal(false);
-    });
-});
-
-function isTeamEdition() {
-    const isTeamServer = Cypress.env('serverEdition') === Constants.ServerEdition.TEAM;
-
-    if (isTeamServer) {
-        return cy.wrap(true);
-    }
-
-    return cy.apiGetClientLicense().then(({isLicensed}) => {
-        return cy.wrap(!isLicensed);
-    });
-}
-
-Cypress.Commands.add('shouldRunOnTeamEdition', () => {
-    isTeamEdition().then((isTeam) => {
-        expect(isTeam, isTeam ? '' : 'Should run on Team edition only').to.equal(true);
-    });
-});
-
-function isElasticsearchEnabled() {
-    return cy.apiGetConfig().then(({config}) => {
-        let isEnabled = false;
-
-        if (config.ElasticsearchSettings) {
-            const {EnableAutocomplete, EnableIndexing, EnableSearching} = config.ElasticsearchSettings;
-
-            isEnabled = EnableAutocomplete && EnableIndexing && EnableSearching;
-        }
-
-        return cy.wrap(isEnabled);
-    });
-}
-
-Cypress.Commands.add('shouldHaveElasticsearchDisabled', () => {
-    isElasticsearchEnabled().then((data) => {
-        expect(data, data ? 'Should have Elasticsearch disabled' : '').to.equal(false);
-    });
-});
-
-Cypress.Commands.add('shouldHavePluginUploadEnabled', () => {
-    return cy.apiGetConfig().then(({config}) => {
-        const isUploadEnabled = config.PluginSettings.EnableUploads;
-        expect(isUploadEnabled, isUploadEnabled ? '' : 'Should have Plugin upload enabled').to.equal(true);
-    });
-});
-
-/**
- * Upload a license if it does not exist.
- */
-function uploadLicenseIfNotExist() {
-    return cy.apiGetClientLicense().then((data) => {
-        if (data.isLicensed) {
-            return cy.wrap(data);
-        }
-
-        return cy.apiInstallTrialLicense().then(() => {
-            return cy.apiGetClientLicense();
-        });
-    });
-}

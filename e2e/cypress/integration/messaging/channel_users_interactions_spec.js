@@ -7,7 +7,6 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
-// Stage: @prod
 // Group: @messaging
 
 describe('Channel users interactions', () => {
@@ -38,7 +37,7 @@ describe('Channel users interactions', () => {
         });
     });
 
-    it('MM-T216 Scroll to bottom when sending a message', () => {
+    it('M17454 Scroll to bottom when sending a message', () => {
         // # Go to off-topic channel via LHS
         cy.get('#sidebarItem_off-topic').click({force: true});
 

@@ -24,16 +24,8 @@ declare namespace Cypress {
          *
          * @example
          *   const permalink = 'http://localhost:8065/team-name/pl/post-id';
-         *   cy.uiClickCopyLink(permalink);
+         *   cy.uiClickCopyLink(permalik);
          */
         uiClickCopyLink(permalink: string): Chainable;
-
-        /**
-         * Click dropdown menu of a post by post ID.
-         * @param {String} postId - post ID
-         * @param {String} menuItem - e.g. "Pin to channel"
-         * @param {String} location - 'CENTER' (default), 'SEARCH', RHS_ROOT, RHS_COMMENT
-         */
-        uiClickPostDropdownMenu(postId: string, menuItem: string, location?: string): Chainable;
     }
 }

@@ -15,7 +15,6 @@ describe('components/PostMarkdown', () => {
         message: 'message',
         post: {},
         mentionKeys: ['a', 'b', 'c'],
-        channelId: 'channel-id',
     };
 
     test('should not error when rendering without a post', () => {

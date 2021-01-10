@@ -48,7 +48,7 @@ describe('Teams Suite', () => {
         });
     });
 
-    it('MM-T384 Team Admin can use Next button to page through list in Manage Members', () => {
+    it('TS14868 Team Admin can use Next button to page through list in Manage Members', () => {
         // # Click hamburger main menu
         cy.get('#sidebarHeaderDropdownButton').should('be.visible').click();
 

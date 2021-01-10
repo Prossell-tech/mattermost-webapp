@@ -2,6 +2,7 @@
 
 exports[`components/SpinnerButton should match snapshot with children 1`] = `
 <button
+  className="btn btn-primary"
   disabled={false}
 >
   <LoadingWrapper
@@ -20,6 +21,7 @@ exports[`components/SpinnerButton should match snapshot with children 1`] = `
 
 exports[`components/SpinnerButton should match snapshot with required props 1`] = `
 <button
+  className="btn btn-primary"
   disabled={false}
 >
   <LoadingWrapper
@@ -31,6 +33,7 @@ exports[`components/SpinnerButton should match snapshot with required props 1`] 
 
 exports[`components/SpinnerButton should match snapshot with spinning 1`] = `
 <button
+  className="btn btn-primary"
   disabled={true}
 >
   <LoadingWrapper

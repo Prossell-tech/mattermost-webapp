@@ -7,13 +7,8 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
-// Group: @te_only @system_console
-
 describe('Feature discovery', () => {
     before(() => {
-        cy.shouldRunOnTeamEdition();
-
-        // # Visit admin console
         cy.visit('/admin_console');
     });
 

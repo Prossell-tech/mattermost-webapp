@@ -69,6 +69,7 @@ exports[`components/TeamMembersModal should match snapshot 1`] = `
         <FormattedMessage
           defaultMessage="Invite People"
           id="team_member_modal.invitePeople"
+          values={Object {}}
         />
       </button>
     </Connect(TeamPermissionGate)>

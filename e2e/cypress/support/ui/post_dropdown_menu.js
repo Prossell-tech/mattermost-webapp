@@ -1,26 +1,25 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {stubClipboard} from '../../utils';
-
 Cypress.Commands.add('uiClickCopyLink', (permalink) => {
-    stubClipboard().as('clipboard');
+    // # Stub on clipboard
+    const clipboard = {permalink: '', wasCalled: false};
+    cy.window().then((win) => {
+        cy.stub(win.navigator.clipboard, 'writeText', (link) => {
+            clipboard.wasCalled = true;
+            clipboard.permalink = link;
+        });
+    });
 
     // * Verify initial state
-    cy.get('@clipboard').its('contents').should('eq', '');
+    cy.wrap(clipboard).its('permalink').should('eq', '');
 
     // # Click on "Copy Link"
     cy.get('.dropdown-menu').should('be.visible').within(() => {
         cy.findByText('Copy Link').scrollIntoView().should('be.visible').click();
 
         // * Verify if it's called with correct link value
-        cy.get('@clipboard').its('wasCalled').should('eq', true);
-        cy.get('@clipboard').its('contents').should('eq', permalink);
+        cy.wrap(clipboard).its('wasCalled').should('eq', true);
+        cy.wrap(clipboard).its('permalink').should('eq', permalink);
     });
-});
-
-Cypress.Commands.add('uiClickPostDropdownMenu', (postId, menuItem, location = 'CENTER') => {
-    cy.clickPostDotMenu(postId, location);
-    cy.findByTestId(`post-menu-${postId}`).should('be.visible');
-    cy.findByText(menuItem).scrollIntoView().should('be.visible').click({force: true});
 });

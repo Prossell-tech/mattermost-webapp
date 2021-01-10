@@ -8,6 +8,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="false"
         id="admin.false"
+        values={Object {}}
       />
     }
     helpText={
@@ -21,6 +22,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Enable Guest Access: "
         id="admin.guest_access.enableTitle"
+        values={Object {}}
       />
     }
     onChange={[Function]}
@@ -29,6 +31,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="true"
         id="admin.true"
+        values={Object {}}
       />
     }
     value={false}
@@ -39,12 +42,14 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Save and Disable Guest Access"
         id="admin.guest_access.disableConfirmButton"
+        values={Object {}}
       />
     }
     message={
       <FormattedMessage
         defaultMessage="Disabling guest access will revoke all current Guest Account sessions. Guests will no longer be able to login and new guests cannot be invited into Mattermost. Guest users will be marked as inactive in user lists. Enabling this feature will not reinstate previous guest accounts. Are you sure you wish to remove these users?"
         id="admin.guest_access.disableConfirmMessage"
+        values={Object {}}
       />
     }
     modalClass=""
@@ -55,6 +60,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Save and Disable Guest Access?"
         id="admin.guest_access.disableConfirmTitle"
+        values={Object {}}
       />
     }
   />
@@ -69,6 +75,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="false"
         id="admin.false"
+        values={Object {}}
       />
     }
     helpText={
@@ -82,6 +89,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Enable Guest Access: "
         id="admin.guest_access.enableTitle"
+        values={Object {}}
       />
     }
     onChange={[Function]}
@@ -90,6 +98,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="true"
         id="admin.true"
+        values={Object {}}
       />
     }
     value={true}
@@ -100,12 +109,14 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Save and Disable Guest Access"
         id="admin.guest_access.disableConfirmButton"
+        values={Object {}}
       />
     }
     message={
       <FormattedMessage
         defaultMessage="Disabling guest access will revoke all current Guest Account sessions. Guests will no longer be able to login and new guests cannot be invited into Mattermost. Guest users will be marked as inactive in user lists. Enabling this feature will not reinstate previous guest accounts. Are you sure you wish to remove these users?"
         id="admin.guest_access.disableConfirmMessage"
+        values={Object {}}
       />
     }
     modalClass=""
@@ -116,6 +127,7 @@ exports[`components/AdminConsole/CustomEnableDisableGuestAccountsSetting initial
       <FormattedMessage
         defaultMessage="Save and Disable Guest Access?"
         id="admin.guest_access.disableConfirmTitle"
+        values={Object {}}
       />
     }
   />

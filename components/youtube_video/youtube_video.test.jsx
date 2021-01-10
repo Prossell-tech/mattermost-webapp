@@ -12,7 +12,6 @@ jest.mock('actions/integration_actions');
 
 describe('YoutubeVideo', () => {
     const baseProps = {
-        postId: 'post_id_1',
         googleDeveloperKey: 'googledevkey',
         hasImageProxy: false,
         link: 'https://www.youtube.com/watch?v=xqCoNej8Zxo',

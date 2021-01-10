@@ -20,7 +20,7 @@ describe('System Console', () => {
         });
     });
 
-    it('MM-T1100 Lock Teammate Name Display for all users', () => {
+    it('MM-19309 Allow System Admins to control Teammate Name Display at the system level', () => {
         // # Go to system admin page
         cy.visit('/admin_console/site_config/users_and_teams');
 

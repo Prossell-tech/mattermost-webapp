@@ -6,7 +6,6 @@ import React from 'react';
 import {Channel} from 'mattermost-redux/types/channels';
 import {Team} from 'mattermost-redux/types/teams';
 import {FormattedMessage} from 'react-intl';
-import classNames from 'classnames';
 
 import {t} from 'utils/i18n';
 
@@ -20,11 +19,10 @@ interface ChannelProfileProps {
     team: Partial<Team>;
     onToggleArchive?: () => void;
     isArchived: boolean;
-    isDisabled?: boolean;
 }
 
 export const ChannelProfile: React.SFC<ChannelProfileProps> = (props: ChannelProfileProps): JSX.Element => {
-    const {team, channel, isArchived, isDisabled} = props;
+    const {team, channel, isArchived} = props;
 
     let archiveBtnID;
     let archiveBtnDefault;
@@ -66,22 +64,10 @@ export const ChannelProfile: React.SFC<ChannelProfileProps> = (props: ChannelPro
                     </div>
                     <div className='AdminChannelDetails_archiveContainer'>
                         <button
-                            type='button'
-                            className={
-                                classNames(
-                                    'btn',
-                                    'btn-secondary',
-                                    'ArchiveButton',
-                                    {ArchiveButton___archived: isArchived},
-                                    {ArchiveButton___unarchived: !isArchived},
-                                    {disabled: isDisabled},
-                                )
-                            }
+                            className={'btn btn-secondary ArchiveButton ' + (isArchived ? 'ArchiveButton___archived' : 'ArchiveButton___unarchived')}
                             onClick={props.onToggleArchive}
                         >
-                            {isArchived ?
-                                <UnarchiveIcon className='channel-icon channel-icon__unarchive'/> :
-                                <ArchiveIcon className='channel-icon channel-icon__archive'/>}
+                            {isArchived ? <UnarchiveIcon className='channel-icon channel-icon__unarchive'/> : <ArchiveIcon className='channel-icon channel-icon__archive'/>}
                             <FormattedMessage
                                 id={archiveBtnID}
                                 defaultMessage={archiveBtnDefault}

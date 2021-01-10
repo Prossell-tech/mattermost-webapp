@@ -44,15 +44,8 @@ class ModalToggleButtonRedux extends React.PureComponent {
     }
 
     render() {
-        const {
-            children,
-            onClick,
-            intl: {
-                formatMessage,
-            },
-            ...props
-        } = this.props;
-
+        const {children, onClick, ...props} = this.props;
+        const {formatMessage} = this.props.intl;
         const ariaLabel = formatMessage({id: 'accessibility.button.dialog', defaultMessage: '{dialogName} dialog'}, {dialogName: props.accessibilityLabel});
 
         // removing these three props since they are not valid props on buttons
@@ -60,7 +53,6 @@ class ModalToggleButtonRedux extends React.PureComponent {
         delete props.dialogType;
         delete props.dialogProps;
         delete props.accessibilityLabel;
-        delete props.actions;
 
         // allow callers to provide an onClick which will be called before the modal is shown
         let clickHandler = () => this.show();

@@ -10,11 +10,11 @@ describe('components/HeaderFooterTemplate', () => {
     const RealDate: DateConstructor = Date;
 
     function mockDate(date: Date) {
-        function mock() {
+        function MockDate() {
             return new RealDate(date);
         }
-        mock.now = () => date.getTime();
-        global.Date = mock as any;
+        MockDate.now = () => date.getTime();
+        global.Date = MockDate as any;
     }
 
     beforeEach(() => {

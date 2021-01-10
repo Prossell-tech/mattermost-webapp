@@ -9,27 +9,17 @@ import {FormattedMessage} from 'react-intl';
 type Props = {
     user: UserProfile;
     removeUser: (user: UserProfile) => void;
-    isDisabled?: boolean;
 }
 
-export default class UserGridRemove extends React.PureComponent<Props> {
-    private handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        e.preventDefault();
-        if (this.props.isDisabled) {
-            return;
-        }
-        this.props.removeUser(this.props.user);
-    }
-
+export default class UserGridRemove extends React.Component<Props> {
     public render = (): JSX.Element => {
-        const {isDisabled} = this.props;
+        const {user} = this.props;
         return (
             <div className='UserGrid_removeRow'>
                 <a
-                    onClick={this.handleClick}
+                    onClick={() => this.props.removeUser(user)}
                     href='#'
                     role='button'
-                    className={isDisabled ? 'disabled' : ''}
                 >
                     <FormattedMessage
                         id='admin.user_grid.remove'

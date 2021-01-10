@@ -66,6 +66,7 @@ exports[`components/GetLinkModal should have called onHide 1`] = `
       <FormattedMessage
         defaultMessage="Close"
         id="get_link.close"
+        values={Object {}}
       />
     </button>
     <button
@@ -78,6 +79,7 @@ exports[`components/GetLinkModal should have called onHide 1`] = `
       <FormattedMessage
         defaultMessage="Copy Link"
         id="get_link.copy"
+        values={Object {}}
       />
     </button>
     <p
@@ -87,6 +89,7 @@ exports[`components/GetLinkModal should have called onHide 1`] = `
       <FormattedMessage
         defaultMessage=" Link copied"
         id="get_link.clipboard"
+        values={Object {}}
       />
     </p>
   </ModalFooter>
@@ -159,6 +162,7 @@ exports[`components/GetLinkModal should have called onHide 2`] = `
       <FormattedMessage
         defaultMessage="Close"
         id="get_link.close"
+        values={Object {}}
       />
     </button>
     <button
@@ -171,6 +175,7 @@ exports[`components/GetLinkModal should have called onHide 2`] = `
       <FormattedMessage
         defaultMessage="Copy Link"
         id="get_link.copy"
+        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -248,6 +253,7 @@ exports[`components/GetLinkModal should match snapshot when all props is set 1`]
       <FormattedMessage
         defaultMessage="Close"
         id="get_link.close"
+        values={Object {}}
       />
     </button>
     <button
@@ -260,6 +266,7 @@ exports[`components/GetLinkModal should match snapshot when all props is set 1`]
       <FormattedMessage
         defaultMessage="Copy Link"
         id="get_link.copy"
+        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -332,6 +339,7 @@ exports[`components/GetLinkModal should match snapshot when helpText is not set 
       <FormattedMessage
         defaultMessage="Close"
         id="get_link.close"
+        values={Object {}}
       />
     </button>
     <button
@@ -344,6 +352,7 @@ exports[`components/GetLinkModal should match snapshot when helpText is not set 
       <FormattedMessage
         defaultMessage="Copy Link"
         id="get_link.copy"
+        values={Object {}}
       />
     </button>
   </ModalFooter>

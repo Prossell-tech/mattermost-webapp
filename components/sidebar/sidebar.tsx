@@ -4,22 +4,23 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import {trackEvent} from 'actions/telemetry_actions';
+import {ChannelType} from 'mattermost-redux/types/channels';
+
+import {trackEvent} from 'actions/diagnostics_actions';
 import EditCategoryModal from 'components/edit_category_modal';
 import MoreDirectChannels from 'components/more_direct_channels';
 import DataPrefetch from 'components/data_prefetch';
 import MoreChannels from 'components/more_channels';
 import NewChannelFlow from 'components/new_channel_flow';
 import Pluggable from 'plugins/pluggable';
-import Constants, {ModalIdentifiers} from 'utils/constants';
+import {Constants, ModalIdentifiers} from 'utils/constants';
 import * as Utils from 'utils/utils';
 
 import AddChannelDropdown from './add_channel_dropdown';
+import SidebarHeader from './sidebar_header';
 import ChannelNavigator from './channel_navigator';
 import ChannelFilter from './channel_filter';
-import SidebarChannelList from './sidebar_channel_list';
-import SidebarHeader from './sidebar_header';
-import SidebarNextSteps from './sidebar_next_steps';
+import SidebarCategoryList from './sidebar_category_list';
 import SidebarWhatsNewModal from './sidebar_whats_new_modal';
 
 type Props = {
@@ -28,6 +29,7 @@ type Props = {
     canCreatePrivateChannel: boolean;
     canJoinPublicChannel: boolean;
     isOpen: boolean;
+    isDataPrefechEnabled: boolean;
     hasSeenModal: boolean;
     actions: {
         fetchMyCategories: (teamId: string) => {data: boolean};
@@ -35,14 +37,13 @@ type Props = {
         openModal: (modalData: {modalId: string; dialogType: any; dialogProps?: any}) => Promise<{
             data: boolean;
         }>;
-        clearChannelSelection: () => void;
     };
-    isCloud: boolean;
-    unreadFilterEnabled: boolean;
 };
 
 type State = {
     showDirectChannelsModal: boolean;
+    showMoreChannelsModal: boolean;
+    showNewChannelModal: boolean;
     isDragging: boolean;
 };
 
@@ -51,6 +52,8 @@ export default class Sidebar extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             showDirectChannelsModal: false,
+            showMoreChannelsModal: false,
+            showNewChannelModal: false,
             isDragging: false,
         };
     }
@@ -60,39 +63,17 @@ export default class Sidebar extends React.PureComponent<Props, State> {
             this.props.actions.fetchMyCategories(this.props.teamId);
         }
 
-        if (!this.props.hasSeenModal && !this.props.isCloud) {
+        if (!this.props.hasSeenModal) {
             this.props.actions.openModal({
                 modalId: ModalIdentifiers.SIDEBAR_WHATS_NEW_MODAL,
                 dialogType: SidebarWhatsNewModal,
             });
         }
-
-        window.addEventListener('click', this.handleClickClearChannelSelection);
-        window.addEventListener('keydown', this.handleKeyDownClearChannelSelection);
     }
 
     componentDidUpdate(prevProps: Props) {
         if (this.props.teamId && prevProps.teamId !== this.props.teamId) {
             this.props.actions.fetchMyCategories(this.props.teamId);
-        }
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('click', this.handleClickClearChannelSelection);
-        window.removeEventListener('keydown', this.handleKeyDownClearChannelSelection);
-    }
-
-    handleClickClearChannelSelection = (event: MouseEvent) => {
-        if (event.defaultPrevented) {
-            return;
-        }
-
-        this.props.actions.clearChannelSelection();
-    }
-
-    handleKeyDownClearChannelSelection = (event: KeyboardEvent) => {
-        if (Utils.isKeyPressed(event, Constants.KeyCodes.ESCAPE)) {
-            this.props.actions.clearChannelSelection();
         }
     }
 
@@ -118,20 +99,21 @@ export default class Sidebar extends React.PureComponent<Props, State> {
     }
 
     showMoreChannelsModal = () => {
-        this.props.actions.openModal({
-            modalId: ModalIdentifiers.MORE_CHANNELS,
-            dialogType: MoreChannels,
-            dialogProps: {morePublicChannelsModalType: 'public'},
-        });
+        this.setState({showMoreChannelsModal: true});
         trackEvent('ui', 'ui_channels_more_public_v2');
     }
 
+    hideMoreChannelsModal = () => {
+        this.setState({showMoreChannelsModal: false});
+    }
+
     showNewChannelModal = () => {
-        this.props.actions.openModal({
-            modalId: ModalIdentifiers.NEW_CHANNEL_FLOW,
-            dialogType: NewChannelFlow,
-        });
+        this.setState({showNewChannelModal: true});
         trackEvent('ui', 'ui_channels_create_channel_v2');
+    }
+
+    hideNewChannelModal = () => {
+        this.setState({showNewChannelModal: false});
     }
 
     handleOpenMoreDirectChannelsModal = (e: Event) => {
@@ -141,6 +123,11 @@ export default class Sidebar extends React.PureComponent<Props, State> {
         } else {
             this.showMoreDirectChannelsModal();
         }
+    }
+
+    handleNewChannelForMoreChannelsModal = () => {
+        this.hideMoreChannelsModal();
+        this.showNewChannelModal();
     }
 
     onDragStart = () => {
@@ -162,9 +149,28 @@ export default class Sidebar extends React.PureComponent<Props, State> {
             );
         }
 
+        let moreChannelsModal;
+        if (this.state.showMoreChannelsModal) {
+            moreChannelsModal = (
+                <MoreChannels
+                    onModalDismissed={this.hideMoreChannelsModal}
+                    handleNewChannel={this.handleNewChannelForMoreChannelsModal}
+                    morePublicChannelsModalType={'public'} // TODO: need to incorporate 'private' when showing archived channels: (getConfig(state).ExperimentalViewArchivedChannels === 'true')
+                />
+            );
+        }
+
         return (
             <React.Fragment>
+                <NewChannelFlow
+                    show={this.state.showNewChannelModal}
+                    canCreatePublicChannel={this.props.canCreatePublicChannel}
+                    canCreatePrivateChannel={this.props.canCreatePrivateChannel}
+                    channelType={Constants.OPEN_CHANNEL as ChannelType}
+                    onModalDismissed={this.hideNewChannelModal}
+                />
                 {moreDirectChannelsModal}
+                {moreChannelsModal}
             </React.Fragment>
         );
     }
@@ -196,19 +202,16 @@ export default class Sidebar extends React.PureComponent<Props, State> {
                             showCreateCategoryModal={this.showCreateCategoryModal}
                             canCreateChannel={this.props.canCreatePrivateChannel || this.props.canCreatePublicChannel}
                             canJoinPublicChannel={this.props.canJoinPublicChannel}
-                            handleOpenDirectMessagesModal={this.handleOpenMoreDirectChannelsModal}
-                            unreadFilterEnabled={this.props.unreadFilterEnabled}
                         />
                     </div>
                 </div>
                 <Pluggable pluggableName='LeftSidebarHeader'/>
-                <SidebarChannelList
+                <SidebarCategoryList
                     handleOpenMoreDirectChannelsModal={this.handleOpenMoreDirectChannelsModal}
                     onDragStart={this.onDragStart}
                     onDragEnd={this.onDragEnd}
                 />
-                <DataPrefetch/>
-                {this.props.isCloud && <SidebarNextSteps/>}
+                {this.props.isDataPrefechEnabled && <DataPrefetch/>}
                 {this.renderModals()}
             </div>
         );

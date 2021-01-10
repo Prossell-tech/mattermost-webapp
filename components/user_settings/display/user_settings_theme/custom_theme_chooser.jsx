@@ -2,6 +2,7 @@
 // See LICENSE.txt for license information.
 /* eslint-disable react/no-string-refs */
 
+import $ from 'jquery';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, FormattedMessage} from 'react-intl';
@@ -10,12 +11,13 @@ import {setThemeDefaults} from 'mattermost-redux/utils/theme_utils';
 import {t} from 'utils/i18n';
 
 import Constants from 'utils/constants';
+import * as UserAgent from 'utils/user_agent';
 
 import LocalizedIcon from 'components/localized_icon';
 import OverlayTrigger from 'components/overlay_trigger';
 import Popover from 'components/widgets/popover';
 
-import ColorChooser from './color_chooser';
+import ColorChooser from './color_chooser.jsx';
 
 const COPY_SUCCESS_INTERVAL = 3000;
 
@@ -129,6 +131,14 @@ export default class CustomThemeChooser extends React.PureComponent {
         };
     }
 
+    componentDidMount() {
+        $('.group--code').on('change', this.onCodeThemeChange);
+    }
+
+    componentWillUnmount() {
+        $('.group--code').off('change', this.onCodeThemeChange);
+    }
+
     handleColorChange = (settingId, color) => {
         const {updateTheme, theme} = this.props;
         if (theme[settingId] !== color) {
@@ -204,35 +214,31 @@ export default class CustomThemeChooser extends React.PureComponent {
     toggleSidebarStyles = (e) => {
         e.preventDefault();
 
-        this.refs.sidebarStylesHeader.classList.toggle('open');
+        $(this.refs.sidebarStylesHeader).toggleClass('open'); // eslint-disable-line jquery/no-class
         this.toggleSection(this.refs.sidebarStyles);
     }
 
     toggleCenterChannelStyles = (e) => {
         e.preventDefault();
 
-        this.refs.centerChannelStylesHeader.classList.toggle('open');
+        $(this.refs.centerChannelStylesHeader).toggleClass('open'); // eslint-disable-line jquery/no-class
         this.toggleSection(this.refs.centerChannelStyles);
     }
 
     toggleLinkAndButtonStyles = (e) => {
         e.preventDefault();
 
-        this.refs.linkAndButtonStylesHeader.classList.toggle('open');
+        $(this.refs.linkAndButtonStylesHeader).toggleClass('open'); // eslint-disable-line jquery/no-class
         this.toggleSection(this.refs.linkAndButtonStyles);
     }
 
     toggleSection(node) {
-        node.classList.toggle('open');
-
-        // set overflow after animation, so the colorchooser is fully shown
-        node.ontransitionend = () => {
-            if (node.classList.contains('open')) {
-                node.style.overflowY = 'inherit';
-            } else {
-                node.style.overflowY = 'hidden';
-            }
-        };
+        if (UserAgent.isIos()) {
+            // iOS doesn't support jQuery animations
+            $(node).toggleClass('open'); // eslint-disable-line jquery/no-class
+        } else {
+            $(node).slideToggle(); // eslint-disable-line jquery/no-slide
+        }
     }
 
     onCodeThemeChange = (e) => {
@@ -252,11 +258,11 @@ export default class CustomThemeChooser extends React.PureComponent {
     }
 
     showCopySuccess = () => {
-        const copySuccess = document.querySelector('.copy-theme-success');
-        copySuccess.style.display = 'inline-block';
+        const copySuccess = $('.copy-theme-success');
+        copySuccess.show();
 
         setTimeout(() => {
-            copySuccess.style.display = 'none';
+            copySuccess.hide();
         }, COPY_SUCCESS_INTERVAL);
     }
 
@@ -316,7 +322,6 @@ export default class CustomThemeChooser extends React.PureComponent {
                                 className='form-control'
                                 type='text'
                                 defaultValue={theme[element.id]}
-                                onChange={this.onCodeThemeChange}
                             >
                                 {codeThemeOptions}
                             </select>
@@ -344,7 +349,7 @@ export default class CustomThemeChooser extends React.PureComponent {
                         <ColorChooser
                             id={element.id}
                             label={<FormattedMessage {...messages[element.id]}/>}
-                            value={theme[element.id]}
+                            color={theme[element.id]}
                             onChange={this.handleColorChange}
                         />
                     </div>,
@@ -364,7 +369,7 @@ export default class CustomThemeChooser extends React.PureComponent {
                         <ColorChooser
                             id={element.id}
                             label={<FormattedMessage {...messages[element.id]}/>}
-                            value={color}
+                            color={color}
                             onChange={this.handleColorChange}
                         />
                     </div>,
@@ -378,7 +383,7 @@ export default class CustomThemeChooser extends React.PureComponent {
                         <ColorChooser
                             id={element.id}
                             label={<FormattedMessage {...messages[element.id]}/>}
-                            value={theme[element.id]}
+                            color={theme[element.id]}
                             onChange={this.handleColorChange}
                         />
                     </div>,

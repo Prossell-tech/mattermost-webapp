@@ -20,7 +20,7 @@ function buildProfile(user) {
 
 Cypress.Commands.add('oktaCreateUser', (user = {}) => {
     const profile = buildProfile(user);
-    return cy.task('oktaRequest', {
+    cy.task('oktaRequest', {
         baseUrl: Cypress.env('oktaApiUrl'),
         urlSuffix: '/users/',
         method: 'post',
@@ -38,12 +38,12 @@ Cypress.Commands.add('oktaCreateUser', (user = {}) => {
     }).then((response) => {
         expect(response.status).to.equal(200);
         const userId = response.data.id;
-        return cy.wrap(userId);
+        return userId;
     });
 });
 
 Cypress.Commands.add('oktaGetUser', (userId = '') => {
-    return cy.task('oktaRequest', {
+    cy.task('oktaRequest', {
         baseUrl: Cypress.env('oktaApiUrl'),
         urlSuffix: '/users?q=' + userId,
         method: 'get',
@@ -51,16 +51,16 @@ Cypress.Commands.add('oktaGetUser', (userId = '') => {
     }).then((response) => {
         expect(response.status).to.be.equal(200);
         if (response.data.length > 0) {
-            return cy.wrap(response.data[0].id);
+            return response.data[0].id;
         }
-        return cy.wrap(null);
+        return null;
     });
 });
 
 Cypress.Commands.add('oktaUpdateUser', (userId = '', user = {}) => {
     const profile = buildProfile(user);
 
-    return cy.task('oktaRequest', {
+    cy.task('oktaRequest', {
         baseUrl: Cypress.env('oktaApiUrl'),
         urlSuffix: '/users/' + userId,
         method: 'post',
@@ -114,7 +114,7 @@ Cypress.Commands.add('oktaDeleteSession', (userId = '') => {
 });
 
 Cypress.Commands.add('oktaAssignUserToApplication', (userId = '', user = {}) => {
-    return cy.task('oktaRequest', {
+    cy.task('oktaRequest', {
         baseUrl: Cypress.env('oktaApiUrl'),
         urlSuffix: '/apps/' + Cypress.env('oktaMMAppId') + '/users',
         method: 'post',
@@ -136,7 +136,7 @@ Cypress.Commands.add('oktaAssignUserToApplication', (userId = '', user = {}) => 
 
 Cypress.Commands.add('oktaGetOrCreateUser', (user) => {
     let userId;
-    return cy.oktaGetUser(user.email).then((uId) => {
+    cy.oktaGetUser(user.email).then((uId) => {
         userId = uId;
         if (userId == null) {
             cy.oktaCreateUser(user).then((_uId) => {

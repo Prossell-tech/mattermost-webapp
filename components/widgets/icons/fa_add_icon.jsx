@@ -2,14 +2,23 @@
 // See LICENSE.txt for license information.
 
 import React from 'react';
-import {useIntl} from 'react-intl';
 
-export default function AddIcon() {
-    const {formatMessage} = useIntl();
-    return (
-        <i
-            className='fa fa-plus'
-            title={formatMessage({id: 'generic_icons.add', defaultMessage: 'Add Icon'})}
-        />
-    );
+import {FormattedMessage} from 'react-intl';
+
+export default class AddIcon extends React.PureComponent {
+    render() {
+        return (
+            <FormattedMessage
+                id='generic_icons.add'
+                defaultMessage='Add Icon'
+            >
+                {(title) => (
+                    <i
+                        className='fa fa-plus'
+                        title={title}
+                    />
+                )}
+            </FormattedMessage>
+        );
+    }
 }

@@ -12,6 +12,7 @@ exports[`admin_console/team_channel_settings/group/GroupList should match snapsh
           "name": <FormattedMessage
             defaultMessage="Name"
             id="admin.member_list_group.name"
+            values={Object {}}
           />,
         },
       ]
@@ -19,12 +20,12 @@ exports[`admin_console/team_channel_settings/group/GroupList should match snapsh
     endCount={10}
     loading={true}
     nextPage={[Function]}
-    onSearch={[MockFunction]}
     page={0}
     placeholderEmpty={
       <FormattedMessage
         defaultMessage="No users found"
         id="admin.member_list_group.notFound"
+        values={Object {}}
       />
     }
     previousPage={[Function]}
@@ -552,7 +553,7 @@ exports[`admin_console/team_channel_settings/group/GroupList should match snapsh
         },
       ]
     }
-    searchPlaceholder=""
+    search={[Function]}
     startCount={1}
     term=""
     total={15}
@@ -572,6 +573,7 @@ exports[`admin_console/team_channel_settings/group/GroupList should match snapsh
           "name": <FormattedMessage
             defaultMessage="Name"
             id="admin.member_list_group.name"
+            values={Object {}}
           />,
         },
       ]
@@ -579,17 +581,17 @@ exports[`admin_console/team_channel_settings/group/GroupList should match snapsh
     endCount={0}
     loading={true}
     nextPage={[Function]}
-    onSearch={[MockFunction]}
     page={0}
     placeholderEmpty={
       <FormattedMessage
         defaultMessage="No users found"
         id="admin.member_list_group.notFound"
+        values={Object {}}
       />
     }
     previousPage={[Function]}
     rows={Array []}
-    searchPlaceholder=""
+    search={[Function]}
     startCount={1}
     term=""
     total={0}

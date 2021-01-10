@@ -7,7 +7,6 @@ import {SearchTypes} from 'utils/constants';
 describe('Reducers.Search', () => {
     const initialState = {
         modalSearch: '',
-        modalFilters: {},
         systemUsersSearch: {},
         userGridSearch: {},
     };

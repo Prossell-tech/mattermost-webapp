@@ -9,8 +9,6 @@
 
 // Group: @channel_settings
 
-import * as TIMEOUTS from '../../fixtures/timeouts';
-
 describe('Channel settings', () => {
     let mainUser;
     let otherUser;
@@ -34,10 +32,12 @@ describe('Channel settings', () => {
             // # Create 20 channels (based on length of channelNames array) to ensure that the channels list is scrollable
             cy.wrap(channelNames).each((name) => {
                 const displayName = `channel-${name}`;
-                cy.apiCreateChannel(team.id, name, displayName, 'O', '', '', false).then(({channel}) => {
+                cy.apiCreateChannel(team.id, name, displayName, 'O', '', '', false).then((response) => {
+                    const testChannel = response.body;
+
                     // # Add our 2 created users to each channel so they can both post messages
-                    cy.apiAddUserToChannel(channel.id, mainUser.id);
-                    cy.apiAddUserToChannel(channel.id, otherUser.id);
+                    cy.apiAddUserToChannel(testChannel.id, mainUser.id);
+                    cy.apiAddUserToChannel(testChannel.id, otherUser.id);
                 });
             });
         });
@@ -51,7 +51,8 @@ describe('Channel settings', () => {
         cy.visit(`/${myTeam.name}/channels/off-topic`);
 
         // # Post message as the second user, in a channel near the top of the list
-        cy.apiGetChannelByName(myTeam.name, channelNames[firstChannelIndex]).then(({channel}) => {
+        cy.apiGetChannelByName(myTeam.name, channelNames[firstChannelIndex]).then((response) => {
+            const channel = response.body;
             cy.postMessageAs({
                 sender: otherUser,
                 message: 'Bleep bloop I am a robot',
@@ -59,7 +60,7 @@ describe('Channel settings', () => {
             });
 
             // # Scroll down in channels list until last created channel is visible
-            cy.get(`#sidebarItem_${channelNames[lastChannelIndex]}`).scrollIntoView({duration: TIMEOUTS.TWO_SEC});
+            cy.get(`#sidebarItem_${channelNames[lastChannelIndex]}`).scrollIntoView();
         });
 
         // * After scrolling is complete, "More Unreads" pill should be visible at the top of the channels list
@@ -70,7 +71,8 @@ describe('Channel settings', () => {
         cy.get('#unreadIndicatorTop').should('be.visible').click();
 
         // # Post as another user in a channel near the bottom of the list, scroll channels list to view it (should be in bold)
-        cy.apiGetChannelByName(myTeam.name, channelNames[lastChannelIndex]).then(({channel}) => {
+        cy.apiGetChannelByName(myTeam.name, channelNames[lastChannelIndex]).then((response) => {
+            const channel = response.body;
             cy.postMessageAs({
                 sender: otherUser,
                 message: 'Bleep bloop I am a robot',
@@ -78,7 +80,7 @@ describe('Channel settings', () => {
             });
 
             // # Scroll down in channels list until last created channel is visible
-            cy.get(`#sidebarItem_${channelNames[firstChannelIndex]}`).scrollIntoView({duration: TIMEOUTS.TWO_SEC});
+            cy.get(`#sidebarItem_${channelNames[firstChannelIndex]}`).scrollIntoView();
         });
 
         // * After scrolling is complete, "More Unreads" pill should not be visible at the top of the channels list

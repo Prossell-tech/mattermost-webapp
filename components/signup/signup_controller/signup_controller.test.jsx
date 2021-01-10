@@ -4,7 +4,7 @@
 import {shallow} from 'enzyme';
 import React from 'react';
 
-import * as GlobalActions from 'actions/global_actions';
+import * as GlobalActions from 'actions/global_actions.jsx';
 import {browserHistory} from 'utils/browser_history';
 import {Constants} from 'utils/constants';
 
@@ -37,9 +37,6 @@ describe('components/SignupController', () => {
         enableSignUpWithGitLab: true,
         enableSignUpWithGoogle: true,
         enableSignUpWithOffice365: true,
-        enableSignUpWithOpenId: true,
-        openidButtonText: 'OpenId',
-        openidButtonColor: '#FFFFFF',
         samlLoginButtonText: 'SAML',
         ldapLoginFieldName: '',
         actions: {

@@ -9,50 +9,46 @@ import FormattedMarkdownMessage from 'components/formatted_markdown_message.jsx'
 
 describe('components/FormattedMarkdownMessage', () => {
     test('should render message', () => {
-        const props = {
+        const descriptor = {
             id: 'test.foo',
             defaultMessage: '**bold** *italic* [link](https://mattermost.com/) <br/> [link target blank](!https://mattermost.com/)',
         };
-        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...props}/>));
+        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...descriptor}/>));
         expect(wrapper).toMatchSnapshot();
     });
 
     test('should backup to default', () => {
-        const props = {
+        const descriptor = {
             id: 'xxx',
             defaultMessage: 'testing default message',
         };
-        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...props}/>));
+        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...descriptor}/>));
         expect(wrapper).toMatchSnapshot();
     });
 
     test('should escape non-BR', () => {
-        const props = {
+        const descriptor = {
             id: 'test.bar',
             defaultMessage: '',
-            values: {
-                b: (...content) => `<b>${content}</b>`,
-                script: (...content) => `<script>${content}</script>`,
-            },
         };
-        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...props}/>));
+        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...descriptor}/>));
         expect(wrapper).toMatchSnapshot();
     });
 
     test('values should work', () => {
-        const props = {
+        const descriptor = {
             id: 'test.vals',
             defaultMessage: '*Hi* {petName}!',
             values: {
                 petName: 'sweetie',
             },
         };
-        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...props}/>));
+        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...descriptor}/>));
         expect(wrapper).toMatchSnapshot();
     });
 
     test('should allow to disable links', () => {
-        const props = {
+        const descriptor = {
             id: 'test.vals',
             defaultMessage: '*Hi* {petName}!',
             values: {
@@ -60,7 +56,7 @@ describe('components/FormattedMarkdownMessage', () => {
             },
             disableLinks: true,
         };
-        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...props}/>));
+        const wrapper = mount(wrapProvider(<FormattedMarkdownMessage {...descriptor}/>));
         expect(wrapper).toMatchSnapshot();
     });
 });

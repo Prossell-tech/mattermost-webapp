@@ -94,16 +94,7 @@
     }
 
     blockquote {
-        font-size: 13px;
-        padding: 0 0 0 20px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        &:before {
-            font-size: 15px;
-            left: 2px;
-            top: 0;
-        }
+        padding-bottom: 0;
     }
 
     .popover-title {
@@ -209,7 +200,7 @@
 
             &:before {
                 position: absolute;
-                background: rgba(var(--center-channel-color-rgb), 0.04) !important;
+                background: v(center-channel-color-04) !important;
                 content: '';
                 width: 100%;
                 height: 100%;
@@ -226,7 +217,7 @@
         .popover-content {
             border-radius: 0 0 3px 3px;
             border-top: none;
-            @include box-shadow(rgba(var(--center-channel-color-rgb), 0.08) 0px 17px 50px 0px, rgba(var(--center-channel-color-rgb), 0.08) 0px 12px 15px 0px);
+            @include box-shadow(v(center-channel-color-08) 0px 17px 50px 0px, v(center-channel-color-08) 0px 12px 15px 0px);
             background: v(center-channel-bg);
         }
     }
@@ -277,10 +268,6 @@
     text-transform: uppercase;
     font-weight: 600;
 
-    span {
-        background: v(center-channel-bg);
-    }
-
     &:first-child {
         &:before {
             display: none;
@@ -290,7 +277,7 @@
     &:before {
         content: '';
         height: 1px;
-        background: rgba(var(--center-channel-color-rgb), 0.08);
+        background: v(center-channel-color-08);
         position: absolute;
         top: -7px;
         left: 0;
@@ -328,7 +315,7 @@
 
             &::-webkit-scrollbar-thumb {
                 border: 1px solid v(center-channel-bg);
-                background-color: rgba(var(--center-channel-color-rgb), 0.24) !important;
+                background-color: v(center-channel-color-24) !important;
                 border-radius: 4px;
             }
         }
@@ -346,12 +333,12 @@
         padding: 0 2.4rem;
 
         &.selected {
-            background: rgba(var(--center-channel-color-rgb), 0.08);
+            background: v(center-channel-color-08);
             box-shadow: none;
         }
 
         .status--group {
-            background-color: rgba(var(--center-channel-color-rgb), 0.20);
+            background-color: v(center-channel-color-20);
             margin: 0;
             width: 1.8rem;
             height: 1.8rem;
@@ -495,11 +482,11 @@
                     height: 2em;
 
                     &:hover {
-                        background-color: rgba(var(--button-bg-rgb), 0.24);
+                        background-color: v(button-bg-24);
                     }
 
                     &:active {
-                        background-color: rgba(var(--button-bg-rgb), 0.32);
+                        background-color: v(button-bg-32);
                     }
 
                     &.a11y--focused {

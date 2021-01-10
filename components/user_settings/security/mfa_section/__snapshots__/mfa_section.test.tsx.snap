@@ -8,6 +8,7 @@ exports[`MfaSection rendering when section is collapsed and MFA is active 1`] = 
     <FormattedMessage
       defaultMessage="Active"
       id="user.settings.security.active"
+      values={Object {}}
     />
   }
   section="mfa"
@@ -15,6 +16,7 @@ exports[`MfaSection rendering when section is collapsed and MFA is active 1`] = 
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}
@@ -27,6 +29,7 @@ exports[`MfaSection rendering when section is collapsed and MFA is not active 1`
     <FormattedMessage
       defaultMessage="Inactive"
       id="user.settings.security.inactive"
+      values={Object {}}
     />
   }
   section="mfa"
@@ -34,6 +37,7 @@ exports[`MfaSection rendering when section is collapsed and MFA is not active 1`
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}
@@ -47,6 +51,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active and enf
     <FormattedMessage
       defaultMessage="Multi-factor authentication is required on this server. Resetting is only recommended when you need to switch code generation to a new mobile device. You will be required to set it up again immediately."
       id="user.settings.mfa.requiredHelp"
+      values={Object {}}
     />
   }
   infoPosition="bottom"
@@ -62,6 +67,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active and enf
         <FormattedMessage
           defaultMessage="Reset MFA on Account"
           id="user.settings.mfa.reset"
+          values={Object {}}
         />
       </a>
       <br />
@@ -74,6 +80,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active and enf
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}
@@ -88,6 +95,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active but not
     <FormattedMessage
       defaultMessage="Removing multi-factor authentication means you will no longer require a phone-based passcode to sign-in to your account."
       id="user.settings.mfa.removeHelp"
+      values={Object {}}
     />
   }
   infoPosition="bottom"
@@ -103,6 +111,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active but not
         <FormattedMessage
           defaultMessage="Remove MFA from Account"
           id="user.settings.mfa.remove"
+          values={Object {}}
         />
       </a>
       <br />
@@ -115,6 +124,7 @@ exports[`MfaSection rendering when section is expanded and MFA is active but not
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}
@@ -129,6 +139,7 @@ exports[`MfaSection rendering when section is expanded and MFA is not active 1`]
     <FormattedMessage
       defaultMessage="Adding multi-factor authentication will make your account more secure by requiring a code from your mobile phone each time you sign in."
       id="user.settings.mfa.addHelp"
+      values={Object {}}
     />
   }
   infoPosition="bottom"
@@ -144,6 +155,7 @@ exports[`MfaSection rendering when section is expanded and MFA is not active 1`]
         <FormattedMessage
           defaultMessage="Add MFA to Account"
           id="user.settings.mfa.add"
+          values={Object {}}
         />
       </a>
       <br />
@@ -156,6 +168,7 @@ exports[`MfaSection rendering when section is expanded and MFA is not active 1`]
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}
@@ -170,6 +183,7 @@ exports[`MfaSection rendering when section is expanded with a server error 1`] =
     <FormattedMessage
       defaultMessage="Adding multi-factor authentication will make your account more secure by requiring a code from your mobile phone each time you sign in."
       id="user.settings.mfa.addHelp"
+      values={Object {}}
     />
   }
   infoPosition="bottom"
@@ -185,6 +199,7 @@ exports[`MfaSection rendering when section is expanded with a server error 1`] =
         <FormattedMessage
           defaultMessage="Add MFA to Account"
           id="user.settings.mfa.add"
+          values={Object {}}
         />
       </a>
       <br />
@@ -197,6 +212,7 @@ exports[`MfaSection rendering when section is expanded with a server error 1`] =
     <FormattedMessage
       defaultMessage="Multi-factor Authentication"
       id="user.settings.mfa.title"
+      values={Object {}}
     />
   }
   updateSection={[MockFunction]}

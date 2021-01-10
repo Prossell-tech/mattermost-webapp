@@ -11,7 +11,7 @@ import MessageAttachment from './message_attachment';
 
 function mapStateToProps(state) {
     return {
-        currentRelativeTeamUrl: getCurrentRelativeTeamUrl(state),
+        getCurrentRelativeTeamUrl: getCurrentRelativeTeamUrl(state),
     };
 }
 

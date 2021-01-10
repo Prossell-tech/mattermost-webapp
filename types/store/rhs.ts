@@ -18,8 +18,8 @@ export type FakePost = {
 
 export type PostDraft = {
     message: string;
-    fileInfos: FileInfo[];
-    uploadsInProgress: string[];
+    fileInfos: Array<FileInfo>;
+    uploadsInProgress: Array<string>;
 };
 
 export type RhsViewState = {
@@ -39,4 +39,4 @@ export type RhsViewState = {
     isMenuOpen: boolean;
 };
 
-export type RhsState = 'mention' | 'search' | 'flag' | 'pin' | 'plugin' | null;
+export type RhsState = 'mention' | 'search' | 'flag' | 'pin' | 'plugin';

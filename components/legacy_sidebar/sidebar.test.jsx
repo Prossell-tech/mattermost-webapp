@@ -144,6 +144,7 @@ describe('component/legacy_sidebar/sidebar_channel/SidebarChannel', () => {
         redirectChannel: 'default-channel',
         canCreatePublicChannel: true,
         canCreatePrivateChannel: true,
+        isDataPrefechEnabled: true,
     };
 
     test('should match snapshot, on sidebar show', () => {
@@ -206,6 +207,18 @@ describe('component/legacy_sidebar/sidebar_channel/SidebarChannel', () => {
                 {...{
                     ...defaultProps,
                     currentUser: null,
+                }}
+            />,
+        );
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    test('should match snapshot that is not to have DataPrefetch mounted, when isDataPrefechEnabled is false', () => {
+        const wrapper = shallowWithIntl(
+            <Sidebar
+                {...{
+                    ...defaultProps,
+                    isDataPrefechEnabled: false,
                 }}
             />,
         );
@@ -408,6 +421,34 @@ describe('component/legacy_sidebar/sidebar_channel/SidebarChannel', () => {
 
         instance.navigateChannelShortcut(ctrlShiftK);
         expect(instance.handleOpenMoreDirectChannelsModal).toHaveBeenCalledTimes(2);
+    });
+
+    test('should show/hide correctly more channels modal', () => {
+        const wrapper = shallowWithIntl(
+            <Sidebar {...defaultProps}/>,
+        );
+        const instance = wrapper.instance();
+        instance.componentDidUpdate = jest.fn();
+        instance.showMoreChannelsModal();
+        wrapper.setState(instance.state);
+        expect(wrapper).toMatchSnapshot();
+        instance.hideMoreChannelsModal();
+        wrapper.setState(instance.state);
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    test('should show/hide correctly new channel modal', () => {
+        const wrapper = shallowWithIntl(
+            <Sidebar {...defaultProps}/>,
+        );
+        const instance = wrapper.instance();
+        instance.componentDidUpdate = jest.fn();
+        instance.showNewChannelModal(Constants.PRIVATE_CHANNEL);
+        wrapper.setState(instance.state);
+        expect(wrapper).toMatchSnapshot();
+        instance.hideNewChannelModal();
+        wrapper.setState(instance.state);
+        expect(wrapper).toMatchSnapshot();
     });
 
     test('should show/hide correctly more direct channels modal', () => {

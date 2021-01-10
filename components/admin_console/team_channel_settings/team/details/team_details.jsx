@@ -10,7 +10,7 @@ import {Groups} from 'mattermost-redux/constants';
 
 import {browserHistory} from 'utils/browser_history';
 
-import {trackEvent} from 'actions/telemetry_actions.jsx';
+import {trackEvent} from 'actions/diagnostics_actions.jsx';
 import BlockableLink from 'components/admin_console/blockable_link';
 import FormError from 'components/form_error';
 
@@ -31,7 +31,6 @@ export default class TeamDetails extends React.PureComponent {
         totalGroups: PropTypes.number.isRequired,
         groups: PropTypes.arrayOf(PropTypes.object),
         allGroups: PropTypes.object.isRequired,
-        isDisabled: PropTypes.bool,
         actions: PropTypes.shape({
             setNavigationBlocked: PropTypes.func.isRequired,
             getTeam: PropTypes.func.isRequired,
@@ -161,12 +160,22 @@ export default class TeamDetails extends React.PureComponent {
         if (usersToUpdate && !syncChecked) {
             const addUserActions = [];
             const removeUserActions = [];
+            const rolesToPromote = [];
+            const rolesToDemote = [];
             const {addUserToTeam, removeUserFromTeam, updateTeamMemberSchemeRoles} = this.props.actions;
             usersToAddList.forEach((user) => {
                 addUserActions.push(addUserToTeam(teamID, user.id));
             });
             usersToRemoveList.forEach((user) => {
                 removeUserActions.push(removeUserFromTeam(teamID, user.id));
+            });
+            userRolesToUpdate.forEach((userId) => {
+                const {schemeUser, schemeAdmin} = rolesToUpdate[userId];
+                if (schemeAdmin) {
+                    rolesToPromote.push(updateTeamMemberSchemeRoles(teamID, userId, schemeUser, schemeAdmin));
+                } else {
+                    rolesToDemote.push(updateTeamMemberSchemeRoles(teamID, userId, schemeUser, schemeAdmin));
+                }
             });
 
             if (addUserActions.length > 0) {
@@ -192,17 +201,6 @@ export default class TeamDetails extends React.PureComponent {
                     trackEvent('admin_team_config_page', 'members_removed_from_team', {count, team_id: teamID});
                 }
             }
-
-            const rolesToPromote = [];
-            const rolesToDemote = [];
-            userRolesToUpdate.forEach((userId) => {
-                const {schemeUser, schemeAdmin} = rolesToUpdate[userId];
-                if (schemeAdmin) {
-                    rolesToPromote.push(updateTeamMemberSchemeRoles(teamID, userId, schemeUser, schemeAdmin));
-                } else {
-                    rolesToDemote.push(updateTeamMemberSchemeRoles(teamID, userId, schemeUser, schemeAdmin));
-                }
-            });
 
             if (rolesToPromote.length > 0) {
                 const result = await Promise.all(rolesToPromote);
@@ -266,8 +264,6 @@ export default class TeamDetails extends React.PureComponent {
                             <UsersWillBeRemovedError
                                 total={usersToRemoveCount}
                                 users={result.data.users}
-                                scope={'team'}
-                                scopeId={this.props.teamID}
                             />
                         );
                     }
@@ -378,7 +374,6 @@ export default class TeamDetails extends React.PureComponent {
                             allowedDomains={allowedDomains}
                             syncChecked={syncChecked}
                             onToggle={this.setToggles}
-                            isDisabled={this.props.isDisabled}
                         />
 
                         <TeamGroups
@@ -390,7 +385,6 @@ export default class TeamDetails extends React.PureComponent {
                             onAddCallback={this.handleGroupChange}
                             onGroupRemoved={this.handleGroupRemoved}
                             setNewGroupRole={this.setNewGroupRole}
-                            isDisabled={this.props.isDisabled}
                         />
 
                         {!syncChecked &&
@@ -401,7 +395,6 @@ export default class TeamDetails extends React.PureComponent {
                                 usersToAdd={this.state.usersToAdd}
                                 updateRole={this.addRolesToUpdate}
                                 teamId={this.props.teamID}
-                                isDisabled={this.props.isDisabled}
                             />
                         }
                     </div>
@@ -413,7 +406,6 @@ export default class TeamDetails extends React.PureComponent {
                     saveNeeded={saveNeeded}
                     onClick={this.showRemoveUsersModal}
                     serverError={serverError}
-                    isDisabled={this.props.isDisabled}
                 />
             </div>
         );

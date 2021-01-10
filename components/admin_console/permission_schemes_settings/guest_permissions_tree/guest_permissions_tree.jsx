@@ -39,12 +39,7 @@ export default class GuestPermissionsTree extends React.PureComponent {
 
         this.ADDITIONAL_VALUES = {
             guest_edit_post: {
-                editTimeLimitButton: (
-                    <EditPostTimeLimitButton
-                        onClick={this.openPostTimeLimitModal}
-                        isDisabled={this.props.readOnly}
-                    />
-                ),
+                editTimeLimitButton: <EditPostTimeLimitButton onClick={this.openPostTimeLimitModal}/>,
             },
         };
 

@@ -13,19 +13,10 @@ export default class TeamInList extends React.PureComponent {
     static propTypes = {
         team: PropTypes.object.isRequired,
         onRemoveTeam: PropTypes.func,
-        isDisabled: PropTypes.bool,
-    }
-
-    handleRemoveTeam = () => {
-        const {team, isDisabled, onRemoveTeam} = this.props;
-        if (isDisabled) {
-            return;
-        }
-        onRemoveTeam(team.id);
     }
 
     render() {
-        const {team, isDisabled} = this.props;
+        const team = this.props.team;
         return (
             <div
                 className='team'
@@ -41,8 +32,8 @@ export default class TeamInList extends React.PureComponent {
                     </div>
                 </div>
                 <a
-                    className={isDisabled ? 'remove disabled' : 'remove'}
-                    onClick={this.handleRemoveTeam}
+                    className='remove'
+                    onClick={() => this.props.onRemoveTeam(team.id)}
                 >
                     <FormattedMessage
                         id='admin.permissions.teamScheme.removeTeam'

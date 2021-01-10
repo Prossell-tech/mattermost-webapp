@@ -20,7 +20,7 @@ describe('Messaging', () => {
         });
     });
 
-    it('MM-T174 Autocomplete should close if tildes are deleted using backspace', () => {
+    it('M18707 - Autocomplete should close if tildes are deleted using backspace', () => {
         const msg = 'foo';
 
         // # Make a post

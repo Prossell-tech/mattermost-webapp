@@ -163,7 +163,6 @@ export default class PushSettings extends AdminSettings {
                             ref='agree'
                             checked={this.state.agree}
                             onChange={this.handleAgreeChange}
-                            disabled={this.props.isDisabled}
                         />
                         <FormattedMarkdownMessage
                             id='admin.email.agreeHPNS'
@@ -189,7 +188,6 @@ export default class PushSettings extends AdminSettings {
                     onChange={this.handleDropdownChange}
                     helpText={sendHelpText}
                     setByEnv={this.isPushNotificationServerSetByEnv()}
-                    disabled={this.props.isDisabled}
                 />
                 {tosCheckbox}
                 <TextSetting
@@ -204,7 +202,7 @@ export default class PushSettings extends AdminSettings {
                     helpText={pushServerHelpText}
                     value={this.state.pushNotificationServer}
                     onChange={this.handleChange}
-                    disabled={this.props.isDisabled || this.state.pushNotificationServerType !== PUSH_NOTIFICATIONS_CUSTOM}
+                    disabled={this.state.pushNotificationServerType !== PUSH_NOTIFICATIONS_CUSTOM}
                     setByEnv={this.isSetByEnv('EmailSettings.PushNotificationServer')}
                 />
                 <TextSetting
@@ -226,7 +224,6 @@ export default class PushSettings extends AdminSettings {
                     value={this.state.maxNotificationsPerChannel}
                     onChange={this.handleChange}
                     setByEnv={this.isSetByEnv('TeamSettings.MaxNotificationsPerChannel')}
-                    disabled={this.props.isDisabled}
                 />
             </SettingsGroup>
         );

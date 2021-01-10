@@ -14,7 +14,7 @@ import RhsCardHeader from 'components/rhs_card_header';
 import Markdown from 'components/markdown';
 import UserProfile from 'components/user_profile';
 import PostProfilePicture from 'components/post_profile_picture';
-import * as GlobalActions from 'actions/global_actions';
+import * as GlobalActions from 'actions/global_actions.jsx';
 
 export function renderView(props) {
     return (

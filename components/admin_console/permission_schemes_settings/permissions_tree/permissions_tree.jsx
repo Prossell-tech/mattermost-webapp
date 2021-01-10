@@ -40,12 +40,7 @@ export default class PermissionsTree extends React.PureComponent {
 
         this.ADDITIONAL_VALUES = {
             edit_post: {
-                editTimeLimitButton: (
-                    <EditPostTimeLimitButton
-                        onClick={this.openPostTimeLimitModal}
-                        isDisabled={this.props.readOnly}
-                    />
-                ),
+                editTimeLimitButton: <EditPostTimeLimitButton onClick={this.openPostTimeLimitModal}/>,
             },
         };
 
@@ -70,23 +65,8 @@ export default class PermissionsTree extends React.PureComponent {
                 permissions: [
                     Permissions.CREATE_PUBLIC_CHANNEL,
                     Permissions.MANAGE_PUBLIC_CHANNEL_PROPERTIES,
-                    {
-                        id: 'manage_public_channel_members_and_read_groups',
-                        combined: true,
-                        permissions: [
-                            Permissions.MANAGE_PUBLIC_CHANNEL_MEMBERS,
-                            Permissions.READ_PUBLIC_CHANNEL_GROUPS,
-                        ],
-                    },
+                    Permissions.MANAGE_PUBLIC_CHANNEL_MEMBERS,
                     Permissions.DELETE_PUBLIC_CHANNEL,
-                    {
-                        id: 'convert_public_channel_to_private',
-                        combined: true,
-                        permissions: [
-                            Permissions.CONVERT_PUBLIC_CHANNEL_TO_PRIVATE,
-                            Permissions.CONVERT_PRIVATE_CHANNEL_TO_PUBLIC,
-                        ],
-                    },
                 ],
             },
             {
@@ -94,14 +74,7 @@ export default class PermissionsTree extends React.PureComponent {
                 permissions: [
                     Permissions.CREATE_PRIVATE_CHANNEL,
                     Permissions.MANAGE_PRIVATE_CHANNEL_PROPERTIES,
-                    {
-                        id: 'manage_private_channel_members_and_read_groups',
-                        combined: true,
-                        permissions: [
-                            Permissions.MANAGE_PRIVATE_CHANNEL_MEMBERS,
-                            Permissions.READ_PRIVATE_CHANNEL_GROUPS,
-                        ],
-                    },
+                    Permissions.MANAGE_PRIVATE_CHANNEL_MEMBERS,
                     Permissions.DELETE_PRIVATE_CHANNEL,
                 ],
             },
@@ -138,20 +111,14 @@ export default class PermissionsTree extends React.PureComponent {
                 permissions: [
                 ],
             },
-            {
-                id: 'manage_shared_channels',
-                permissions: [
-                ],
-            },
         ];
         this.updateGroups();
     }
 
     updateGroups = () => {
         const {config, scope, license} = this.props;
-        const sharedChannelsGroup = this.groups[this.groups.length - 1];
-        const integrationsGroup = this.groups[this.groups.length - 2];
-        const postsGroup = this.groups[this.groups.length - 3];
+        const integrationsGroup = this.groups[this.groups.length - 1];
+        const postsGroup = this.groups[this.groups.length - 2];
         const teamsGroup = this.groups[0];
         if (config.EnableIncomingWebhooks === 'true' && !integrationsGroup.permissions.includes(Permissions.MANAGE_INCOMING_WEBHOOKS)) {
             integrationsGroup.permissions.push(Permissions.MANAGE_INCOMING_WEBHOOKS);
@@ -184,11 +151,6 @@ export default class PermissionsTree extends React.PureComponent {
             postsGroup.permissions.push(Permissions.USE_GROUP_MENTIONS);
         }
         postsGroup.permissions.push(Permissions.CREATE_POST);
-
-        if (config.ExperimentalSharedChannels === 'true') {
-            sharedChannelsGroup.permissions.push(Permissions.MANAGE_SHARED_CHANNELS);
-            sharedChannelsGroup.permissions.push(Permissions.MANAGE_REMOTE_CLUSTERS);
-        }
     }
 
     openPostTimeLimitModal = () => {

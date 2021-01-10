@@ -39,11 +39,15 @@ describe('Channel header menu', () => {
     });
 
     it('MM-14490 show/hide properly menu dividers', () => {
+        let channel;
+
         // # Go to "/"
         cy.visit(`/${testTeam.name}/channels/town-square`);
 
         // # Create new test channel
-        cy.apiCreateChannel(testTeam.id, 'channel-test', 'Channel Test').then(({channel}) => {
+        cy.apiCreateChannel(testTeam.id, 'channel-test', 'Channel Test').then((res) => {
+            channel = res.body;
+
             // # Select channel on the left hand side
             cy.get(`#sidebarItem_${channel.name}`).click();
 
@@ -74,11 +78,15 @@ describe('Channel header menu', () => {
     });
 
     it('MM-24590 should leave channel successfully', () => {
+        let channel;
+
         // # Go to "/"
         cy.visit(`/${testTeam.name}/channels/town-square`);
 
         // # Create new test channel
-        cy.apiCreateChannel(testTeam.id, 'channel-test-leave', 'Channel Test Leave').then(({channel}) => {
+        cy.apiCreateChannel(testTeam.id, 'channel-test-leave', 'Channel Test Leave').then((res) => {
+            channel = res.body;
+
             // # Select channel on the left hand side
             cy.get(`#sidebarItem_${channel.name}`).click();
 

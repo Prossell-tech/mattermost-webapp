@@ -3,10 +3,10 @@
 
 import assert from 'assert';
 
-import {arePropsEqual} from 'components/search_results/search_results.tsx';
+import {shouldRenderFromPropsAndState} from 'components/search_results/search_results.jsx';
 
 describe('components/SearchResults', () => {
-    describe('shouldRenderFromProps', () => {
+    describe('shouldRenderFromPropsAndState', () => {
         const result1 = {test: 'test'};
         const result2 = {test: 'test'};
         const results = [result1, result2];
@@ -17,15 +17,17 @@ describe('components/SearchResults', () => {
         };
 
         test('should not render', () => {
-            assert.ok(arePropsEqual(props, {...props}));
-            assert.ok(arePropsEqual(props, {...props, results: [result1, result2]}, props, {...props}));
+            assert.ok(!shouldRenderFromPropsAndState(props, {...props}, props, {...props}));
+            assert.ok(!shouldRenderFromPropsAndState(props, {...props, prop1: 'someprop'}, props, {...props}));
+            assert.ok(!shouldRenderFromPropsAndState(props, {...props, results: [result1, result2]}, props, {...props}));
         });
 
         test('should render', () => {
-            assert.ok(!arePropsEqual(props, {...props, prop1: 'newprop'}));
-            assert.ok(!arePropsEqual(props, {...props, results: [result2, result1]}));
-            assert.ok(!arePropsEqual(props, {...props, results: [result1, result2, {test: 'test'}]}));
-            assert.ok(!arePropsEqual(props, {...props, somearray: [1, 2, 3]}));
+            assert.ok(shouldRenderFromPropsAndState(props, {...props, prop1: 'newprop'}, props, {...props}));
+            assert.ok(shouldRenderFromPropsAndState(props, {...props}, props, {...props, prop1: 'newprop'}));
+            assert.ok(shouldRenderFromPropsAndState(props, {...props, results: [result2, result1]}, props, {...props}));
+            assert.ok(shouldRenderFromPropsAndState(props, {...props, results: [result1, result2, {test: 'test'}]}, props, {...props}));
+            assert.ok(shouldRenderFromPropsAndState(props, {...props, somearray: [1, 2, 3]}, props, {...props}));
         });
     });
 });

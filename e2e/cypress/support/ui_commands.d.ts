@@ -42,15 +42,5 @@ declare namespace Cypress {
          *   cy.uiGetNthPost(-1);
          */
         uiGetNthPost(index: number): Chainable<Response>;
-
-        /**
-         * Post message via center textbox by directly injected in the textbox
-         * @param {string} message - message to be posted
-         * @returns void
-         *
-         * @example
-         *  cy.uiPostMessageQuickly('Hello world')
-         */
-        uiPostMessageQuickly(message: string): void;
     }
 }

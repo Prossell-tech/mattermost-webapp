@@ -29,7 +29,7 @@ describe('Messaging', () => {
         });
     });
 
-    it('MM-T222 Emoji characters followed by punctuation', () => {
+    it('M23360 - Emoji characters followed by punctuation', () => {
         // # Post a message
         const messageText = ':)=';
         cy.postMessage(messageText);

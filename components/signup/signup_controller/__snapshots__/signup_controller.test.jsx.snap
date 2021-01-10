@@ -33,6 +33,7 @@ exports[`components/SignupController should match snapshot for addUserToTeamFrom
         >
           <FormattedMessage
             id="web.root.signup_info"
+            values={Object {}}
           />
         </h4>
         <div
@@ -43,6 +44,7 @@ exports[`components/SignupController should match snapshot for addUserToTeamFrom
               <FormattedMessage
                 defaultMessage="Create an account with:"
                 id="signup.title"
+                values={Object {}}
               />
             </strong>
           </h5>
@@ -56,6 +58,7 @@ exports[`components/SignupController should match snapshot for addUserToTeamFrom
             <FormattedMessage
               defaultMessage="The invite link was invalid.  Please speak with your Administrator to receive an invitation."
               id="signup_user_completed.invalid_invite"
+              values={Object {}}
             />
           </label>
         </div>
@@ -66,6 +69,7 @@ exports[`components/SignupController should match snapshot for addUserToTeamFrom
         <FormattedMessage
           defaultMessage="Already have an account?"
           id="signup_user_completed.haveAccount"
+          values={Object {}}
         />
          
         <Link
@@ -74,6 +78,7 @@ exports[`components/SignupController should match snapshot for addUserToTeamFrom
           <FormattedMessage
             defaultMessage="Click here to sign in."
             id="signup_user_completed.signIn"
+            values={Object {}}
           />
         </Link>
       </span>
@@ -108,6 +113,7 @@ exports[`components/SignupController should match snapshot for all signup option
         >
           <FormattedMessage
             id="web.root.signup_info"
+            values={Object {}}
           />
         </h4>
         <div
@@ -118,6 +124,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="Create an account with:"
                 id="signup.title"
+                values={Object {}}
               />
             </strong>
           </h5>
@@ -141,6 +148,7 @@ exports[`components/SignupController should match snapshot for all signup option
             <FormattedMessage
               defaultMessage="Email and Password"
               id="signup.email"
+              values={Object {}}
             />
           </span>
         </Link>
@@ -157,6 +165,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="GitLab Single Sign-On"
                 id="signup.gitlab"
+                values={Object {}}
               />
             </span>
           </span>
@@ -168,6 +177,7 @@ exports[`components/SignupController should match snapshot for all signup option
         <FormattedMessage
           defaultMessage="Already have an account?"
           id="signup_user_completed.haveAccount"
+          values={Object {}}
         />
          
         <Link
@@ -176,6 +186,7 @@ exports[`components/SignupController should match snapshot for all signup option
           <FormattedMessage
             defaultMessage="Click here to sign in."
             id="signup_user_completed.signIn"
+            values={Object {}}
           />
         </Link>
       </span>
@@ -210,6 +221,7 @@ exports[`components/SignupController should match snapshot for all signup option
         >
           <FormattedMessage
             id="web.root.signup_info"
+            values={Object {}}
           />
         </h4>
         <div
@@ -220,6 +232,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="Create an account with:"
                 id="signup.title"
+                values={Object {}}
               />
             </strong>
           </h5>
@@ -243,6 +256,7 @@ exports[`components/SignupController should match snapshot for all signup option
             <FormattedMessage
               defaultMessage="Email and Password"
               id="signup.email"
+              values={Object {}}
             />
           </span>
         </Link>
@@ -259,6 +273,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="GitLab Single Sign-On"
                 id="signup.gitlab"
+                values={Object {}}
               />
             </span>
           </span>
@@ -276,6 +291,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="Google Account"
                 id="signup.google"
+                values={Object {}}
               />
             </span>
           </span>
@@ -293,24 +309,8 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="Office 365"
                 id="signup.office365"
+                values={Object {}}
               />
-            </span>
-          </span>
-        </a>
-        <a
-          className="btn btn-custom-login btn--full openid"
-          href="/oauth/openid/signup"
-          id="OpenIdButton"
-          key="openid"
-          style={
-            Object {
-              "backgroundColor": "#FFFFFF",
-            }
-          }
-        >
-          <span>
-            <span>
-              OpenId
             </span>
           </span>
         </a>
@@ -334,6 +334,7 @@ exports[`components/SignupController should match snapshot for all signup option
               <FormattedMessage
                 defaultMessage="AD/LDAP Credentials"
                 id="signup.ldap"
+                values={Object {}}
               />
             </span>
           </span>
@@ -366,6 +367,7 @@ exports[`components/SignupController should match snapshot for all signup option
         <FormattedMessage
           defaultMessage="Already have an account?"
           id="signup_user_completed.haveAccount"
+          values={Object {}}
         />
          
         <Link
@@ -374,6 +376,7 @@ exports[`components/SignupController should match snapshot for all signup option
           <FormattedMessage
             defaultMessage="Click here to sign in."
             id="signup_user_completed.signIn"
+            values={Object {}}
           />
         </Link>
       </span>

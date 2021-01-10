@@ -7,6 +7,7 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
+// Stage: @prod
 // Group: @markdown
 
 describe('Markdown', () => {
@@ -91,7 +92,7 @@ describe('Markdown', () => {
             });
 
             // * Verify that the preview modal opens
-            cy.get('div.modal-image__content').should('be.visible').trigger('mouseover');
+            cy.get('div.modal-image__content').should('be.visible');
 
             // # Close the modal
             cy.get('div.modal-close').should('exist').click({force: true});
@@ -114,7 +115,7 @@ describe('Markdown', () => {
             });
 
             // * Verify that the preview modal opens
-            cy.get('div.file-details__container').should('be.visible').trigger('mouseover');
+            cy.get('div.file-details__container').should('be.visible');
 
             // # Close the modal
             cy.get('div.modal-close').should('exist').click({force: true});

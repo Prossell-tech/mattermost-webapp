@@ -9,39 +9,39 @@
 
 // Group: @enterprise @ldap
 
-import ldapUsers from '../../../fixtures/ldap_users.json';
+import users from '../../../fixtures/ldap_users.json';
 import {getRandomId} from '../../../utils';
+
+function setLDAPTestSettings(config) {
+    return {
+        siteName: config.TeamSettings.SiteName,
+        siteUrl: config.ServiceSettings.SiteURL,
+        teamName: '',
+        user: null,
+    };
+}
 
 // assumes the CYPRESS_* variables are set
 // assumes that E20 license is uploaded
 // for setup with AWS: Follow the instructions mentioned in the mattermost/platform-private/config/ldap-test-setup.txt file
 context('ldap', () => {
-    const user1 = ldapUsers['test-1'];
-    const guest1 = ldapUsers['board-1'];
-    const admin1 = ldapUsers['dev-1'];
+    const user1 = users['test-1'];
+    const guest1 = users['board-1'];
+    const admin1 = users['dev-1'];
 
     let testSettings;
 
-    before(() => {
-        // * Check if server has license for LDAP
-        cy.apiRequireLicenseForFeature('LDAP');
+    describe('LDAP Login flow - Admin Login', () => {
+        before(() => {
+            // * Check if server has license for LDAP
+            cy.apiRequireLicenseForFeature('LDAP');
 
-        // # Test LDAP configuration and server connection
-        // # Synchronize user attributes
-        cy.apiLDAPTest();
-        cy.apiLDAPSync();
-
-        cy.apiGetConfig().then(({config}) => {
-            testSettings = setLDAPTestSettings(config);
+            cy.apiGetConfig().then(({config}) => {
+                testSettings = setLDAPTestSettings(config);
+            });
         });
 
-        removeUserFromAllTeams(user1);
-        removeUserFromAllTeams(guest1);
-        removeUserFromAllTeams(admin1);
-    });
-
-    describe('LDAP Login flow - Admin Login', () => {
-        it('MM-T2821 LDAP Admin Filter', () => {
+        it('LDAP login new MM admin, create team', () => {
             testSettings.user = admin1;
             const ldapSetting = {
                 LdapSettings: {
@@ -51,13 +51,11 @@ context('ldap', () => {
             };
             cy.apiUpdateConfig(ldapSetting).then(() => {
                 cy.doLDAPLogin(testSettings).then(() => {
-                    // # Skip or create team
+                    // new user create team
                     cy.skipOrCreateTeam(testSettings, getRandomId()).then(() => {
                         cy.get('#headerTeamName').should('be.visible').then((teamName) => {
                             testSettings.teamName = teamName.text();
                         });
-
-                        // # Do LDAP logout
                         cy.doLDAPLogout(testSettings);
                     });
                 });
@@ -67,7 +65,6 @@ context('ldap', () => {
         it('LDAP login existing MM admin', () => {
             // existing user, verify and logout
             cy.doLDAPLogin(testSettings).then(() => {
-                // # Do LDAP logout
                 cy.doLDAPLogout(testSettings);
             });
         });
@@ -84,7 +81,6 @@ context('ldap', () => {
             cy.apiAdminLogin().then(() => {
                 cy.apiUpdateConfig(ldapSetting).then(() => {
                     cy.doLDAPLogin(testSettings).then(() => {
-                        // * Verify login failed
                         cy.checkLoginFailed(testSettings);
                     });
                 });
@@ -101,8 +97,7 @@ context('ldap', () => {
             cy.apiAdminLogin().then(() => {
                 cy.apiUpdateConfig(ldapSetting).then(() => {
                     cy.doLDAPLogin(testSettings).then(() => {
-                        // # Do member logout from sign up
-                        cy.doMemberLogoutFromSignUp(testSettings);
+                        cy.doMemberLogout(testSettings);
                     });
                 });
             });
@@ -114,15 +109,14 @@ context('ldap', () => {
             testSettings.user = guest1;
             const ldapSetting = {
                 LdapSettings: {
-                    UserFilter: '(cn=no_users)',
                     GuestFilter: '(cn=no_guests)',
                 },
             };
             cy.apiAdminLogin().then(() => {
                 cy.apiUpdateConfig(ldapSetting).then(() => {
                     cy.doLDAPLogin(testSettings).then(() => {
-                        // * Verify login failed
-                        cy.checkLoginFailed(testSettings);
+                        cy.get('#createPublicChannel').should('be.visible');
+                        cy.doMemberLogout(testSettings);
                     });
                 });
             });
@@ -132,15 +126,13 @@ context('ldap', () => {
             testSettings.user = guest1;
             const ldapSetting = {
                 LdapSettings: {
-                    UserFilter: '(cn=no_users)',
                     GuestFilter: '(cn=board*)',
                 },
             };
             cy.apiAdminLogin().then(() => {
                 cy.apiUpdateConfig(ldapSetting).then(() => {
                     cy.doLDAPLogin(testSettings).then(() => {
-                        // # Do logout from sign up
-                        cy.doLogoutFromSignUp(testSettings);
+                        cy.doGuestLogout(testSettings);
                     });
                 });
             });
@@ -152,10 +144,11 @@ context('ldap', () => {
             cy.apiAdminLogin();
 
             cy.apiGetTeamByName(testSettings.teamName).then(({team}) => {
-                cy.apiGetChannelByName(testSettings.teamName, 'town-square').then(({channel}) => {
+                cy.apiGetChannelByName(testSettings.teamName, 'town-square').then((r2) => {
+                    const channelId = r2.body.id;
                     cy.apiGetUserByEmail(guest1.email).then(({user}) => {
                         cy.apiAddUserToTeam(team.id, user.id).then(() => {
-                            cy.apiAddUserToChannel(channel.id, user.id);
+                            cy.apiAddUserToChannel(channelId, user.id);
                         });
                     });
 
@@ -169,57 +162,16 @@ context('ldap', () => {
 
         it('LDAP Member login with team invite', () => {
             testSettings.user = user1;
-            const ldapSetting = {
-                LdapSettings: {
-                    UserFilter: '(cn=test*)',
-                },
-            };
-            cy.apiAdminLogin().then(() => {
-                cy.apiUpdateConfig(ldapSetting).then(() => {
-                    cy.doLDAPLogin(testSettings).then(() => {
-                        // # Do LDAP logout
-                        cy.doLDAPLogout(testSettings);
-                    });
-                });
+            cy.doLDAPLogin(testSettings).then(() => {
+                cy.doLDAPLogout(testSettings);
             });
         });
 
         it('LDAP Guest login with team invite', () => {
             testSettings.user = guest1;
-            const ldapSetting = {
-                LdapSettings: {
-                    GuestFilter: '(cn=board*)',
-                },
-            };
-            cy.apiAdminLogin().then(() => {
-                cy.apiUpdateConfig(ldapSetting).then(() => {
-                    cy.doLDAPLogin(testSettings).then(() => {
-                        // # Do LDAP logout
-                        cy.doLDAPLogout(testSettings);
-                    });
-                });
+            cy.doLDAPLogin(testSettings).then(() => {
+                cy.doGuestLogout(testSettings);
             });
         });
     });
 });
-
-function setLDAPTestSettings(config) {
-    return {
-        siteName: config.TeamSettings.SiteName,
-        siteUrl: config.ServiceSettings.SiteURL,
-        teamName: '',
-        user: null,
-    };
-}
-
-function removeUserFromAllTeams(testUser) {
-    cy.apiGetUsersByUsernames([testUser.username]).then(({users}) => {
-        users.forEach((user) => {
-            cy.apiGetTeamsForUser(user.id).then(({teams}) => {
-                teams.forEach((team) => {
-                    cy.apiDeleteUserFromTeam(team.id, user.id);
-                });
-            });
-        });
-    });
-}

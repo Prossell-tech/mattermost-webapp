@@ -175,7 +175,7 @@ describe('Image attachment', () => {
             });
 
             // * Verify that the preview modal opens
-            cy.get('div.modal-image__content').should('be.visible').trigger('mouseover');
+            cy.get('div.modal-image__content').should('be.visible');
 
             // # Close the modal
             cy.get('div.modal-close').should('exist').click({force: true});

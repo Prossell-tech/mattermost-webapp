@@ -44,6 +44,7 @@ exports[`components/unarchive_channel_modal should match snapshot for unarchive_
       <FormattedMessage
         defaultMessage="Confirm UNARCHIVE Channel"
         id="unarchive_channel.confirm"
+        values={Object {}}
       />
     </ModalTitle>
   </ModalHeader>
@@ -77,6 +78,7 @@ exports[`components/unarchive_channel_modal should match snapshot for unarchive_
       <FormattedMessage
         defaultMessage="Cancel"
         id="unarchive_channel.cancel"
+        values={Object {}}
       />
     </button>
     <button
@@ -90,6 +92,7 @@ exports[`components/unarchive_channel_modal should match snapshot for unarchive_
       <FormattedMessage
         defaultMessage="Unarchive"
         id="unarchive_channel.del"
+        values={Object {}}
       />
     </button>
   </ModalFooter>

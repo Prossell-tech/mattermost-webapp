@@ -7,7 +7,7 @@ import configureStore from 'redux-mock-store';
 import {joinChannel} from 'mattermost-redux/actions/channels';
 import {getUserByEmail} from 'mattermost-redux/actions/users';
 
-import {emitChannelClickEvent} from 'actions/global_actions';
+import {emitChannelClickEvent} from 'actions/global_actions.jsx';
 import {
     goToChannelByChannelName,
     goToDirectChannelByUserId,
@@ -17,7 +17,7 @@ import {
     getPathFromIdentifier,
 } from 'components/channel_layout/channel_identifier_router/actions';
 
-jest.mock('actions/global_actions', () => ({
+jest.mock('actions/global_actions.jsx', () => ({
     emitChannelClickEvent: jest.fn(),
 }));
 

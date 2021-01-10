@@ -54,7 +54,7 @@ describe('System Console', () => {
         cy.apiRequireLicenseForFeature('LDAPGroups');
 
         // Enable LDAP
-        cy.apiUpdateConfig({LdapSettings: {Enable: true}});
+        cy.apiUpdateConfig({LdapSettings: {Enable: true, EnableSync: true}});
 
         // # Check and run LDAP Sync job
         if (Cypress.env('runLDAPSync')) {

@@ -20,8 +20,8 @@ const mapStateToProps = (state: GlobalState) => ({
 type Actions = {
     openModal: (modalData: {
         modalId: string;
-        dialogProps: {[key: string]: any};
-        dialogType: (props: {[key: string]: any}) => React.ReactElement | null;
+        dialogProps: {};
+        dialogType: (props: {}) => React.ReactElement | null;
     }) => Promise<{data: boolean}>;
 }
 

@@ -41,7 +41,6 @@ export type Props<T extends Value> = {
         onAdd: (value: T) => void,
         onMouseMove: (value: T) => void
     ) => void;
-    selectedItemRef?: React.RefObject<HTMLDivElement>;
     options: T[];
     perPage: number;
     placeholderText?: string;
@@ -398,17 +397,11 @@ export default class MultiSelect<T extends Value> extends React.PureComponent<Pr
                             savingMessage={this.props.buttonSubmitLoadingText}
                         />
                     </div>
-                    <div
-                        id='multiSelectHelpMemberInfo'
-                        className='multi-select__help'
-                    >
+                    <div className='multi-select__help'>
                         {numRemainingText}
                         {memberCount}
                     </div>
-                    <div
-                        id='multiSelectMessageNote'
-                        className='multi-select__help'
-                    >
+                    <div className='multi-select__help'>
                         {noteTextContainer}
                     </div>
                 </div>
@@ -423,7 +416,6 @@ export default class MultiSelect<T extends Value> extends React.PureComponent<Pr
                     onAdd={this.onAdd}
                     onSelect={this.onSelect}
                     loading={this.props.loading}
-                    selectedItemRef={this.props.selectedItemRef}
                 />
                 <div className='filter-controls'>
                     {previousButton}

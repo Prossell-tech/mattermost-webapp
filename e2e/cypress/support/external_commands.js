@@ -3,6 +3,13 @@
 
 import {getAdminAccount} from './env';
 
+Cypress.Commands.add('externalAddUserToTeam', (teamId, userId) => {
+    const baseUrl = Cypress.config('baseUrl');
+    const admin = getAdminAccount();
+
+    cy.externalRequest({user: admin, method: 'post', baseUrl, path: `teams/${teamId}/members`, data: {team_id: teamId, user_id: userId}});
+});
+
 Cypress.Commands.add('externalActivateUser', (userId, active = true) => {
     const baseUrl = Cypress.config('baseUrl');
     const admin = getAdminAccount();

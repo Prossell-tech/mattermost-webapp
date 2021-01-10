@@ -10,7 +10,7 @@ import {getAdminAccount} from '../../../support/env';
 // ***************************************************************
 
 // Stage: @prod
-// Group: @enterprise @not_cloud @extend_session
+// Group: @enterprise @extend_session
 
 describe('MM-T2575 Extend Session - Email Login', () => {
     let townSquarePage;
@@ -19,11 +19,9 @@ describe('MM-T2575 Extend Session - Email Login', () => {
     let testUser;
 
     before(() => {
-        cy.shouldNotRunOnCloudEdition();
-
-        // * Verify that the server has license and its database matches with the DB client and config at "cypress.json"
+        // # Check if with license and has matching database
         cy.apiRequireLicense();
-        cy.apiRequireServerDBToMatch();
+        cy.requireServerDBToMatch();
 
         cy.apiInitSetup().then(({team, user}) => {
             testUser = user;

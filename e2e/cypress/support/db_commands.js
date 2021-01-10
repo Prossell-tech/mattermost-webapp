@@ -1,30 +1,14 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-const dbClient = Cypress.env('dbClient');
-const dbConnection = Cypress.env('dbConnection');
 const dbConfig = {
-    client: dbClient,
-    connection: dbConnection,
+    client: Cypress.env('dbClient'),
+    connection: Cypress.env('dbConnection'),
 };
 
-const message = `Compare "cypress.json" against "config.json" of mattermost-server. It should match database driver and connection string.
-
-The value at "cypress.json" is based on default mattermost-server's local database: 
-{"dbClient": "${dbClient}", "dbConnection": "${dbConnection}"}
-
-If your server is using database other than the default, you may export those as env variables, like:
-"__CYPRESS_dbClient=[dbClient] CYPRESS_dbConnection=[dbConnection] npm run cypress:open__"
-`;
-
-Cypress.Commands.add('apiRequireServerDBToMatch', () => {
+Cypress.Commands.add('requireServerDBToMatch', () => {
     cy.apiGetConfig().then(({config}) => {
-        // On Cloud, SqlSettings is not being returned.
-        // With that, checking of server DB will be ignored and will assume it does match with
-        // the one being expected by Cypress.
-        if (config.SqlSettings && config.SqlSettings.DriverName !== dbClient) {
-            expect(config.SqlSettings.DriverName, message).to.equal(dbClient);
-        }
+        expect(config.SqlSettings.DriverName, 'Should match server DB. Also manually check that the connection string is correct and match the one being used by the server.').to.equal(Cypress.env('dbClient'));
     });
 });
 
@@ -37,10 +21,10 @@ Cypress.Commands.add('apiRequireServerDBToMatch', () => {
  * @returns {[Object]} sessions - an array of active sessions
  */
 Cypress.Commands.add('dbGetActiveUserSessions', ({username, userId, limit}) => {
-    return cy.task('dbGetActiveUserSessions', {dbConfig, params: {username, userId, limit}}).then(({user, sessions, errorMessage}) => {
+    cy.task('dbGetActiveUserSessions', {dbConfig, params: {username, userId, limit}}).then(({user, sessions, errorMessage}) => {
         expect(errorMessage).to.be.undefined;
 
-        return cy.wrap({user, sessions});
+        cy.wrap({user, sessions});
     });
 });
 
@@ -50,10 +34,10 @@ Cypress.Commands.add('dbGetActiveUserSessions', ({username, userId, limit}) => {
  * @returns {Object} user - user object
  */
 Cypress.Commands.add('dbGetUser', ({username}) => {
-    return cy.task('dbGetUser', {dbConfig, params: {username}}).then(({user, errorMessage, error}) => {
-        verifyError(error, errorMessage);
+    cy.task('dbGetUser', {dbConfig, params: {username}}).then(({user, errorMessage}) => {
+        expect(errorMessage).to.be.undefined;
 
-        return cy.wrap({user});
+        cy.wrap({user});
     });
 });
 
@@ -63,10 +47,10 @@ Cypress.Commands.add('dbGetUser', ({username}) => {
  * @returns {Object} session
  */
 Cypress.Commands.add('dbGetUserSession', ({sessionId}) => {
-    return cy.task('dbGetUserSession', {dbConfig, params: {sessionId}}).then(({session, errorMessage}) => {
+    cy.task('dbGetUserSession', {dbConfig, params: {sessionId}}).then(({session, errorMessage}) => {
         expect(errorMessage).to.be.undefined;
 
-        return cy.wrap({session});
+        cy.wrap({session});
     });
 });
 
@@ -78,15 +62,9 @@ Cypress.Commands.add('dbGetUserSession', ({sessionId}) => {
  * @returns {Object} session
  */
 Cypress.Commands.add('dbUpdateUserSession', ({sessionId, userId, fieldsToUpdate}) => {
-    return cy.task('dbUpdateUserSession', {dbConfig, params: {sessionId, userId, fieldsToUpdate}}).then(({session, errorMessage}) => {
+    cy.task('dbUpdateUserSession', {dbConfig, params: {sessionId, userId, fieldsToUpdate}}).then(({session, errorMessage}) => {
         expect(errorMessage).to.be.undefined;
 
-        return cy.wrap({session});
+        cy.wrap({session});
     });
 });
-
-function verifyError(error, errorMessage) {
-    if (errorMessage) {
-        expect(errorMessage, `${errorMessage}\n\n${message}\n\n${JSON.stringify(error)}`).to.be.undefined;
-    }
-}

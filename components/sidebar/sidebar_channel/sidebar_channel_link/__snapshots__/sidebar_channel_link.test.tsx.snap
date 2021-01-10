@@ -68,9 +68,7 @@ exports[`components/sidebar/sidebar_channel/sidebar_channel_link should match sn
     }
     channelLink="http://a.fake.link"
     isCollapsed={false}
-    isMenuOpen={false}
     isUnread={false}
-    onToggleMenu={[Function]}
   />
 </Link>
 `;
@@ -143,9 +141,7 @@ exports[`components/sidebar/sidebar_channel/sidebar_channel_link should match sn
     }
     channelLink="http://a.fake.link"
     isCollapsed={false}
-    isMenuOpen={false}
     isUnread={false}
-    onToggleMenu={[Function]}
   />
 </Link>
 `;
@@ -242,9 +238,7 @@ exports[`components/sidebar/sidebar_channel/sidebar_channel_link should match sn
     }
     channelLink="http://a.fake.link"
     isCollapsed={false}
-    isMenuOpen={false}
     isUnread={false}
-    onToggleMenu={[Function]}
   />
 </Link>
 `;
@@ -317,9 +311,7 @@ exports[`components/sidebar/sidebar_channel/sidebar_channel_link should match sn
     }
     channelLink="http://a.fake.link"
     isCollapsed={false}
-    isMenuOpen={false}
     isUnread={true}
-    onToggleMenu={[Function]}
   />
 </Link>
 `;

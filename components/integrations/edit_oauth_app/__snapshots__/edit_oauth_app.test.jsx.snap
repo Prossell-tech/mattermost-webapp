@@ -7,12 +7,14 @@ exports[`components/integrations/EditOAuthApp should have match renderExtra 1`] 
     <FormattedMessage
       defaultMessage="Update"
       id="update_command.update"
+      values={Object {}}
     />
   }
   message={
     <FormattedMessage
       defaultMessage="Your changes may break the existing OAuth 2.0 application. Are you sure you would like to update it?"
       id="update_oauth_app.question"
+      values={Object {}}
     />
   }
   modalClass=""
@@ -23,6 +25,7 @@ exports[`components/integrations/EditOAuthApp should have match renderExtra 1`] 
     <FormattedMessage
       defaultMessage="Edit OAuth 2.0 application"
       id="update_oauth_app.confirm"
+      values={Object {}}
     />
   }
 />
@@ -74,12 +77,14 @@ exports[`components/integrations/EditOAuthApp should match snapshot 1`] = `
         <FormattedMessage
           defaultMessage="Update"
           id="update_command.update"
+          values={Object {}}
         />
       }
       message={
         <FormattedMessage
           defaultMessage="Your changes may break the existing OAuth 2.0 application. Are you sure you would like to update it?"
           id="update_oauth_app.question"
+          values={Object {}}
         />
       }
       modalClass=""
@@ -90,6 +95,7 @@ exports[`components/integrations/EditOAuthApp should match snapshot 1`] = `
         <FormattedMessage
           defaultMessage="Edit OAuth 2.0 application"
           id="update_oauth_app.confirm"
+          values={Object {}}
         />
       }
     />
@@ -150,12 +156,14 @@ exports[`components/integrations/EditOAuthApp should match snapshot when EnableO
         <FormattedMessage
           defaultMessage="Update"
           id="update_command.update"
+          values={Object {}}
         />
       }
       message={
         <FormattedMessage
           defaultMessage="Your changes may break the existing OAuth 2.0 application. Are you sure you would like to update it?"
           id="update_oauth_app.question"
+          values={Object {}}
         />
       }
       modalClass=""
@@ -166,6 +174,7 @@ exports[`components/integrations/EditOAuthApp should match snapshot when EnableO
         <FormattedMessage
           defaultMessage="Edit OAuth 2.0 application"
           id="update_oauth_app.confirm"
+          values={Object {}}
         />
       }
     />

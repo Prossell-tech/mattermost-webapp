@@ -4,40 +4,39 @@ exports[`components/sidebar/sidebar_menu should match snapshot 1`] = `
 <MenuWrapper
   animationComponent={[Function]}
   className="SidebarMenu"
-  onToggle={[MockFunction]}
+  onToggle={[Function]}
   stopPropagationOnToggle={true}
 >
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    delayShow={500}
-    disabled={false}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        className="hidden-xs"
-        id="new-group-tooltip"
-        placement="right"
-      >
-        some tooltip text
-      </Tooltip>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+  <button
+    aria-label="some aria label"
+    className="SidebarMenu_menuButton"
   >
-    <button
-      aria-label="some aria label"
-      className="SidebarMenu_menuButton"
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      delayShow={500}
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          className="hidden-xs"
+          id="new-group-tooltip"
+          placement="right"
+        >
+          some tooltip text
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
     >
       <i
         className="icon-dots-vertical"
       />
-    </button>
-  </OverlayTrigger>
+    </OverlayTrigger>
+  </button>
   <Menu
     ariaLabel="some other aria label"
     id="SidebarMenu-menu_id"

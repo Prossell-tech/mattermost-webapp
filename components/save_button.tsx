@@ -59,7 +59,6 @@ export default class SaveButton extends React.PureComponent<Props> {
         return (
             <button
                 type='submit'
-                data-testid='saveSetting'
                 id='saveSetting'
                 className={className}
                 disabled={disabled}

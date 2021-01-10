@@ -3,7 +3,7 @@
 import {createSelector} from 'reselect';
 import {connect} from 'react-redux';
 import {getChannel} from 'mattermost-redux/selectors/entities/channels';
-import {getMyGroupMentionKeysForChannel, getMyGroupMentionKeys} from 'mattermost-redux/selectors/entities/groups';
+import {getAllUserMentionKeys} from 'mattermost-redux/selectors/entities/search';
 import {getCurrentUserMentionKeys} from 'mattermost-redux/selectors/entities/users';
 
 import {canManageMembers} from 'utils/channel_utils.jsx';
@@ -12,13 +12,13 @@ import PostMarkdown from './post_markdown';
 
 export function makeGetMentionKeysForPost() {
     return createSelector(
+        getAllUserMentionKeys,
         getCurrentUserMentionKeys,
         (state, post) => post,
-        (state, post, channel) => (channel ? getMyGroupMentionKeysForChannel(state, channel.team_id, channel.id) : getMyGroupMentionKeys(state)),
-        (mentionKeysWithoutGroups, post, groupMentionKeys) => {
-            let mentionKeys = mentionKeysWithoutGroups;
-            if (!post?.props?.disable_group_highlight) { // eslint-disable-line camelcase
-                mentionKeys = mentionKeys.concat(groupMentionKeys);
+        (allMentionKeys, mentionKeysWithoutGroups, post) => {
+            let mentionKeys = allMentionKeys;
+            if (post?.props?.disable_group_highlight) { // eslint-disable-line camelcase
+                mentionKeys = mentionKeysWithoutGroups;
             }
 
             if (post?.props?.mentionHighlightDisabled) {
@@ -30,19 +30,16 @@ export function makeGetMentionKeysForPost() {
     );
 }
 
-function makeMapStateToProps() {
+function mapStateToProps(state, ownProps) {
+    const channel = getChannel(state, ownProps.channelId);
     const getMentionKeysForPost = makeGetMentionKeysForPost();
-
-    return (state, ownProps) => {
-        const channel = getChannel(state, ownProps.channelId);
-        return {
-            channel,
-            pluginHooks: state.plugins.components.MessageWillFormat,
-            hasPluginTooltips: Boolean(state.plugins.components.LinkTooltip),
-            isUserCanManageMembers: channel && canManageMembers(state, channel),
-            mentionKeys: getMentionKeysForPost(state, ownProps.post, channel),
-        };
+    return {
+        channel,
+        pluginHooks: state.plugins.components.MessageWillFormat,
+        hasPluginTooltips: Boolean(state.plugins.components.LinkTooltip),
+        isUserCanManageMembers: channel && canManageMembers(state, channel),
+        mentionKeys: getMentionKeysForPost(state, ownProps.post),
     };
 }
 
-export default connect(makeMapStateToProps)(PostMarkdown);
+export default connect(mapStateToProps)(PostMarkdown);

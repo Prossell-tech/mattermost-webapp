@@ -27,7 +27,6 @@ describe('components/login/LoginController', () => {
         enableSignUpWithGitLab: false,
         enableSignUpWithGoogle: false,
         enableSignUpWithOffice365: false,
-        enableSignUpWithOpenId: false,
         experimentalPrimaryTeam: '',
         ldapLoginFieldName: '',
         samlLoginButtonText: '',

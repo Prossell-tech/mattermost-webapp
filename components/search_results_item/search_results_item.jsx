@@ -376,7 +376,6 @@ class SearchResultsItem extends React.PureComponent {
                 <DateSeparator date={currentPostDay}/>
                 <div
                     className={`a11y__section ${this.getClassName()}`}
-                    id={'searchResult_' + post.id}
                     aria-label={this.state.currentAriaLabel}
                     onFocus={this.handleSearchItemFocus}
                     data-a11y-sort-order={this.props.a11yIndex}

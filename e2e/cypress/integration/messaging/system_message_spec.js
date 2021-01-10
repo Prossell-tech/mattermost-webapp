@@ -13,20 +13,20 @@
 // helper function to count the lines in a block of text by wrapping each word in a span and finding where the text breaks the line
 function getLines(e) {
     const $cont = Cypress.$(e);
-    const textArr = $cont.text().split(' ');
+    const textArr = $cont.text().split(' '); // eslint-disable-line jquery/no-text
 
     for (let i = 0; i < textArr.length; i++) {
         textArr[i] = '<span>' + textArr[i] + ' </span>';
     }
 
-    $cont.html(textArr.join(''));
+    $cont.html(textArr.join('')); // eslint-disable-line jquery/no-html
 
-    const $wordSpans = $cont.find('span');
+    const $wordSpans = $cont.find('span'); // eslint-disable-line jquery/no-find
     const lineArray = [];
     var lineIndex = 0;
     var lineStart = true;
 
-    $wordSpans.each(function handleWord(idx) {
+    $wordSpans.each(function handleWord(idx) { // eslint-disable-line jquery/no-each
         const top = Cypress.$(this).position().top;
 
         if (lineStart) {
@@ -60,7 +60,7 @@ describe('System Message', () => {
         });
     });
 
-    it('MM-T426 System messages wrap properly', () => {
+    it('MM-14636 - Validate that system message is wrapping properly', () => {
         const newHeader = `${Date.now()} newheader`;
 
         // # Update channel header textbox
@@ -85,10 +85,9 @@ describe('System Message', () => {
         // * Check that the status is updated and is spread on more than one line
         cy.getLastPost().
             should('contain', 'System').
-            and('contain', `@${testUsername} updated the channel header`).
-            and('contain', 'From:').
+            and('contain', `@${testUsername} updated the channel header from:`).
             and('contain', newHeader).
-            and('contain', 'To:').
+            and('contain', 'to:').
             and('contain', newHeader.repeat(20));
 
         const validateMulti = (desc) => {

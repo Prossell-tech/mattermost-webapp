@@ -13,6 +13,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
       <FormattedMessage
         defaultMessage="Bleve"
         id="admin.bleve.title"
+        values={Object {}}
       />
     </AdminHeader>
     <SettingsGroup
@@ -25,6 +26,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
@@ -41,6 +43,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
                   <FormattedMessage
                     defaultMessage="Learn more about Bleve in our documentation."
                     id="admin.bleve.enableIndexingDescription.documentationLinkText"
+                    values={Object {}}
                   />
                 </a>,
               }
@@ -52,6 +55,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve Indexing:"
             id="admin.bleve.enableIndexingTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -60,6 +64,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={false}
@@ -69,6 +74,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Directory path to use for store bleve indexes."
             id="admin.bleve.indexDirDescription"
+            values={Object {}}
           />
         }
         id="indexDir"
@@ -76,6 +82,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Index Directory:"
             id="admin.bleve.indexDirTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -91,6 +98,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Bulk Indexing:"
             id="admin.bleve.bulkIndexingTitle"
+            values={Object {}}
           />
         </label>
         <div
@@ -104,12 +112,14 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
                 <FormattedMessage
                   defaultMessage="Index Now"
                   id="admin.bleve.createJob.title"
+                  values={Object {}}
                 />
               }
               createJobHelpText={
                 <FormattedMessage
                   defaultMessage="All users, channels and posts in the database will be indexed from oldest to newest. Bleve is available during indexing but search results may be incomplete until the indexing job is complete."
                   id="admin.bleve.createJob.help"
+                  values={Object {}}
                 />
               }
               disabled={true}
@@ -124,6 +134,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Purge Index"
             id="admin.bleve.purgeIndexesButton"
+            values={Object {}}
           />
         }
         disabled={true}
@@ -137,6 +148,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Purging will entirely remove the content of the Bleve index directory. Search results may be incomplete until a bulk index of the existing database is rebuilt."
             id="admin.bleve.purgeIndexesHelpText"
+            values={Object {}}
           />
         }
         id="purgeIndexesSection"
@@ -145,6 +157,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Purge Indexes:"
             id="admin.bleve.purgeIndexesButton.label"
+            values={Object {}}
           />
         }
         requestAction={[MockFunction]}
@@ -163,12 +176,14 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
           <FormattedMessage
             defaultMessage="When true, Bleve will be used for all search queries using the latest index. Search results may be incomplete until a bulk index of the existing post database is finished. When false, database search is used."
             id="admin.bleve.enableSearchingDescription"
+            values={Object {}}
           />
         }
         id="enableSearching"
@@ -176,6 +191,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve for search queries:"
             id="admin.bleve.enableSearchingTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -184,6 +200,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={false}
@@ -194,12 +211,14 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
           <FormattedMessage
             defaultMessage="When true, Bleve will be used for all autocompletion queries on users and channels using the latest index. Autocompletion results may be incomplete until a bulk index of the existing users and channels database is finished. When false, database autocomplete is used."
             id="admin.bleve.enableAutocompleteDescription"
+            values={Object {}}
           />
         }
         id="enableAutocomplete"
@@ -207,6 +226,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve for autocomplete queries:"
             id="admin.bleve.enableAutocompleteTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -215,6 +235,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={false}
@@ -229,6 +250,7 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
           <FormattedMessage
             defaultMessage="Save"
             id="save_button.save"
+            values={Object {}}
           />
         }
         disabled={true}
@@ -252,7 +274,6 @@ exports[`components/BleveSettings should match snapshot, disabled 1`] = `
         placement="top"
         rootClose={false}
         show={false}
-        target={null}
       >
         <Tooltip
           bsClass="tooltip"
@@ -278,6 +299,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
       <FormattedMessage
         defaultMessage="Bleve"
         id="admin.bleve.title"
+        values={Object {}}
       />
     </AdminHeader>
     <SettingsGroup
@@ -290,6 +312,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
@@ -306,6 +329,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
                   <FormattedMessage
                     defaultMessage="Learn more about Bleve in our documentation."
                     id="admin.bleve.enableIndexingDescription.documentationLinkText"
+                    values={Object {}}
                   />
                 </a>,
               }
@@ -317,6 +341,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve Indexing:"
             id="admin.bleve.enableIndexingTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -325,6 +350,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={true}
@@ -334,6 +360,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Directory path to use for store bleve indexes."
             id="admin.bleve.indexDirDescription"
+            values={Object {}}
           />
         }
         id="indexDir"
@@ -341,6 +368,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Index Directory:"
             id="admin.bleve.indexDirTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -356,6 +384,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Bulk Indexing:"
             id="admin.bleve.bulkIndexingTitle"
+            values={Object {}}
           />
         </label>
         <div
@@ -369,14 +398,17 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
                 <FormattedMessage
                   defaultMessage="Index Now"
                   id="admin.bleve.createJob.title"
+                  values={Object {}}
                 />
               }
               createJobHelpText={
                 <FormattedMessage
                   defaultMessage="All users, channels and posts in the database will be indexed from oldest to newest. Bleve is available during indexing but search results may be incomplete until the indexing job is complete."
                   id="admin.bleve.createJob.help"
+                  values={Object {}}
                 />
               }
+              disabled={false}
               getExtraInfoText={[Function]}
               jobType="bleve_post_indexing"
             />
@@ -388,6 +420,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Purge Index"
             id="admin.bleve.purgeIndexesButton"
+            values={Object {}}
           />
         }
         disabled={false}
@@ -401,6 +434,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Purging will entirely remove the content of the Bleve index directory. Search results may be incomplete until a bulk index of the existing database is rebuilt."
             id="admin.bleve.purgeIndexesHelpText"
+            values={Object {}}
           />
         }
         id="purgeIndexesSection"
@@ -409,6 +443,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Purge Indexes:"
             id="admin.bleve.purgeIndexesButton.label"
+            values={Object {}}
           />
         }
         requestAction={[MockFunction]}
@@ -427,12 +462,14 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
           <FormattedMessage
             defaultMessage="When true, Bleve will be used for all search queries using the latest index. Search results may be incomplete until a bulk index of the existing post database is finished. When false, database search is used."
             id="admin.bleve.enableSearchingDescription"
+            values={Object {}}
           />
         }
         id="enableSearching"
@@ -440,6 +477,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve for search queries:"
             id="admin.bleve.enableSearchingTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -448,6 +486,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={false}
@@ -458,12 +497,14 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="false"
             id="admin.false"
+            values={Object {}}
           />
         }
         helpText={
           <FormattedMessage
             defaultMessage="When true, Bleve will be used for all autocompletion queries on users and channels using the latest index. Autocompletion results may be incomplete until a bulk index of the existing users and channels database is finished. When false, database autocomplete is used."
             id="admin.bleve.enableAutocompleteDescription"
+            values={Object {}}
           />
         }
         id="enableAutocomplete"
@@ -471,6 +512,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Enable Bleve for autocomplete queries:"
             id="admin.bleve.enableAutocompleteTitle"
+            values={Object {}}
           />
         }
         onChange={[Function]}
@@ -479,6 +521,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="true"
             id="admin.true"
+            values={Object {}}
           />
         }
         value={false}
@@ -493,6 +536,7 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
           <FormattedMessage
             defaultMessage="Save"
             id="save_button.save"
+            values={Object {}}
           />
         }
         disabled={true}
@@ -516,7 +560,6 @@ exports[`components/BleveSettings should match snapshot, enabled 1`] = `
         placement="top"
         rootClose={false}
         show={false}
-        target={null}
       >
         <Tooltip
           bsClass="tooltip"

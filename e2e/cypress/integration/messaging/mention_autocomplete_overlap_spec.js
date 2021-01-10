@@ -7,7 +7,6 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
-// Stage: @prod
 // Group: @messaging
 
 import * as TIMEOUTS from '../../fixtures/timeouts';
@@ -81,12 +80,12 @@ describe('Messaging', () => {
         cy.closeRHS();
     });
 
-    it('MM-T70_1 At-mention user autocomplete is legible when it overlaps with channel header when drafting a long message containing a file attachment', () => {
+    it('M18667-At-mention user autocomplete does not overlap with channel header when drafting a long message containing a file attachment (standard viewport)', () => {
         // # Upload file, add message, add mention, verify no overlap
         uploadFileAndAddAutocompleteThenVerifyNoOverlap();
     });
 
-    it('MM-T70_2 At-mention user autocomplete is legible when it overlaps with channel header when drafting a long message containing a file attachment (1280x900 viewport)', () => {
+    it('M18667-At-mention user autocomplete does not overlap with channel header when drafting a long message containing a file attachment (1280x900 viewport)', () => {
         // # Set to different viewport
         cy.viewport(1280, 900);
 

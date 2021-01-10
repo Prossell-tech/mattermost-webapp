@@ -15,19 +15,6 @@ function modalSearch(state = '', action) {
     }
 }
 
-function modalFilters(state = {}, action) {
-    switch (action.type) {
-    case SearchTypes.SET_MODAL_FILTERS: {
-        const filters = action.data;
-        return {
-            ...filters,
-        };
-    }
-    default:
-        return state;
-    }
-}
-
 function systemUsersSearch(state = {}, action) {
     switch (action.type) {
     case SearchTypes.SET_SYSTEM_USERS_SEARCH: {
@@ -61,7 +48,6 @@ function userGridSearch(state = {}, action) {
 
 export default combineReducers({
     modalSearch,
-    modalFilters,
     systemUsersSearch,
     userGridSearch,
 });

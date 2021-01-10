@@ -5,7 +5,6 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {UserProfile} from 'mattermost-redux/types/users';
-import {GroupStats} from 'mattermost-redux/types/groups';
 
 import Constants from 'utils/constants';
 import UserGridName from 'components/admin_console/user_grid/user_grid_name';
@@ -15,16 +14,18 @@ const USERS_PER_PAGE = 10;
 
 import './member_list_group.scss';
 
-export type Props = {
+type Props = {
     searchTerm: string;
-    users: UserProfile[];
+    users: Array<UserProfile>;
     groupID: string;
     total: number;
     actions: {
-        getProfilesInGroup: (groupID: string, page: number, perPage: number) => Promise<{data: UserProfile[]}>;
-        getGroupStats: (groupID: string) => Promise<{data: GroupStats}>;
-        searchProfiles: (term: string, options?: Record<string, unknown>) => Promise<{data: UserProfile[]}>;
-        setModalSearchTerm: (term: string) => Promise<{data: boolean}>;
+        getProfilesInGroup: (groupID: string, page: number, perPage: number) => Promise<{data: {}}>;
+        getGroupStats: (groupID: string) => Promise<{data: {}}>;
+        searchProfiles: (term: string, options?: {}) => Promise<{data: UserProfile[]}>;
+        setModalSearchTerm: (term: string) => Promise<{
+            data: boolean;
+        }>;
     };
 }
 
@@ -110,6 +111,10 @@ export default class MemberListGroup extends React.PureComponent<Props, State> {
         this.setState({page: this.state.page - 1});
     }
 
+    search = (term: string) => {
+        this.props.actions.setModalSearchTerm(term);
+    }
+
     private getRows = (): Row[] => {
         const {users} = this.props;
         const {startCount, endCount} = this.getPaginationProps();
@@ -126,7 +131,7 @@ export default class MemberListGroup extends React.PureComponent<Props, State> {
                             user={user}
                         />
                     ),
-                },
+                }
             };
         });
     }
@@ -184,7 +189,7 @@ export default class MemberListGroup extends React.PureComponent<Props, State> {
                     startCount={startCount}
                     endCount={endCount}
                     total={total}
-                    onSearch={this.props.actions.setModalSearchTerm}
+                    search={this.search}
                     term={this.props.searchTerm || ''}
                     placeholderEmpty={placeholderEmpty}
                 />

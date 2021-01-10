@@ -23,6 +23,12 @@
     min-width: 21px;
     vertical-align: middle;
     width: 21px;
+    color: transparent;
+
+    &::selection{
+        background-color: transparent;
+        color: transparent;
+    }
 
     &--unicode {
         font-size: 21px;
@@ -30,15 +36,6 @@
         .os--windows & {
             font-size: 16px;
             line-height: 1.3;
-        }
-    }
-
-    &:not(.emoticon--unicode) {
-        color: transparent;
-
-        &::selection{
-            background-color: transparent;
-            color: transparent;
         }
     }
 }
@@ -156,12 +153,12 @@
         text-decoration: none;
 
         &:hover {
-            background-color: rgba(var(--center-channel-color-rgb), 0.04);
+            background-color: v(center-channel-color-04);
             color: v(center-channel-color);
         }
 
         &:active {
-            background-color: rgba(var(--center-channel-color-rgb), 0.16);
+            background-color: v(center-channel-color-16);
             color: v(center-channel-color);
         }
 
@@ -318,11 +315,11 @@
 
     &.selected,
     &:hover {
-        background-color: rgba(var(--center-channel-color-rgb), 0.16);
+        background-color: v(center-channel-color-16);
     }
 
     &:active {
-        background-color: rgba(var(--center-channel-color-rgb), 0.32);
+        background-color: v(center-channel-color-32);
     }
 
     > div {

@@ -2,7 +2,6 @@
 // See LICENSE.txt for license information.
 
 import PQueue from 'p-queue';
-
 import {getChannelAndMyMember, getChannelMembersByIds} from 'mattermost-redux/actions/channels';
 import {savePreferences} from 'mattermost-redux/actions/preferences';
 import {getTeamMembersByIds} from 'mattermost-redux/actions/teams';
@@ -23,7 +22,7 @@ import {makeFilterAutoclosedDMs, makeFilterManuallyClosedDMs} from 'mattermost-r
 import {CategoryTypes} from 'mattermost-redux/constants/channel_categories';
 
 import {loadStatusesForProfilesList, loadStatusesForProfilesMap} from 'actions/status_actions.jsx';
-import {trackEvent} from 'actions/telemetry_actions.jsx';
+import {trackEvent} from 'actions/diagnostics_actions.jsx';
 import store from 'stores/redux_store.jsx';
 import * as Utils from 'utils/utils.jsx';
 import {Constants, Preferences, UserStatuses} from 'utils/constants';
@@ -35,9 +34,9 @@ const getState = store.getState;
 export const filterAutoclosedDMs = makeFilterAutoclosedDMs();
 export const filterManuallyClosedDMs = makeFilterManuallyClosedDMs();
 
-export function loadProfilesAndStatusesInChannel(channelId, page = 0, perPage = General.PROFILE_CHUNK_SIZE, sort = '', options = {}) {
+export function loadProfilesAndStatusesInChannel(channelId, page = 0, perPage = General.PROFILE_CHUNK_SIZE, sort = '') {
     return async (doDispatch) => {
-        const {data} = await doDispatch(UserActions.getProfilesInChannel(channelId, page, perPage, sort, options));
+        const {data} = await doDispatch(UserActions.getProfilesInChannel(channelId, page, perPage, sort));
         if (data) {
             doDispatch(loadStatusesForProfilesList(data));
         }
@@ -118,12 +117,12 @@ export function searchProfilesAndChannelMembers(term, options = {}) {
     };
 }
 
-export function loadProfilesAndTeamMembersAndChannelMembers(page, perPage, teamId, channelId, options) {
+export function loadProfilesAndTeamMembersAndChannelMembers(page, perPage, teamId, channelId) {
     return async (doDispatch, doGetState) => {
         const state = doGetState();
         const teamIdParam = teamId || getCurrentTeamId(state);
         const channelIdParam = channelId || getCurrentChannelId(state);
-        const {data} = await doDispatch(UserActions.getProfilesInChannel(channelIdParam, page, perPage, '', options));
+        const {data} = await doDispatch(UserActions.getProfilesInChannel(channelIdParam, page, perPage));
         if (data) {
             const {data: listData} = await doDispatch(loadTeamMembersForProfilesList(data, teamIdParam));
             if (listData) {

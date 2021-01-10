@@ -14,7 +14,7 @@ export default class Renderer extends marked.Renderer {
     private emojiMap: EmojiMap;
     public constructor(
         options: MarkedOptions,
-        formattingOptions: TextFormatting.TextFormattingOptions,
+        formattingOptions = {},
         emojiMap = new EmojiMap(new Map()),
     ) {
         super(options);
@@ -35,7 +35,7 @@ export default class Renderer extends marked.Renderer {
             return `<div data-latex="${TextFormatting.escapeHtml(code)}"></div>`;
         }
         if (usedLanguage === 'texcode' || usedLanguage === 'latexcode') {
-            usedLanguage = 'latex';
+            usedLanguage = 'tex';
         }
 
         // treat html as xml to prevent injection attacks
@@ -44,8 +44,13 @@ export default class Renderer extends marked.Renderer {
         }
 
         let className = 'post-code';
+        let codeClassName = 'hljs';
         if (!usedLanguage) {
             className += ' post-code--wrap';
+        }
+
+        if (SyntaxHighlighting.canHighlight(usedLanguage)) {
+            codeClassName = 'hljs hljs-ln';
         }
 
         let header = '';
@@ -57,19 +62,10 @@ export default class Renderer extends marked.Renderer {
             );
         }
 
-        let lineNumbers = '';
-        if (SyntaxHighlighting.canHighlight(usedLanguage)) {
-            lineNumbers = (
-                '<div class="post-code__line-numbers">' +
-                    SyntaxHighlighting.renderLineNumbers(code) +
-                '</div>'
-            );
-        }
-
-        // If we have to apply syntax highlighting AND highlighting of search terms, create two copies
+        // if we have to apply syntax highlighting AND highlighting of search terms, create two copies
         // of the code block, one with syntax highlighting applied and another with invisible text, but
         // search term highlighting and overlap them
-        const content = SyntaxHighlighting.highlight(usedLanguage, code);
+        const content = SyntaxHighlighting.highlight(usedLanguage, code, true);
         let searchedContent = '';
 
         if (this.formattingOptions.searchPatterns) {
@@ -96,13 +92,10 @@ export default class Renderer extends marked.Renderer {
         return (
             '<div class="' + className + '">' +
                 header +
-                '<div class="hljs">' +
-                    lineNumbers +
-                    '<code>' +
-                        searchedContent +
-                        content +
-                    '</code>' +
-                '</div>' +
+                '<code class="' + codeClassName + '">' +
+                    searchedContent +
+                    content +
+                '</code>' +
             '</div>'
         );
     }
@@ -207,38 +200,22 @@ export default class Renderer extends marked.Renderer {
 
         output += `" href="${outHref}" rel="noreferrer"`;
 
-        const isInternalLink = outHref.startsWith(this.formattingOptions.siteURL || '') || outHref.startsWith('/');
+        // special case for team invite links, channel links, and permalinks that are inside the app
+        let internalLink = false;
+        const pattern = new RegExp(
+            '^(' +
+        TextFormatting.escapeRegex(this.formattingOptions.siteURL) +
+        ')?\\/(?:signup_user_complete|admin_console|[^\\/]+\\/(?:pl|channels|messages))\\/',
+        );
+        internalLink = pattern.test(outHref);
 
-        let openInNewTab;
-        if (isInternalLink) {
-            const path = outHref.startsWith('/') ? outHref : outHref.substring(this.formattingOptions.siteURL?.length || 0);
-
-            // Paths managed by plugins and public file links aren't handled by the web app
-            const unhandledPaths = [
-                'plugins',
-                'files',
-            ];
-
-            // Paths managed by another service shouldn't be handled by the web app either
-            if (this.formattingOptions.managedResourcePaths) {
-                for (const managedPath of this.formattingOptions.managedResourcePaths) {
-                    unhandledPaths.push(TextFormatting.escapeRegex(managedPath));
-                }
-            }
-
-            openInNewTab = unhandledPaths.some((unhandledPath) => new RegExp('^/' + unhandledPath + '\\b').test(path));
-        } else {
-            // All links outside of Mattermost should be opened in a new tab
-            openInNewTab = true;
-        }
-
-        if (openInNewTab || !this.formattingOptions.siteURL) {
-            output += ' target="_blank"';
-        } else {
+        if (internalLink && this.formattingOptions.siteURL) {
             output += ` data-link="${outHref.replace(
                 this.formattingOptions.siteURL,
                 '',
             )}"`;
+        } else {
+            output += ' target="_blank"';
         }
 
         if (title) {

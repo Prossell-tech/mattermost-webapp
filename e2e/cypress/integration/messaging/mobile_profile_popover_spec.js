@@ -26,7 +26,7 @@ describe('Profile popover', () => {
         });
     });
 
-    it('MM-T145_1 Mobile view: View profile popover from profile pic (standard mode)', () => {
+    it('M18715 Profile popover should render (standard mode)', () => {
         // # Setting posts to standard mode
         cy.apiSaveMessageDisplayPreference();
         cy.getLastPostId().then((postId) => {
@@ -42,7 +42,7 @@ describe('Profile popover', () => {
         });
     });
 
-    it('MM-T145_2 Mobile view: View profile popover from profile pic (compact mode)', () => {
+    it('M18715 Profile popover should render (compact mode)', () => {
         // # Setting posts to compact mode
         cy.apiSaveMessageDisplayPreference('compact');
         cy.getLastPostId().then((postId) => {

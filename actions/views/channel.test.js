@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 
 import {General, Posts, RequestStatus} from 'mattermost-redux/constants';
 import {leaveChannel, markChannelAsRead} from 'mattermost-redux/actions/channels';
-import * as UserActions from 'mattermost-redux/actions/users';
 import * as PostActions from 'mattermost-redux/actions/posts';
 
 import {browserHistory} from 'utils/browser_history';
@@ -35,8 +34,6 @@ jest.mock('actions/channel_actions.jsx', () => ({
     openDirectChannelToUserId: jest.fn(() => ({type: ''})),
 }));
 
-jest.mock('mattermost-redux/actions/users');
-
 jest.mock('mattermost-redux/actions/channels', () => ({
     ...jest.requireActual('mattermost-redux/actions/channels'),
     markChannelAsRead: jest.fn(() => ({type: ''})),
@@ -47,10 +44,6 @@ jest.mock('mattermost-redux/actions/posts');
 
 jest.mock('selectors/local_storage', () => ({
     getLastViewedChannelName: () => 'channel1',
-}));
-
-jest.mock('mattermost-redux/selectors/entities/utils', () => ({
-    makeAddLastViewAtToProfiles: () => jest.fn().mockReturnValue([]),
 }));
 
 describe('channel view actions', () => {
@@ -765,14 +758,6 @@ describe('channel view actions', () => {
             jest.runOnlyPendingTimers();
             await Promise.resolve();
             expect(PostActions.getPostsUnread).toHaveBeenCalledWith('channelid1');
-        });
-    });
-
-    describe('autocompleteUsersInChannel', () => {
-        test('should return empty arrays if the key is missing in reponse', async () => {
-            UserActions.autocompleteUsers.mockReturnValue(() => ({data: {}}));
-            const response = await store.dispatch(Actions.autocompleteUsersInChannel('test', 'channelid1'));
-            expect(response).toStrictEqual({data: {out_of_channel: [], users: []}});
         });
     });
 });

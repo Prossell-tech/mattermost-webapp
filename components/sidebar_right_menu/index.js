@@ -13,7 +13,7 @@ import {getIsRhsMenuOpen} from 'selectors/rhs';
 import {Preferences, TutorialSteps} from 'utils/constants';
 import {isMobile} from 'utils/utils.jsx';
 
-import SidebarRightMenu from './sidebar_right_menu';
+import SidebarRightMenu from './sidebar_right_menu.jsx';
 
 function mapStateToProps(state) {
     const config = getConfig(state);

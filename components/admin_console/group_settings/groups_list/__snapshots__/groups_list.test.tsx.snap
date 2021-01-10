@@ -35,7 +35,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -43,6 +42,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -110,6 +110,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
           <FormattedMessage
             defaultMessage="Is Linked"
             id="admin.group_settings.filters.isLinked"
+            values={Object {}}
           />
         </span>
       </div>
@@ -126,6 +127,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
           <FormattedMessage
             defaultMessage="Is Not Linked"
             id="admin.group_settings.filters.isUnlinked"
+            values={Object {}}
           />
         </span>
       </div>
@@ -140,6 +142,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
           <FormattedMessage
             defaultMessage="Is Configured"
             id="admin.group_settings.filters.isConfigured"
+            values={Object {}}
           />
         </span>
       </div>
@@ -154,6 +157,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
           <FormattedMessage
             defaultMessage="Is Not Configured"
             id="admin.group_settings.filters.isUnconfigured"
+            values={Object {}}
           />
         </span>
       </div>
@@ -164,6 +168,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Search"
           id="search_bar.search"
+          values={Object {}}
         />
       </a>
     </div>
@@ -172,7 +177,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -180,6 +184,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -235,7 +240,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <button
         className="btn btn-primary"
         onClick={[Function]}
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -243,6 +247,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -256,6 +261,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -267,6 +273,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -308,7 +315,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -318,7 +324,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -364,7 +369,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <button
         className="btn btn-primary"
         onClick={[Function]}
-        type="button"
       >
         <i
           className="icon fa fa-unlink"
@@ -372,6 +376,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Unlink Selected Groups"
           id="admin.group_settings.groups_list.unlink_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -385,6 +390,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -396,6 +402,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -437,7 +444,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -447,7 +453,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -493,7 +498,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <button
         className="btn btn-primary"
         onClick={[Function]}
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -501,6 +505,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -514,6 +519,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -525,6 +531,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -566,7 +573,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -576,7 +582,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -621,7 +626,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -629,6 +633,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -642,6 +647,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -653,6 +659,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -730,7 +737,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -740,7 +746,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -785,7 +790,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -793,6 +797,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -806,6 +811,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -817,6 +823,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -985,7 +992,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -995,7 +1001,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -1040,7 +1045,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -1048,6 +1052,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -1061,6 +1066,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -1072,6 +1078,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -1240,7 +1247,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev "
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -1250,7 +1256,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -1295,7 +1300,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -1303,6 +1307,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -1316,6 +1321,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -1327,6 +1333,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -1404,7 +1411,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev "
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -1414,7 +1420,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}
@@ -1459,7 +1464,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -1467,6 +1471,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -1481,6 +1486,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="No groups found"
         id="admin.group_settings.groups_list.no_groups_found"
+        values={Object {}}
       />
     </div>
   </div>
@@ -1522,7 +1528,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
     >
       <button
         className="btn btn-inactive disabled"
-        type="button"
       >
         <i
           className="icon fa fa-link"
@@ -1530,6 +1535,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Link Selected Groups"
           id="admin.group_settings.groups_list.link_selected"
+          values={Object {}}
         />
       </button>
     </div>
@@ -1543,6 +1549,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       <FormattedMessage
         defaultMessage="Name"
         id="admin.group_settings.groups_list.nameHeader"
+        values={Object {}}
       />
     </div>
     <div
@@ -1554,6 +1561,7 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
         <FormattedMessage
           defaultMessage="Mattermost Linking"
           id="admin.group_settings.groups_list.mappingHeader"
+          values={Object {}}
         />
       </div>
       <div
@@ -1595,7 +1603,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link prev disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <PreviousIcon
         additionalClassName={null}
@@ -1605,7 +1612,6 @@ exports[`components/admin_console/group_settings/GroupsList.tsx should match sna
       className="btn btn-link next disabled"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <NextIcon
         additionalClassName={null}

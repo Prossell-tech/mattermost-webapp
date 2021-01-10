@@ -9,8 +9,7 @@ import * as Utils from 'utils/utils.jsx';
 import ProfilePicture from 'components/profile_picture';
 import UserProfile from 'components/user_profile';
 
-import FormattedMarkdownMessage from 'components/formatted_markdown_message';
-import Nbsp from 'components/html_entities/nbsp';
+import FormattedMarkdownMessage from 'components/formatted_markdown_message.jsx';
 
 export default class UserListRow extends React.PureComponent {
     static propTypes = {
@@ -93,7 +92,6 @@ export default class UserListRow extends React.PureComponent {
                     size='md'
                     userId={this.props.user.id}
                     hasMention={true}
-                    username={this.props.user.username}
                 />
                 <div
                     className='more-modal__details'
@@ -108,12 +106,10 @@ export default class UserListRow extends React.PureComponent {
                             hasMention={true}
                             displayUsername={true}
                         />
-                        <Nbsp/>
-                        {
-                            this.props.user.first_name || this.props.user.last_name || this.props.user.nickname ?
-                                '-' : null
-                        }
-                        <Nbsp/>
+                        &nbsp;
+                        {this.props.user.first_name || this.props.user.last_name || this.props.user.nickname ?
+                            '-' : null}
+                        &nbsp;
                         {Utils.displayFullAndNicknameForUser(this.props.user)}
                     </div>
                     <div

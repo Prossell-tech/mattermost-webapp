@@ -1,5 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import React from 'react';
 import {Draggable} from 'react-beautiful-dnd';
@@ -7,7 +8,6 @@ import classNames from 'classnames';
 
 import {Channel} from 'mattermost-redux/types/channels';
 
-import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 import {DraggingState} from 'types/store';
 import Constants, {DraggingStates} from 'utils/constants';
 
@@ -71,17 +71,11 @@ type Props = {
 
     isDMCategory: boolean;
 
-    isDraggable: boolean;
-
     draggingState: DraggingState;
 
     isCategoryDragged: boolean;
 
     isDropDisabled: boolean;
-
-    isChannelSelected: boolean;
-
-    multiSelectedChannelIds: string[];
 };
 
 type State = {
@@ -89,10 +83,6 @@ type State = {
 };
 
 export default class SidebarChannel extends React.PureComponent<Props, State> {
-    static defaultProps = {
-        isDraggable: true,
-    }
-
     isUnread = () => {
         return this.props.unreadMentions > 0 || (this.props.unreadMsgs > 0 && this.props.showUnreadForMsgs);
     }
@@ -121,25 +111,15 @@ export default class SidebarChannel extends React.PureComponent<Props, State> {
         return this.props.getChannelRef(this.props.channel.id);
     }
 
-    setRef = (refMethod?: (element: HTMLLIElement) => any) => {
+    setRef = (refMethod: (element: HTMLLIElement) => any) => {
         return (ref: HTMLLIElement) => {
             this.props.setChannelRef(this.props.channel.id, ref);
-            refMethod?.(ref);
+            refMethod(ref);
         };
     }
 
     render() {
-        const {
-            channel,
-            channelIndex,
-            currentTeamName,
-            isCurrentChannel,
-            isDraggable,
-            isDMCategory,
-            isChannelSelected,
-            draggingState,
-            multiSelectedChannelIds,
-        } = this.props;
+        const {channel, currentTeamName, channelIndex, isDMCategory, isCurrentChannel} = this.props;
 
         let ChannelComponent: React.ComponentType<{channel: Channel; currentTeamName: string; isCollapsed: boolean}> = SidebarBaseChannel;
         if (channel.type === Constants.DM_CHANNEL) {
@@ -148,78 +128,40 @@ export default class SidebarChannel extends React.PureComponent<Props, State> {
             ChannelComponent = SidebarGroupChannel;
         }
 
-        const component = (
-            <ChannelComponent
-                isCollapsed={this.isCollapsed(this.props)}
-                channel={channel}
-                currentTeamName={currentTeamName}
-            />
+        return (
+            <Draggable
+                draggableId={channel.id}
+                index={channelIndex}
+            >
+                {(provided, snapshot) => {
+                    return (
+                        <li
+                            draggable='false'
+                            ref={this.setRef(provided.innerRef)}
+                            className={classNames('SidebarChannel', {
+                                collapsed: this.isCollapsed(this.props),
+                                unread: this.isUnread(),
+                                active: isCurrentChannel,
+                                dragging: snapshot.isDragging,
+                                fadeDMs: snapshot.isDropAnimating && snapshot.draggingOver?.includes('direct_messages'),
+                                noFloat: isDMCategory && !snapshot.isDragging,
+                            })}
+                            onTransitionEnd={this.removeAnimation}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            role='listitem'
+                            tabIndex={-1}
+                        >
+                            <ChannelComponent
+                                isCollapsed={this.isCollapsed(this.props)}
+                                channel={channel}
+                                currentTeamName={currentTeamName}
+                            />
+                        </li>
+                    );
+                }}
+            </Draggable>
         );
-
-        let wrappedComponent: React.ReactNode;
-
-        if (isDraggable) {
-            let selectedCount: React.ReactNode;
-            if (isChannelSelected && draggingState.state && draggingState.id === channel.id && multiSelectedChannelIds.length > 1) {
-                selectedCount = (
-                    <div className='SidebarChannel__selectedCount'>
-                        <FormattedMarkdownMessage
-                            id='sidebar_left.sidebar_channel.selectedCount'
-                            defaultMessage='{count} selected'
-                            values={{count: multiSelectedChannelIds.length}}
-                        />
-                    </div>
-                );
-            }
-
-            wrappedComponent = (
-                <Draggable
-                    draggableId={channel.id}
-                    index={channelIndex}
-                >
-                    {(provided, snapshot) => {
-                        return (
-                            <li
-                                draggable='false'
-                                ref={this.setRef(provided.innerRef)}
-                                className={classNames('SidebarChannel', {
-                                    collapsed: this.isCollapsed(this.props),
-                                    unread: this.isUnread(),
-                                    active: isCurrentChannel,
-                                    dragging: snapshot.isDragging,
-                                    selectedDragging: isChannelSelected && draggingState.state && draggingState.id !== channel.id,
-                                    fadeDMs: snapshot.isDropAnimating && snapshot.draggingOver?.includes('direct_messages'),
-                                    noFloat: isDMCategory && !snapshot.isDragging,
-                                })}
-                                onTransitionEnd={this.removeAnimation}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                role='listitem'
-                                tabIndex={-1}
-                            >
-                                {component}
-                                {selectedCount}
-                            </li>
-                        );
-                    }}
-                </Draggable>
-            );
-        } else {
-            wrappedComponent = (
-                <li
-                    ref={this.setRef()}
-                    className={classNames('SidebarChannel', {
-                        collapsed: this.isCollapsed(this.props),
-                        unread: this.isUnread(),
-                        active: isCurrentChannel,
-                    })}
-                    role='listitem'
-                >
-                    {component}
-                </li>
-            );
-        }
-
-        return wrappedComponent;
     }
 }
+/* eslint-enable react/no-string-refs */

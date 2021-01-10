@@ -10,7 +10,7 @@ import OverlayTrigger from 'components/overlay_trigger';
 
 import Popover from '.';
 
-storiesOf('Widgets/Popover', module).
+storiesOf('Popover', module).
     addDecorator(withKnobs).
     add(
         'basic popover',

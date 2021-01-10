@@ -4,9 +4,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 
-import {trackEvent} from 'actions/telemetry_actions.jsx';
+import {trackEvent} from 'actions/diagnostics_actions.jsx';
 import Constants from 'utils/constants.jsx';
 import {cleanUpUrlable} from 'utils/url';
 import logoImage from 'images/logo.png';
@@ -29,9 +30,7 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = {
-            teamDisplayName: this.props.state.team?.display_name || '', // eslint-disable-line camelcase
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -41,7 +40,7 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
     submitNext = (e) => {
         e.preventDefault();
         trackEvent('display_name', 'click_next');
-        var displayName = this.state.teamDisplayName.trim();
+        var displayName = ReactDOM.findDOMNode(this.refs.name).value.trim();
         if (!displayName) {
             this.setState({nameError: (
                 <FormattedMessage
@@ -76,10 +75,6 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
         e.currentTarget.select();
     }
 
-    handleDisplayNameChange = (e) => {
-        this.setState({teamDisplayName: e.target.value});
-    }
-
     render() {
         var nameError = null;
         var nameDivClass = 'form-group';
@@ -108,13 +103,13 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
                                 <input
                                     id='teamNameInput'
                                     type='text'
+                                    ref='name'
                                     className='form-control'
                                     placeholder=''
                                     maxLength='128'
-                                    value={this.state.teamDisplayName}
+                                    defaultValue={this.props.state.team.display_name}
                                     autoFocus={true}
                                     onFocus={this.handleFocus}
-                                    onChange={this.handleDisplayNameChange}
                                     spellCheck='false'
                                 />
                             </div>

@@ -8,25 +8,21 @@ import {getRandomId} from '../../utils';
 // https://api.mattermost.com/#tag/teams
 // *****************************************************************************
 
-export function createTeamPatch(name = 'team', displayName = 'Team', type = 'O', unique = true) {
+Cypress.Commands.add('apiCreateTeam', (name, displayName, type = 'O', unique = true) => {
     const randomSuffix = getRandomId();
 
-    return {
-        name: unique ? `${name}-${randomSuffix}` : name,
-        display_name: unique ? `${displayName} ${randomSuffix}` : displayName,
-        type,
-    };
-}
-
-Cypress.Commands.add('apiCreateTeam', (...args) => {
     return cy.request({
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         url: '/api/v4/teams',
         method: 'POST',
-        body: createTeamPatch(...args),
+        body: {
+            name: unique ? `${name}-${randomSuffix}` : name,
+            display_name: unique ? `${displayName} ${randomSuffix}` : displayName,
+            type,
+        },
     }).then((response) => {
         expect(response.status).to.equal(201);
-        return cy.wrap({team: response.body});
+        cy.wrap({team: response.body});
     });
 });
 
@@ -37,18 +33,7 @@ Cypress.Commands.add('apiDeleteTeam', (teamId, permanent = false) => {
         method: 'DELETE',
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({data: response.body});
-    });
-});
-
-Cypress.Commands.add('apiDeleteUserFromTeam', (teamId, userId) => {
-    return cy.request({
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        url: '/api/v4/teams/' + teamId + '/members/' + userId,
-        method: 'DELETE',
-    }).then((response) => {
-        expect(response.status).to.equal(200);
-        return cy.wrap({data: response.body});
+        cy.wrap({data: response.body});
     });
 });
 
@@ -60,7 +45,7 @@ Cypress.Commands.add('apiPatchTeam', (teamId, teamData) => {
         body: teamData,
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({team: response.body});
+        cy.wrap({team: response.body});
     });
 });
 
@@ -71,7 +56,7 @@ Cypress.Commands.add('apiGetTeamByName', (name) => {
         method: 'GET',
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({team: response.body});
+        cy.wrap({team: response.body});
     });
 });
 
@@ -82,7 +67,7 @@ Cypress.Commands.add('apiGetAllTeams', ({page = 0, perPage = 60} = {}) => {
         method: 'GET',
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({teams: response.body});
+        cy.wrap({teams: response.body});
     });
 });
 
@@ -93,12 +78,12 @@ Cypress.Commands.add('apiGetTeamsForUser', (userId = 'me') => {
         method: 'GET',
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({teams: response.body});
+        cy.wrap({teams: response.body});
     });
 });
 
 Cypress.Commands.add('apiAddUserToTeam', (teamId, userId) => {
-    return cy.request({
+    cy.request({
         method: 'POST',
         url: `/api/v4/teams/${teamId}/members`,
         headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -118,7 +103,7 @@ Cypress.Commands.add('apiAddUsersToTeam', (teamId, teamMembers) => {
         body: teamMembers,
     }).then((response) => {
         expect(response.status).to.equal(201);
-        return cy.wrap({members: response.body});
+        cy.wrap({members: response.body});
     });
 });
 
@@ -129,7 +114,7 @@ Cypress.Commands.add('apiGetTeamMembers', (teamId) => {
         url: `/api/v4/teams/${teamId}/members`,
     }).then((response) => {
         expect(response.status).to.equal(200);
-        return cy.wrap({members: response.body});
+        cy.wrap({members: response.body});
     });
 });
 

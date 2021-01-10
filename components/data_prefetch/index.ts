@@ -10,7 +10,6 @@ import {isChannelMuted} from 'mattermost-redux/utils/channel_utils';
 import {getMyChannelMemberships} from 'mattermost-redux/selectors/entities/common';
 
 import {Channel, ChannelMembership} from 'mattermost-redux/types/channels';
-import {PostList} from 'mattermost-redux/types/posts';
 
 import {ActionFunc, GenericAction} from 'mattermost-redux/types/actions';
 import {RelationOneToOne} from 'mattermost-redux/types/utilities';
@@ -23,7 +22,7 @@ import {trackDMGMOpenChannels} from 'actions/user_actions';
 import DataPrefetch from './data_prefetch';
 
 type Actions = {
-    prefetchChannelPosts: (channelId: string, delay?: number) => Promise<{data: PostList}>;
+    prefetchChannelPosts: (channelId: string, delay?: number) => Promise<{data: {}}>;
     trackDMGMOpenChannels: () => Promise<void>;
 };
 
@@ -62,7 +61,7 @@ const prefetchQueue = memoizeResult((channels: Channel[], memberships: RelationO
 });
 
 function mapStateToProps(state: GlobalState) {
-    const lastUnreadChannel = state.views.channel.lastUnreadChannel;
+    const lastUnreadChannel = state.views.channel.keepChannelIdAsUnread;
     const memberships = getMyChannelMemberships(state);
     const unreadChannels = getUnreadChannels(state, lastUnreadChannel);
     const prefetchQueueObj = prefetchQueue(unreadChannels, memberships);

@@ -8,7 +8,7 @@ import {CategoryTypes} from 'mattermost-redux/constants/channel_categories';
 import {Channel} from 'mattermost-redux/types/channels';
 import {ChannelCategory} from 'mattermost-redux/types/channel_categories';
 
-import {trackEvent} from 'actions/telemetry_actions';
+import {trackEvent} from 'actions/diagnostics_actions';
 import ChannelInviteModal from 'components/channel_invite_modal';
 import EditCategoryModal from 'components/edit_category_modal';
 import SidebarMenu from 'components/sidebar/sidebar_menu';
@@ -32,10 +32,6 @@ type Props = {
     managePrivateChannelMembers: boolean;
     closeHandler?: (callback: () => void) => void;
     isCollapsed: boolean;
-    isMenuOpen: boolean;
-    onToggleMenu: (isMenuOpen: boolean) => void;
-    multiSelectedChannelIds: string[];
-    displayedChannels: Channel[];
     actions: {
         markChannelAsRead: (channelId: string) => void;
         favoriteChannel: (channelId: string) => void;
@@ -43,7 +39,7 @@ type Props = {
         muteChannel: (userId: string, channelId: string) => void;
         unmuteChannel: (userId: string, channelId: string) => void;
         openModal: (modalData: any) => void;
-        addChannelsInSidebar: (categoryId: string, channelId: string) => void;
+        addChannelToCategory: (categoryId: string, channelId: string) => void;
     };
 };
 
@@ -91,19 +87,17 @@ export class SidebarChannelMenu extends React.PureComponent<Props, State> {
 
     moveToCategory = (categoryId: string) => {
         return () => {
-            this.props.actions.addChannelsInSidebar(categoryId, this.props.channel.id);
+            this.props.actions.addChannelToCategory(categoryId, this.props.channel.id);
             trackEvent('ui', 'ui_sidebar_channel_menu_moveToExistingCategory');
         };
     }
 
     moveToNewCategory = () => {
-        const {actions, multiSelectedChannelIds, channel} = this.props;
-
-        actions.openModal({
+        this.props.actions.openModal({
             modalId: ModalIdentifiers.EDIT_CATEGORY,
             dialogType: EditCategoryModal,
             dialogProps: {
-                channelIdsToAdd: multiSelectedChannelIds.indexOf(channel.id) === -1 ? [channel.id] : multiSelectedChannelIds,
+                channelIdsToAdd: [this.props.channel.id],
             },
         });
         trackEvent('ui', 'ui_sidebar_channel_menu_createCategory');
@@ -140,7 +134,7 @@ export class SidebarChannelMenu extends React.PureComponent<Props, State> {
     }
 
     renderDropdownItems = () => {
-        const {intl, isUnread, isFavorite, isMuted, channel, categories, displayedChannels, multiSelectedChannelIds} = this.props;
+        const {intl, isUnread, isFavorite, isMuted, channel, categories} = this.props;
 
         if (!categories) {
             return null;
@@ -208,22 +202,21 @@ export class SidebarChannelMenu extends React.PureComponent<Props, State> {
             );
         }
 
-        const selectedChannels = multiSelectedChannelIds.indexOf(channel.id) === -1 ? [channel] : displayedChannels.filter((c) => multiSelectedChannelIds.indexOf(c.id) !== -1);
-        const allChannelsAreDMs = selectedChannels.every((selectedChannel) => selectedChannel.type === Constants.DM_CHANNEL || selectedChannel.type === Constants.GM_CHANNEL);
-        const allChannelsAreNotDMs = selectedChannels.every((selectedChannel) => selectedChannel.type !== Constants.DM_CHANNEL && selectedChannel.type !== Constants.GM_CHANNEL);
-
         const categoryMenuItems = categories.filter((category) => {
             if (category.id === this.props.currentCategory?.id) {
                 return false;
             }
 
-            if (allChannelsAreDMs) {
-                return category.type !== CategoryTypes.CHANNELS;
-            } else if (allChannelsAreNotDMs) {
+            switch (channel.type) {
+            case Constants.OPEN_CHANNEL:
+            case Constants.PRIVATE_CHANNEL:
                 return category.type !== CategoryTypes.DIRECT_MESSAGES;
+            case Constants.DM_CHANNEL:
+            case Constants.GM_CHANNEL:
+                return category.type !== CategoryTypes.CHANNELS;
+            default:
+                return true;
             }
-
-            return true;
         }).map((category) => {
             return {
                 id: `moveToCategory-${channel.id}-${category.id}`,
@@ -327,35 +320,29 @@ export class SidebarChannelMenu extends React.PureComponent<Props, State> {
         }
     }
 
-    onToggleMenu = (open: boolean) => {
-        this.props.onToggleMenu(open);
-
+    onToggle = (open: boolean) => {
         if (open) {
             trackEvent('ui', 'ui_sidebar_channel_menu_opened');
         }
     }
 
     render() {
-        const {
-            channel,
-            intl,
-            isCollapsed,
-            isMenuOpen,
-        } = this.props;
+        const {intl, channel} = this.props;
 
         return (
-            <SidebarMenu
-                refCallback={this.refCallback}
-                id={`SidebarChannelMenu-${channel.id}`}
-                ariaLabel={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.dropdownAriaLabel', defaultMessage: 'Channel Menu'})}
-                buttonAriaLabel={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.dropdownAriaLabel', defaultMessage: 'Channel Menu'})}
-                isMenuOpen={isMenuOpen}
-                onToggleMenu={this.onToggleMenu}
-                tooltipText={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.editChannel', defaultMessage: 'Channel options'})}
-                tabIndex={isCollapsed ? -1 : 0}
-            >
-                {this.renderDropdownItems()}
-            </SidebarMenu>
+            <React.Fragment>
+                <SidebarMenu
+                    refCallback={this.refCallback}
+                    id={`SidebarChannelMenu-${channel.id}`}
+                    ariaLabel={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.dropdownAriaLabel', defaultMessage: 'Channel Menu'})}
+                    buttonAriaLabel={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.dropdownAriaLabel', defaultMessage: 'Channel Menu'})}
+                    tooltipText={intl.formatMessage({id: 'sidebar_left.sidebar_channel_menu.editChannel', defaultMessage: 'Channel options'})}
+                    onToggle={this.onToggle}
+                    tabIndex={this.props.isCollapsed ? -1 : 0}
+                >
+                    {this.renderDropdownItems()}
+                </SidebarMenu>
+            </React.Fragment>
         );
     }
 }

@@ -10,7 +10,7 @@
 // Stage: @prod
 // Group: @emoji
 
-describe('MM-T157 Filtered emojis are sorted by recency, then begins with, then contains (alphabetically within each)', () => {
+describe('M16739 - Filtered emojis are sorted', () => {
     before(() => {
         // # Login as test user and visit town-square
         cy.apiInitSetup({loginAfter: true}).then(({team}) => {

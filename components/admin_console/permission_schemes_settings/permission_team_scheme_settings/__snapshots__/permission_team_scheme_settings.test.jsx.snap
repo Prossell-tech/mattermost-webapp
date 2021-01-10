@@ -15,6 +15,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -58,6 +59,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -84,6 +86,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -116,6 +119,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -222,6 +226,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -237,6 +242,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div
@@ -317,6 +323,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -360,6 +367,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -386,6 +394,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -418,6 +427,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -511,6 +521,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -526,6 +537,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div
@@ -588,6 +600,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -631,6 +644,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -657,6 +671,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -689,6 +704,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -807,6 +823,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -822,6 +839,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div
@@ -884,6 +902,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -927,6 +946,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -953,6 +973,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -985,6 +1006,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1103,6 +1125,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -1118,6 +1141,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div
@@ -1180,6 +1204,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -1223,6 +1248,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -1249,6 +1275,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -1281,6 +1308,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1415,6 +1443,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -1430,6 +1459,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div
@@ -1511,6 +1541,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Team Scheme"
         id="admin.permissions.teamScheme"
+        values={Object {}}
       />
     </div>
   </div>
@@ -1554,6 +1585,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Name:"
                 id="admin.permissions.teamScheme.schemeNameLabel"
+                values={Object {}}
               />
             </label>
             <LocalizedInput
@@ -1580,6 +1612,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
               <FormattedMessage
                 defaultMessage="Scheme Description:"
                 id="admin.permissions.teamScheme.schemeDescriptionLabel"
+                values={Object {}}
               />
             </label>
             <textarea
@@ -1612,6 +1645,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
             <FormattedMessage
               defaultMessage="No team selected. Please add teams to this list."
               id="admin.permissions.teamScheme.noTeams"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1730,6 +1764,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -1745,6 +1780,7 @@ exports[`components/admin_console/permission_schemes_settings/permission_team_sc
       <FormattedMessage
         defaultMessage="Cancel"
         id="admin.permissions.permissionSchemes.cancel"
+        values={Object {}}
       />
     </Connect(BlockableLink)>
     <div

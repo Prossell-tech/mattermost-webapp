@@ -26,7 +26,6 @@ export type Props<T extends Value> = {
         onAdd: (value: T) => void,
         onMouseMove: (value: T) => void
     ) => void;
-    selectedItemRef?: React.RefObject<HTMLDivElement>;
     options: T[];
     page: number;
     perPage: number;
@@ -46,7 +45,7 @@ export default class MultiSelectList<T extends Value> extends React.PureComponen
 
     private toSelect = -1
     private listRef = React.createRef<HTMLDivElement>()
-    private selectedItemRef = React.createRef<HTMLDivElement>()
+    private selectedRef = React.createRef<HTMLDivElement>()
 
     public constructor(props: Props<T>) {
         super(props);
@@ -74,16 +73,15 @@ export default class MultiSelectList<T extends Value> extends React.PureComponen
             return;
         }
 
-        const selectRef = this.selectedItemRef.current || this.props.selectedItemRef?.current;
-        if (this.listRef.current && selectRef) {
-            const elemTop = selectRef.getBoundingClientRect().top;
-            const elemBottom = selectRef.getBoundingClientRect().bottom;
+        if (this.listRef.current && this.selectedRef.current) {
+            const elemTop = this.selectedRef.current.getBoundingClientRect().top;
+            const elemBottom = this.selectedRef.current.getBoundingClientRect().bottom;
             const listTop = this.listRef.current.getBoundingClientRect().top;
             const listBottom = this.listRef.current.getBoundingClientRect().bottom;
             if (elemBottom > listBottom) {
-                selectRef.scrollIntoView(false);
+                this.selectedRef.current.scrollIntoView(false);
             } else if (elemTop < listTop) {
-                selectRef.scrollIntoView(true);
+                this.selectedRef.current.scrollIntoView(true);
             }
         }
     }
@@ -137,7 +135,7 @@ export default class MultiSelectList<T extends Value> extends React.PureComponen
 
         return (
             <div
-                ref={isSelected ? this.selectedItemRef : option.value}
+                ref={isSelected ? 'selected' : option.value}
                 className={rowSelected}
                 key={'multiselectoption' + option.value}
                 onClick={() => onAdd(option)}
@@ -207,7 +205,7 @@ export default class MultiSelectList<T extends Value> extends React.PureComponen
                         {ariaLabel}
                     </div>
                     <div
-                        ref={this.listRef}
+                        ref='list'
                         id='multiSelectList'
                         role='presentation'
                         aria-hidden={true}

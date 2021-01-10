@@ -4,6 +4,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Chart, {ChartOptions} from 'chart.js';
 
@@ -14,11 +15,9 @@ type Props = {
     width: number;
     height: number;
     data?: any;
-    id: string;
 }
 
 export default class LineChart extends React.PureComponent<Props> {
-    private canvasRef = React.createRef<HTMLCanvasElement>()
     public static propTypes = {
 
         /*
@@ -82,11 +81,12 @@ export default class LineChart extends React.PureComponent<Props> {
     }
 
     public initChart = (update?: boolean): void => {
-        if (!this.canvasRef.current) {
+        if (!this.refs.canvas) {
             return;
         }
 
-        const ctx = this.canvasRef.current.getContext('2d') as CanvasRenderingContext2D;
+        const el = ReactDOM.findDOMNode(this.refs.canvas) as HTMLCanvasElement;
+        const ctx = el.getContext('2d') as CanvasRenderingContext2D;
         const dataCopy: any = JSON.parse(JSON.stringify(this.props.data));
         this.chart = new Chart(ctx, {type: 'line', data: dataCopy, options: this.chartOptions || {}});
 
@@ -116,11 +116,9 @@ export default class LineChart extends React.PureComponent<Props> {
         } else {
             content = (
                 <canvas
-                    data-testid={this.props.id}
-                    ref={this.canvasRef}
+                    ref='canvas'
                     width={this.props.width}
                     height={this.props.height}
-                    data-labels={this.props.data.labels}
                 />
             );
         }

@@ -6,7 +6,7 @@ import hlJS from 'highlight.js';
 import Constants from './constants';
 import * as TextFormatting from './text_formatting';
 
-type LanguageObject = {
+type languageObject = {
     [key: string]: {
         name: string;
         extensions: string[];
@@ -14,30 +14,43 @@ type LanguageObject = {
     };
 }
 
-const HighlightedLanguages: LanguageObject = Constants.HighlightedLanguages;
+const HighlightedLanguages: languageObject = Constants.HighlightedLanguages;
 
-export function highlight(lang: string, code: string) {
+// This function add line numbers to code
+function formatHighLight(code: string) {
+    if (code) {
+        return code.split('\n').map((str) => {
+            if (str || str === '') {
+                return `
+                    <div class='hljs-ln-numbers'>
+                        <span class='hljs-code'>${str}</span>
+                    </div>
+                `;
+            }
+
+            return str;
+        }).join('\n');
+    }
+
+    return code;
+}
+
+export function highlight(lang: string, code: string, addLineNumbers = false) {
     const language = getLanguageFromNameOrAlias(lang);
 
     if (language) {
         try {
-            return hlJS.highlight(language, code).value;
+            const codeValue = hlJS.highlight(language, code).value;
+            if (addLineNumbers) {
+                return formatHighLight(codeValue);
+            }
+            return codeValue;
         } catch (e) {
             // fall through if highlighting fails and handle below
         }
     }
 
     return TextFormatting.sanitizeHtml(code);
-}
-
-export function renderLineNumbers(code: string) {
-    const numberOfLines = code.split(/\r\n|\n|\r/g).length;
-    const lineNumbers = [];
-    for (let i = 0; i < numberOfLines; i++) {
-        lineNumbers.push((i + 1).toString());
-    }
-
-    return lineNumbers.join('\n');
 }
 
 export function getLanguageFromFileExtension(extension: string): string | null {

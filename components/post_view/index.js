@@ -53,6 +53,7 @@ function makeMapStateToProps() {
         return {
             lastViewedAt,
             channelLoading,
+            channel,
         };
     };
 }

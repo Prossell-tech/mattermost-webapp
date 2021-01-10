@@ -14,7 +14,6 @@ export const intlConfigPropTypes = {
 
     defaultLocale: PropTypes.string,
     defaultFormats: PropTypes.object,
-    wrapRichTextChunksInFragment: PropTypes.bool,
 
     onError: PropTypes.func,
 };
@@ -26,6 +25,7 @@ export const intlFormatPropTypes = {
     formatNumber: PropTypes.func.isRequired,
     formatPlural: PropTypes.func.isRequired,
     formatMessage: PropTypes.func.isRequired,
+    formatHTMLMessage: PropTypes.func.isRequired,
 };
 
 export const intlShape = PropTypes.shape({

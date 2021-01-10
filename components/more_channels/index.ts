@@ -15,7 +15,6 @@ import {getChannels, getArchivedChannels, joinChannel} from 'mattermost-redux/ac
 import {getOtherChannels, getChannelsInCurrentTeam} from 'mattermost-redux/selectors/entities/channels';
 
 import {searchMoreChannels} from 'actions/channel_actions.jsx';
-import {openModal, closeModal} from 'actions/views/modals';
 
 import {GlobalState} from '../../types/store';
 
@@ -50,10 +49,6 @@ type Actions = {
     getArchivedChannels: (teamId: string, page: number, channelsPerPage: number) => ActionFunc | void;
     joinChannel: (currentUserId: string, teamId: string, channelId: string) => Promise<ActionResult>;
     searchMoreChannels: (term: string, shouldShowArchivedChannels: boolean) => Promise<ActionResult>;
-    openModal: (modalData: {modalId: string; dialogType: any; dialogProps?: any}) => Promise<{
-        data: boolean;
-    }>;
-    closeModal: (modalId: string) => void;
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
@@ -63,8 +58,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
             getArchivedChannels,
             joinChannel,
             searchMoreChannels,
-            openModal,
-            closeModal,
         }, dispatch),
     };
 }

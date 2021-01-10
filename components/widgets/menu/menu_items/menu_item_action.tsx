@@ -14,15 +14,7 @@ type Props = {
     buttonClass?: string;
     isDangerous?: boolean;
 }
-export const MenuItemActionImpl = ({
-    onClick,
-    ariaLabel,
-    text,
-    extraText,
-    id,
-    buttonClass,
-    isDangerous,
-}: Props) => (
+export const MenuItemActionImpl = ({onClick, ariaLabel, text, extraText, id, buttonClass, isDangerous}: Props) => (
     <button
         data-testid={id}
         id={id}

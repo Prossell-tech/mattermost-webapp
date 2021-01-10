@@ -19,15 +19,14 @@ interface ChannelGroupsProps {
     channel: Partial<Channel>;
     onAddCallback: (groupIDs: string[]) => void;
     totalGroups: number;
-    groups: Array<Partial<Group>>;
-    removedGroups: Array<{[key: string]: any}>;
+    groups: Partial<Group>[];
+    removedGroups: object[];
     onGroupRemoved: (gid: string) => void;
     setNewGroupRole: (gid: string) => void;
-    isDisabled?: boolean;
 }
 
-export const ChannelGroups: React.FunctionComponent<ChannelGroupsProps> = (props: ChannelGroupsProps): JSX.Element => {
-    const {onGroupRemoved, onAddCallback, totalGroups, groups, removedGroups, channel, synced, setNewGroupRole, isDisabled} = props;
+export const ChannelGroups: React.SFC<ChannelGroupsProps> = (props: ChannelGroupsProps): JSX.Element => {
+    const {onGroupRemoved, onAddCallback, totalGroups, groups, removedGroups, channel, synced, setNewGroupRole} = props;
     return (
         <AdminPanel
             id='channel_groups'
@@ -47,7 +46,6 @@ export const ChannelGroups: React.FunctionComponent<ChannelGroupsProps> = (props
                         includeGroups: removedGroups,
                         excludeGroups: groups,
                     }}
-                    isDisabled={isDisabled}
                 >
                     <FormattedMessage
                         id='admin.channel_settings.channel_details.add_group'
@@ -64,7 +62,6 @@ export const ChannelGroups: React.FunctionComponent<ChannelGroupsProps> = (props
                     setNewGroupRole={setNewGroupRole}
                     isModeSync={synced}
                     type='channel'
-                    isDisabled={isDisabled}
                 />
             )}
         </AdminPanel>

@@ -11,11 +11,13 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -35,6 +37,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -54,6 +57,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -68,6 +72,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -87,6 +92,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -101,6 +107,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -119,6 +126,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -133,6 +141,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -150,6 +159,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -164,6 +174,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Username"
             id="add_incoming_webhook.username"
+            values={Object {}}
           />
         </label>
         <div
@@ -183,6 +194,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="Specify the username this integration will post as. Usernames can be up to 22 characters, and can contain lowercase letters, numbers and the symbols \\\\\\"-\\\\\\", \\\\\\"_\\\\\\", and \\\\\\".\\\\\\". If left blank, the name specified by the webhook creator is used."
               id="add_incoming_webhook.username.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -197,6 +209,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Profile Picture"
             id="add_incoming_webhook.icon_url"
+            values={Object {}}
           />
         </label>
         <div
@@ -216,6 +229,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
             <FormattedMessage
               defaultMessage="Enter the URL of a .png or .jpg file for the profile picture of this integration when posting. The file should be at least 128 pixels by 128 pixels. If left blank, the profile picture specified by the webhook creator is used."
               id="add_incoming_webhook.icon_url.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -240,6 +254,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -253,6 +268,7 @@ exports[`components/integrations/AbstractIncomingWebhook should call action func
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>
@@ -272,11 +288,13 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -296,6 +314,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -315,6 +334,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -329,6 +349,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -348,6 +369,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -362,6 +384,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -380,6 +403,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -394,6 +418,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -411,6 +436,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -425,6 +451,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Username"
             id="add_incoming_webhook.username"
+            values={Object {}}
           />
         </label>
         <div
@@ -444,6 +471,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="Specify the username this integration will post as. Usernames can be up to 22 characters, and can contain lowercase letters, numbers and the symbols \\\\\\"-\\\\\\", \\\\\\"_\\\\\\", and \\\\\\".\\\\\\". If left blank, the name specified by the webhook creator is used."
               id="add_incoming_webhook.username.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -458,6 +486,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Profile Picture"
             id="add_incoming_webhook.icon_url"
+            values={Object {}}
           />
         </label>
         <div
@@ -477,6 +506,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
             <FormattedMessage
               defaultMessage="Enter the URL of a .png or .jpg file for the profile picture of this integration when posting. The file should be at least 128 pixels by 128 pixels. If left blank, the profile picture specified by the webhook creator is used."
               id="add_incoming_webhook.icon_url.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -501,6 +531,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -514,6 +545,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot 1
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>
@@ -533,11 +565,13 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -557,6 +591,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -576,6 +611,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -590,6 +626,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -609,6 +646,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -623,6 +661,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -641,6 +680,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -655,6 +695,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -672,6 +713,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -686,6 +728,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Username"
             id="add_incoming_webhook.username"
+            values={Object {}}
           />
         </label>
         <div
@@ -705,6 +748,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify the username this integration will post as. Usernames can be up to 22 characters, and can contain lowercase letters, numbers and the symbols \\\\\\"-\\\\\\", \\\\\\"_\\\\\\", and \\\\\\".\\\\\\". If left blank, the name specified by the webhook creator is used."
               id="add_incoming_webhook.username.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -719,6 +763,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Profile Picture"
             id="add_incoming_webhook.icon_url"
+            values={Object {}}
           />
         </label>
         <div
@@ -738,6 +783,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Enter the URL of a .png or .jpg file for the profile picture of this integration when posting. The file should be at least 128 pixels by 128 pixels. If left blank, the profile picture specified by the webhook creator is used."
               id="add_incoming_webhook.icon_url.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -753,6 +799,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
               <FormattedMessage
                 defaultMessage="A valid channel is required"
                 id="add_incoming_webhook.channelRequired"
+                values={Object {}}
               />,
             ]
           }
@@ -765,6 +812,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -778,6 +826,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>
@@ -797,11 +846,13 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -821,6 +872,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -840,6 +892,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -854,6 +907,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -873,6 +927,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -887,6 +942,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -905,6 +961,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -919,6 +976,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -936,6 +994,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -950,6 +1009,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Username"
             id="add_incoming_webhook.username"
+            values={Object {}}
           />
         </label>
         <div
@@ -969,6 +1029,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify the username this integration will post as. Usernames can be up to 22 characters, and can contain lowercase letters, numbers and the symbols \\\\\\"-\\\\\\", \\\\\\"_\\\\\\", and \\\\\\".\\\\\\". If left blank, the name specified by the webhook creator is used."
               id="add_incoming_webhook.username.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -993,6 +1054,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -1006,6 +1068,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>
@@ -1025,11 +1088,13 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -1049,6 +1114,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -1068,6 +1134,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1082,6 +1149,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -1101,6 +1169,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1115,6 +1184,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -1133,6 +1203,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1147,6 +1218,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -1164,6 +1236,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1178,6 +1251,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Profile Picture"
             id="add_incoming_webhook.icon_url"
+            values={Object {}}
           />
         </label>
         <div
@@ -1197,6 +1271,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Enter the URL of a .png or .jpg file for the profile picture of this integration when posting. The file should be at least 128 pixels by 128 pixels. If left blank, the profile picture specified by the webhook creator is used."
               id="add_incoming_webhook.icon_url.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1221,6 +1296,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -1234,6 +1310,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>
@@ -1253,11 +1330,13 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
       <FormattedMessage
         defaultMessage="Incoming Webhooks"
         id="installed_incoming_webhooks.header"
+        values={Object {}}
       />
     </Link>
     <FormattedMessage
       defaultMessage="Header"
       id="header_id"
+      values={Object {}}
     />
   </BackstageHeader>
   <div
@@ -1277,6 +1356,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Title"
             id="add_incoming_webhook.displayName"
+            values={Object {}}
           />
         </label>
         <div
@@ -1296,6 +1376,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify a title, of up to 64 characters, for the webhook settings page."
               id="add_incoming_webhook.displayName.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1310,6 +1391,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Description"
             id="add_incoming_webhook.description"
+            values={Object {}}
           />
         </label>
         <div
@@ -1329,6 +1411,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Describe your incoming webhook."
               id="add_incoming_webhook.description.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1343,6 +1426,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Channel"
             id="add_incoming_webhook.channel"
+            values={Object {}}
           />
         </label>
         <div
@@ -1361,6 +1445,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="This is the default public or private channel that receives the webhook payloads.  When setting up the webhook, you must belong to the private channel."
               id="add_incoming_webhook.channel.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1375,6 +1460,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Lock to this channel"
             id="add_incoming_webhook.channelLocked"
+            values={Object {}}
           />
         </label>
         <div
@@ -1392,6 +1478,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="If set, the incoming webhook can post only to the selected channel."
               id="add_incoming_webhook.channelLocked.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1406,6 +1493,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Username"
             id="add_incoming_webhook.username"
+            values={Object {}}
           />
         </label>
         <div
@@ -1425,6 +1513,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Specify the username this integration will post as. Usernames can be up to 22 characters, and can contain lowercase letters, numbers and the symbols \\\\\\"-\\\\\\", \\\\\\"_\\\\\\", and \\\\\\".\\\\\\". If left blank, the name specified by the webhook creator is used."
               id="add_incoming_webhook.username.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1439,6 +1528,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Profile Picture"
             id="add_incoming_webhook.icon_url"
+            values={Object {}}
           />
         </label>
         <div
@@ -1458,6 +1548,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
             <FormattedMessage
               defaultMessage="Enter the URL of a .png or .jpg file for the profile picture of this integration when posting. The file should be at least 128 pixels by 128 pixels. If left blank, the profile picture specified by the webhook creator is used."
               id="add_incoming_webhook.icon_url.help"
+              values={Object {}}
             />
           </div>
         </div>
@@ -1482,6 +1573,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Cancel"
             id="add_incoming_webhook.cancel"
+            values={Object {}}
           />
         </Link>
         <SpinnerButton
@@ -1495,6 +1587,7 @@ exports[`components/integrations/AbstractIncomingWebhook should match snapshot, 
           <FormattedMessage
             defaultMessage="Footer"
             id="footer_id"
+            values={Object {}}
           />
         </SpinnerButton>
       </div>

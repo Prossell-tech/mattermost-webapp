@@ -3,14 +3,22 @@
 
 import React from 'react';
 
-import LocalizedIcon from 'components/localized_icon';
-import {t} from 'utils/i18n';
+import {FormattedMessage} from 'react-intl';
 
-export default function SearchIcon() {
-    return (
-        <LocalizedIcon
-            className='fa fa-search'
-            title={{id: t('generic_icons.search'), defaultMessage: 'Search Icon'}}
-        />
-    );
+export default class SearchIcon extends React.PureComponent {
+    render() {
+        return (
+            <FormattedMessage
+                id='generic_icons.search'
+                defaultMessage='Search Icon'
+            >
+                {(title) => (
+                    <i
+                        className='fa fa-search'
+                        title={title}
+                    />
+                )}
+            </FormattedMessage>
+        );
+    }
 }

@@ -87,11 +87,6 @@ exports[`components/AddGroupsToChannelModal should match snapshot 1`] = `
       perPage={50}
       placeholderText="Search and add groups"
       saving={false}
-      selectedItemRef={
-        Object {
-          "current": null,
-        }
-      }
       valueRenderer={[Function]}
       values={Array []}
     />
@@ -118,9 +113,9 @@ exports[`components/AddGroupsToChannelModal should match when renderOption is ca
     <div
       className="more-modal__name"
     >
-      <Nbsp />
+       
       -
-      <Nbsp />
+       
       <span
         className="more-modal__name_sub"
       >
@@ -167,9 +162,9 @@ exports[`components/AddGroupsToChannelModal should match when renderOption is ca
     <div
       className="more-modal__name"
     >
-      <Nbsp />
+       
       -
-      <Nbsp />
+       
       <span
         className="more-modal__name_sub"
       >
@@ -216,9 +211,9 @@ exports[`components/AddGroupsToChannelModal should match when renderOption is ca
     <div
       className="more-modal__name"
     >
-      <Nbsp />
+       
       -
-      <Nbsp />
+       
       <span
         className="more-modal__name_sub"
       >

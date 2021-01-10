@@ -36,8 +36,8 @@ describe('Keyboard shortcut for adding reactions to last message in channel or t
             cy.apiCreateUser({prefix: 'other'}).then(({user: user1}) => {
                 otherUser = user1;
 
-                cy.apiGetChannelByName(testTeam.name, 'town-square').then((out) => {
-                    townsquareChannel = out.channel;
+                cy.apiGetChannelByName(testTeam.name, 'town-square').then((res) => {
+                    townsquareChannel = res.body;
                 });
 
                 cy.apiAddUserToTeam(testTeam.id, otherUser.id).then(() => {
@@ -51,7 +51,7 @@ describe('Keyboard shortcut for adding reactions to last message in channel or t
         // # Login as test user and visit town-square
         cy.apiLogin(testUser);
         cy.visit(`/${testTeam.name}/channels/town-square`);
-        cy.get('#channelHeaderTitle', {timeout: TIMEOUTS.ONE_MIN}).should('be.visible').and('contain', 'Town Square');
+        cy.get('#channelHeaderTitle').should('be.visible').and('contain', 'Town Square');
 
         // # Make sure there is at least a message without reaction for each test
         cy.postMessage(MESSAGES.TINY);
@@ -444,53 +444,47 @@ describe('Keyboard shortcut for adding reactions to last message in channel or t
 
     it('Should not emoji picker by shortcut if any modals are open', () => {
         // # Open account settings modal
-        cy.uiOpenMainMenu('Account Settings');
+        openMainMenuOptions('Account Settings');
 
         // * Emulate react to last message shortcut and verify its blocked
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
 
         // * Open view members modal and verify shortcut is blocked
-        cy.uiOpenMainMenu('View Members');
+        openMainMenuOptions('View Members');
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
 
         // * Open about mattermost modal and verify shortcut is blocked
-        cy.uiOpenMainMenu('About Mattermost');
+        openMainMenuOptions('About Mattermost');
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
 
         // * Open channel header modal and verify shortcut is blocked
-        cy.uiOpenChannelMenu('Edit Channel Header');
+        openChannelMainOptions('Edit Channel Header');
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
 
         // * Open Edit channel header modal and verify shortcut is blocked
-        cy.uiOpenChannelMenu('View Members');
+        openChannelMainOptions('View Members');
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
 
         // * Open channel rename modal and verify shortcut is blocked
-        cy.uiOpenChannelMenu('Rename Channel');
+        openChannelMainOptions('Rename Channel');
         verifyShortcutReactToLastMessageIsBlocked();
-        pressEscapeKey();
     });
 
     it('Should not open the emoji picker by shortcut if any dropdown or popups are open', () => {
         // * Open the channel menu dropdown, execute the shortcut and verify it is blocked
-        cy.uiOpenChannelMenu();
+        cy.findByLabelText('channel menu').click();
         verifyShortcutReactToLastMessageIsBlocked();
 
         // * Open the channel menu dropdown, execute the shortcut and verify it is blocked
-        cy.uiOpenMainMenu();
+        cy.findByLabelText('main menu').click();
         verifyShortcutReactToLastMessageIsBlocked();
     });
 
-    it('Should not open the emoji picker by shortcut if RHS is fully expanded for search results, recent mentions, saved and pinned posts', () => {
-        // # Open the saved message
+    it('Should not open the emoji picker by shortcut if RHS is fully expanded for search results, recent mentions, flagged and pinned posts', () => {
+        // # Open the flagged message
         cy.findByLabelText('Saved posts').click();
 
-        // # Expand the saved message
+        // # Expand the flagged message
         cy.findByLabelText('Expand Sidebar Icon').click();
 
         // Execute the shortcut
@@ -665,6 +659,14 @@ function verifyShortcutReactToLastMessageIsBlocked(from) {
     cy.get('#emojiPicker').should('not.exist');
 }
 
-function pressEscapeKey() {
-    cy.get('body').type('{esc}');
+function openMainMenuOptions(menu) {
+    cy.get('body').type('{esc}').wait(TIMEOUTS.HALF_SEC);
+    cy.findByLabelText('main menu').click();
+    cy.findByText(menu).scrollIntoView().click();
+}
+
+function openChannelMainOptions(menu) {
+    cy.get('body').type('{esc}').wait(TIMEOUTS.HALF_SEC);
+    cy.findByLabelText('channel menu').click();
+    cy.findByText(menu).scrollIntoView().should('be.visible').click();
 }

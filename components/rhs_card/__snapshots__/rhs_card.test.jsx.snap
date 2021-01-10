@@ -73,6 +73,7 @@ exports[`comoponents/rhs_card/RhsCard should match on post when no plugin defini
             <FormattedMessage
               defaultMessage="Jump"
               id="rhs_card.jump"
+              values={Object {}}
             />
           </Link>
         </div>
@@ -155,6 +156,7 @@ exports[`comoponents/rhs_card/RhsCard should match on post when plugin defining 
             <FormattedMessage
               defaultMessage="Jump"
               id="rhs_card.jump"
+              values={Object {}}
             />
           </Link>
         </div>
@@ -243,6 +245,7 @@ exports[`comoponents/rhs_card/RhsCard should match on post when plugin defining 
             <FormattedMessage
               defaultMessage="Jump"
               id="rhs_card.jump"
+              values={Object {}}
             />
           </Link>
         </div>

@@ -19,7 +19,7 @@ function searchAndVerifyChannel(channel) {
     cy.typeCmdOrCtrl().type('k');
 
     // # Search for channel's display name
-    cy.findByRole('textbox', {name: 'quick switch input'}).
+    cy.get('#quickSwitchInput').
         should('be.visible').
         as('input').
         clear().
@@ -56,7 +56,15 @@ describe('Autocomplete without Elasticsearch - Renaming', () => {
     let testTeam;
 
     before(() => {
-        cy.shouldHaveElasticsearchDisabled();
+        // # Disable elastic search via API
+        cy.apiUpdateConfig({
+            ElasticsearchSettings: {
+                EnableAutocomplete: false,
+                EnableIndexing: false,
+                EnableSearching: false,
+                Sniff: false,
+            },
+        });
 
         // # Create new team for tests
         cy.apiCreateTeam(`search-${timestamp}`, `search-${timestamp}`).then(({team}) => {
@@ -99,7 +107,9 @@ describe('Autocomplete without Elasticsearch - Renaming', () => {
         const newChannelName = 'updatedchannel' + Date.now();
 
         // # Create a new channel
-        cy.apiCreateChannel(testTeam.id, channelName, channelName).then(({channel}) => {
+        cy.apiCreateChannel(testTeam.id, channelName, channelName).then((channelResponse) => {
+            const channel = channelResponse.body;
+
             // # Channel should appear in search results pre-change
             searchAndVerifyChannel(channel);
 
@@ -146,8 +156,8 @@ describe('Autocomplete without Elasticsearch - Renaming', () => {
             const channelName = 'another-channel' + Date.now();
 
             // # Create a new channel
-            cy.apiCreateChannel(testTeam.id, channelName, channelName).then(({channel}) => {
-                testChannel = channel;
+            cy.apiCreateChannel(testTeam.id, channelName, channelName).then((channelResponse) => {
+                testChannel = channelResponse.body;
 
                 // # Channel should appear in search results pre-change
                 searchAndVerifyChannel(testChannel);

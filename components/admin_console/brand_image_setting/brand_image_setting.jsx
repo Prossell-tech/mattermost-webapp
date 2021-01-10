@@ -1,10 +1,11 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import $ from 'jquery';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
 import {Tooltip} from 'react-bootstrap';
 import {Client4} from 'mattermost-redux/client';
 
@@ -54,9 +55,6 @@ export default class BrandImageSetting extends React.PureComponent {
             brandImageTimestamp: Date.now(),
             error: '',
         };
-
-        this.imageRef = React.createRef();
-        this.fileInputRef = React.createRef();
     }
 
     componentDidMount() {
@@ -78,10 +76,10 @@ export default class BrandImageSetting extends React.PureComponent {
     }
 
     componentDidUpdate() {
-        if (this.imageRef.current) {
+        if (this.refs.image) {
             const reader = new FileReader();
 
-            const img = this.imageRef.current;
+            const img = this.refs.image;
             reader.onload = (e) => {
                 $(img).attr('src', e.target.result); // eslint-disable-line jquery/no-attr
             };
@@ -91,7 +89,7 @@ export default class BrandImageSetting extends React.PureComponent {
     }
 
     handleImageChange = () => {
-        const element = $(this.fileInputRef.current);
+        const element = $(this.refs.fileInput);
         if (element.prop('files').length > 0) {
             this.props.setSaveNeeded();
             this.setState({
@@ -160,7 +158,7 @@ export default class BrandImageSetting extends React.PureComponent {
             img = (
                 <div className='remove-image__img mb-5'>
                     <img
-                        ref={this.imageRef}
+                        ref='image'
                         alt='brand image'
                         src=''
                     />
@@ -185,7 +183,6 @@ export default class BrandImageSetting extends React.PureComponent {
                         )}
                     >
                         <button
-                            type='button'
                             className='remove-image__btn'
                             onClick={this.handleDeleteButtonPressed}
                         >
@@ -234,7 +231,6 @@ export default class BrandImageSetting extends React.PureComponent {
                 <div className='col-sm-8'>
                     <div className='file__upload mt-5'>
                         <button
-                            type='button'
                             className={letbtnDefaultClass}
                             disabled={this.props.disabled}
                         >
@@ -244,7 +240,7 @@ export default class BrandImageSetting extends React.PureComponent {
                             />
                         </button>
                         <input
-                            ref={this.fileInputRef}
+                            ref='fileInput'
                             type='file'
                             accept='.jpg,.png,.bmp'
                             disabled={this.props.disabled}
@@ -254,9 +250,9 @@ export default class BrandImageSetting extends React.PureComponent {
                     <br/>
                     <FormError error={this.state.error}/>
                     <p className='help-text m-0'>
-                        <FormattedMessage
+                        <FormattedHTMLMessage
                             id='admin.team.uploadDesc'
-                            defaultMessage='Customize your user experience by adding a custom image to your login screen. Recommended maximum image size is less than 2 MB.'
+                            defaultMessage='Customize your user experience by adding a custom image to your login screen. See examples at <a href="http://docs.mattermost.com/administration/config-settings.html#custom-branding" target="_blank">docs.mattermost.com/administration/config-settings.html#custom-branding</a>.'
                         />
                     </p>
                 </div>
@@ -264,3 +260,4 @@ export default class BrandImageSetting extends React.PureComponent {
         );
     }
 }
+/* eslint-enable react/no-string-refs */

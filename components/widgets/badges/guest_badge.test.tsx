@@ -8,7 +8,20 @@ import GuestBadge from './guest_badge';
 
 describe('components/widgets/badges/GuestBadge', () => {
     test('should match the snapshot', () => {
-        const wrapper = shallow(<GuestBadge className={'test'}/>);
-        expect(wrapper).toMatchSnapshot();
+        const wrapper = shallow(
+            <GuestBadge className={'test'}/>,
+        );
+        expect(wrapper).toMatchInlineSnapshot(`
+<Badge
+  className="GuestBadge test"
+  show={true}
+>
+  <FormattedMessage
+    defaultMessage="GUEST"
+    id="post_info.guest"
+    values={Object {}}
+  />
+</Badge>
+`);
     });
 });

@@ -7,6 +7,7 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
+// Stage: @prod
 // Group: @enterprise @system_console @channel_moderation
 
 import * as TIMEOUTS from '../../../../fixtures/timeouts';
@@ -16,8 +17,8 @@ import {checkboxesTitleToIdMap} from './constants';
 
 import {
     deleteOrEditTeamScheme,
-    disablePermission,
-    enablePermission,
+    disableChannelModeratedPermission,
+    enableChannelModeratedPermission,
     goToPermissionsAndCreateTeamOverrideScheme,
     goToSystemScheme,
     saveConfigForChannel,
@@ -74,7 +75,7 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
     it('Manage Members option for Members', () => {
         // # Visit test channel page and turn off the Manage members for Members and then save
         visitChannelConfigPage(testChannel);
-        disablePermission(checkboxesTitleToIdMap.MANAGE_MEMBERS_MEMBERS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.MANAGE_MEMBERS_MEMBERS);
         saveConfigForChannel();
 
         visitChannel(regularUser, testChannel, testTeam);
@@ -85,7 +86,7 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
 
         // # Visit test channel page and turn off the Manage members for Members and then save
         visitChannelConfigPage(testChannel);
-        enablePermission(checkboxesTitleToIdMap.MANAGE_MEMBERS_MEMBERS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.MANAGE_MEMBERS_MEMBERS);
         saveConfigForChannel();
 
         visitChannel(regularUser, testChannel, testTeam);
@@ -98,7 +99,8 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
     it('Manage Members option removed for Members in System Scheme', () => {
         // Edit the System Scheme and disable the Manage Members option for Members & Save.
         goToSystemScheme();
-        disablePermission(checkboxesTitleToIdMap.ALL_USERS_MANAGE_PUBLIC_CHANNEL_MEMBERS);
+        cy.get('#all_users-public_channel-manage_public_channel_members').scrollIntoView().should('be.visible').click();
+        cy.findByTestId('all_users-public_channel-manage_public_channel_members-checkbox').should('not.have.class', 'checked');
         saveConfigForScheme();
 
         // # Visit test channel page
@@ -120,7 +122,8 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
 
         // Edit the System Scheme and enable the Manage Members option for Members & Save.
         goToSystemScheme();
-        enablePermission(checkboxesTitleToIdMap.ALL_USERS_MANAGE_PUBLIC_CHANNEL_MEMBERS);
+        cy.get('#all_users-public_channel-manage_public_channel_members').scrollIntoView().should('be.visible').click();
+        cy.findByTestId('all_users-public_channel-manage_public_channel_members-checkbox').should('have.class', 'checked');
         saveConfigForScheme();
 
         // # Visit test channel page
@@ -146,7 +149,8 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
 
         // # Disable mange channel members
         deleteOrEditTeamScheme(teamOverrideSchemeName, 'edit');
-        disablePermission(checkboxesTitleToIdMap.ALL_USERS_MANAGE_PUBLIC_CHANNEL_MEMBERS);
+        cy.get('#all_users-public_channel-manage_public_channel_members').scrollIntoView().should('be.visible').click();
+        cy.findByTestId('all_users-public_channel-manage_public_channel_members-checkbox').should('not.have.class', 'checked');
         saveConfigForScheme(false);
         cy.wait(TIMEOUTS.FIVE_SEC);
 
@@ -166,7 +170,8 @@ describe('MM-23102 - Channel Moderation - Manage Members', () => {
 
         // # Enable manage channel members
         deleteOrEditTeamScheme(teamOverrideSchemeName, 'edit');
-        enablePermission(checkboxesTitleToIdMap.ALL_USERS_MANAGE_PUBLIC_CHANNEL_MEMBERS);
+        cy.get('#all_users-public_channel-manage_public_channel_members').scrollIntoView().should('be.visible').click();
+        cy.findByTestId('all_users-public_channel-manage_public_channel_members-checkbox').should('have.class', 'checked');
         saveConfigForScheme(false);
         cy.wait(TIMEOUTS.FIVE_SEC);
 

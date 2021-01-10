@@ -92,7 +92,6 @@ describe('admin_console/team_channel_settings/channel/ChannelDetails', () => {
 
         const additionalProps = {
             guestAccountsEnabled: true,
-            isDisabled: false,
         };
 
         if (!testChannel.id) {

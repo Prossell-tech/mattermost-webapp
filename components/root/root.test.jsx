@@ -1,28 +1,21 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {shallow} from 'enzyme';
 import React from 'react';
+import {shallow} from 'enzyme';
 
 import {Client4} from 'mattermost-redux/client';
 
 import Root from 'components/root/root';
-import * as GlobalActions from 'actions/global_actions';
+import * as GlobalActions from 'actions/global_actions.jsx';
 import * as Utils from 'utils/utils';
-import Constants, {StoragePrefixes} from 'utils/constants';
+import Constants from 'utils/constants';
 
 jest.mock('fastclick', () => ({
     attach: () => {}, // eslint-disable-line no-empty-function
 }));
 
-jest.mock('rudder-sdk-js', () => ({
-    identify: jest.fn(),
-    load: jest.fn(),
-    page: jest.fn(),
-    track: jest.fn(),
-}));
-
-jest.mock('actions/telemetry_actions', () => ({
+jest.mock('actions/diagnostics_actions', () => ({
     trackLoadTime: () => {}, // eslint-disable-line no-empty-function
 }));
 
@@ -39,15 +32,28 @@ jest.mock('utils/utils', () => ({
 jest.mock('mattermost-redux/actions/general', () => ({
     setUrl: () => {},
 }));
+jest.mock('mattermost-redux/client', () => {
+    const original = require.requireActual('mattermost-redux/client');
+
+    return {
+        ...original,
+        Client4: {
+            ...original.Client4,
+            setUrl: jest.fn(),
+            enableRudderEvents: jest.fn(),
+        },
+    };
+});
 
 describe('components/Root', () => {
     const baseProps = {
-        telemetryEnabled: true,
-        telemetryId: '1234ab',
+        diagnosticsEnabled: true,
+        diagnosticId: '1234ab',
         noAccounts: false,
         showTermsOfService: false,
         actions: {
             loadMeAndConfig: async () => [{}, {}, {data: true}], // eslint-disable-line no-empty-function
+            getWarnMetricsStatus: async () => {},
         },
         location: {
             pathname: '/',
@@ -73,7 +79,6 @@ describe('components/Root', () => {
 
         wrapper.instance().onConfigLoaded();
         expect(props.history.push).toHaveBeenCalledWith('/signup_user_complete');
-        wrapper.unmount();
     });
 
     test('should load user, config, and license on mount and redirect to defaultTeam on success', (done) => {
@@ -94,10 +99,9 @@ describe('components/Root', () => {
             });
         }
 
-        const wrapper = shallow(<MockedRoot {...props}/>);
+        shallow(<MockedRoot {...props}/>);
 
         expect(props.actions.loadMeAndConfig).toHaveBeenCalledTimes(1);
-        wrapper.unmount();
     });
 
     test('should load user, config, and license on mount and should not redirect to defaultTeam id pathname is not root', (done) => {
@@ -117,8 +121,7 @@ describe('components/Root', () => {
             });
         }
 
-        const wrapper = shallow(<MockedRoot {...props}/>);
-        wrapper.unmount();
+        shallow(<MockedRoot {...props}/>);
     });
 
     test('should load config and enable dev mode features', () => {
@@ -142,7 +145,6 @@ describe('components/Root', () => {
         wrapper.instance().onConfigLoaded();
         expect(Utils.isDevMode).toHaveBeenCalledTimes(1);
         expect(Utils.enableDevModeFeatures).toHaveBeenCalledTimes(1);
-        wrapper.unmount();
     });
 
     test('should load config and not enable dev mode features', () => {
@@ -166,7 +168,6 @@ describe('components/Root', () => {
         wrapper.instance().onConfigLoaded();
         expect(Utils.isDevMode).toHaveBeenCalledTimes(1);
         expect(Utils.enableDevModeFeatures).not.toHaveBeenCalled();
-        wrapper.unmount();
     });
 
     test('should call history on props change', () => {
@@ -185,63 +186,20 @@ describe('components/Root', () => {
         };
         wrapper.setProps(props2);
         expect(props.history.push).toHaveBeenLastCalledWith('/signup_user_complete');
-        wrapper.unmount();
     });
 
-    describe('onConfigLoaded', () => {
-        // Replace loadMeAndConfig with an action that never resolves so we can control exactly when onConfigLoaded is called
-        const props = {
-            ...baseProps,
-            actions: {
-                ...baseProps.actions,
-                loadMeAndConfig: () => new Promise(() => {}),
-            },
-        };
-
-        test('should not set a TelemetryHandler when onConfigLoaded is called if Rudder is not configured', () => {
-            const wrapper = shallow(<Root {...props}/>);
-
-            wrapper.instance().onConfigLoaded();
-
-            Client4.trackEvent('category', 'event');
-
-            expect(Client4.telemetryHandler).not.toBeDefined();
-
-            wrapper.unmount();
-        });
-
-        test('should set a TelemetryHandler when onConfigLoaded is called if Rudder is configured', () => {
-            Constants.TELEMETRY_RUDDER_KEY = 'testKey';
-            Constants.TELEMETRY_RUDDER_DATAPLANE_URL = 'url';
-
-            const wrapper = shallow(<Root {...props}/>);
-
-            wrapper.instance().onConfigLoaded();
-
-            Client4.trackEvent('category', 'event');
-
-            expect(Client4.telemetryHandler).toBeDefined();
-
-            wrapper.unmount();
-        });
-    });
-
-    test('should reload on focus after getting signal login event from another tab', () => {
-        Object.defineProperty(window.location, 'reload', {
-            configurable: true,
-            writable: true,
-        });
-        window.location.reload = jest.fn();
+    test('should not call enableRudderEvents on call of onConfigLoaded if url and key for rudder is not set', () => {
         const wrapper = shallow(<Root {...baseProps}/>);
-        const loginSignal = new StorageEvent('storage', {
-            key: StoragePrefixes.LOGIN,
-            newValue: String(Math.random()),
-            storageArea: localStorage,
-        });
+        wrapper.instance().onConfigLoaded();
+        expect(Client4.enableRudderEvents).not.toHaveBeenCalled();
+    });
 
-        window.dispatchEvent(loginSignal);
-        document.dispatchEvent(new Event('visibilitychange'));
-        expect(window.location.reload).toBeCalledTimes(1);
-        wrapper.unmount();
+    test('should call for enableRudderEvents on call of onConfigLoaded if url and key for rudder is set', () => {
+        Constants.DIAGNOSTICS_RUDDER_KEY = 'testKey';
+        Constants.DIAGNOSTICS_RUDDER_DATAPLANE_URL = 'url';
+
+        const wrapper = shallow(<Root {...baseProps}/>);
+        wrapper.instance().onConfigLoaded();
+        expect(Client4.enableRudderEvents).toHaveBeenCalled();
     });
 });

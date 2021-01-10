@@ -10,6 +10,8 @@
 // Stage: @prod
 // Group: @messaging
 
+import * as TIMEOUTS from '../../fixtures/timeouts';
+
 describe('Message Draft and Switch Channels', () => {
     let testTeam;
 
@@ -21,58 +23,47 @@ describe('Message Draft and Switch Channels', () => {
         });
     });
 
-    it('MM-T131 Message Draft Pencil Icon - CTRL/CMD+K & "Jump to"', () => {
-        const testChannel = 'Off-Topic';
-        const message = 'message draft test';
+    it('M14358 Message Draft Pencil Icon Visible in Channel Switcher', () => {
+        // # In a test channel, type some text in the message input box
+        // # Do not send the post
+        cy.get('#sidebarItem_town-square').click({force: true});
 
-        // * Validate if the draft icon is not visible at LHS before making a draft
-        verifyDraftIcon(testChannel, false);
+        // * Validate if the channel has been opened
+        cy.url().should('include', `/${testTeam.name}/channels/town-square`);
 
-        // # Go to test channel and check if it opened correctly
-        openChannelFromLhs(testTeam.name, testChannel);
+        // * Validate if the draft icon is not visible on the sidebar before making a draft
+        cy.get('#publicChannel').scrollIntoView();
+        cy.get('#sidebarItem_town-square #draftIcon').should('be.not.visible');
 
-        // # Type a message in the input box but do not send
-        cy.findByRole('textbox', `write to ${testChannel.toLowerCase()}`).should('be.visible').type(message);
+        // Type in some text into the text area of the opened channel
+        cy.get('#post_textbox').type('message draft test');
 
-        // # Switch to another channel and check if it opened correctly
-        openChannelFromLhs(testTeam.name, 'Town Square', 'town-square');
+        // # Switch to another channel
+        cy.get('#sidebarItem_off-topic').click({force: true});
 
-        // * Validate if the draft icon is visible at LHS
-        verifyDraftIcon(testChannel, true);
+        // * Validate if the newly navigated channel is open
+        cy.url().should('include', `/${testTeam.name}/channels/off-topic`);
 
-        // # Press CTRL/CMD+K shortcut to open Quick Channel Switch modal
+        // # Press CTRL/CMD+K
         cy.typeCmdOrCtrl().type('K', {release: true});
 
-        // * Verify that the switch model is shown
-        cy.findAllByRole('dialog').first().findByText('Switch Channels').should('be.visible');
+        // * Click on hint in modal to get out of overlapping suggestion list
+        cy.get('#quickSwitchHint').click();
 
         // # Type the first few letters of the channel name you typed the message draft in
-        cy.findByRole('textbox', {name: 'quick switch input'}).type(testChannel.substring(0, 3));
+        cy.get('#quickSwitchInput').type('tow');
+        cy.wait(TIMEOUTS.HALF_SEC);
 
-        // * Suggestion list is visible
-        cy.get('#suggestionList').should('be.visible').within(() => {
-            // * A pencil icon before the channel name in the filtered list is visible
-            cy.findByLabelText(testChannel).find('.icon-pencil-outline').should('be.visible');
+        // * Suggestion list should be visible
+        cy.get('#suggestionList').should('be.visible');
 
-            // # Click to switch back to the test channel
-            cy.findByLabelText(testChannel).click();
-        });
+        // * Validate if the draft icon is visible to left of the channel name in the filtered list
+        cy.get('#publicChannel').scrollIntoView();
+        cy.get('#switchChannel_town-square .icon-pencil-outline').should('be.visible');
 
-        // * Draft is saved in the text input box of the test channel
-        cy.findByRole('textbox', `write to ${testChannel.toLowerCase()}`).should('be.visible').and('have.text', message);
+        // * Escape channel switcher and reset post textbox for test channel
+        cy.get('.close').click();
+        cy.clearPostTextbox('town-square');
     });
 });
-
-function verifyDraftIcon(channelName, isVisible) {
-    cy.get('#sidebar-left').findByLabelText(`${channelName.toLowerCase()} public channel`).
-        should('be.visible').
-        find('#draftIcon').
-        should(isVisible ? 'be.visible' : 'not.exist');
-}
-
-function openChannelFromLhs(teamName, displayName, name) {
-    // # Go to test channel and check if it opened correctly
-    cy.get('#sidebar-left').findByText(displayName).click();
-    cy.url().should('include', `/${teamName}/channels/${name || displayName.toLowerCase()}`);
-}
 

@@ -10,20 +10,25 @@
 // Stage: @prod
 // Group: @channel_sidebar
 
+import {testWithConfig} from '../../support/hooks';
+
 import {getRandomId} from '../../utils';
 
 describe('Channel sidebar', () => {
-    before(() => {
-        cy.apiUpdateConfig({
-            ServiceSettings: {
-                ExperimentalChannelSidebarOrganization: 'default_on',
-            },
-        });
+    testWithConfig({
+        ServiceSettings: {
+            ExperimentalChannelSidebarOrganization: 'default_on',
+        },
+    });
 
+    before(() => {
         // # Login as test user and visit town-square
         cy.apiInitSetup({loginAfter: true}).then(({team}) => {
             cy.visit(`/${team.name}/channels/town-square`);
         });
+
+        // # Close "What's new" modal
+        cy.uiCloseWhatsNewModal();
     });
 
     it('should not show history arrows on the regular webapp', () => {

@@ -83,6 +83,7 @@ describe('components/ElasticSearchSettings', () => {
         const success = jest.fn();
         instance.doTestConfig(success);
         expect(success).toBeCalled();
+        expect(instance.doSubmit).toBeCalled();
         expect(wrapper.find(SaveButton).prop('disabled')).toBe(false);
     });
 });

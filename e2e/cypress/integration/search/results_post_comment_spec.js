@@ -33,7 +33,7 @@ describe('Search', () => {
         cy.postMessage(message);
 
         // # Search for the text we just entered
-        cy.uiSearchPosts(message);
+        cy.get('#searchBox').type(message).type('{enter}');
 
         // # Get last postId
         cy.getLastPostId().then((postId) => {

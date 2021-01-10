@@ -88,6 +88,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="false"
                 id="admin.false"
+                values={Object {}}
               />
             }
             helpText={
@@ -106,6 +107,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="true"
                 id="admin.true"
+                values={Object {}}
               />
             }
             value={false}
@@ -194,6 +196,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="Regenerate"
                 id="admin.regenerate"
+                values={Object {}}
               />
             }
             setByEnv={false}
@@ -262,6 +265,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
                 <FormattedMessage
                   defaultMessage="Setting Eight"
                   id="label-h"
+                  values={Object {}}
                 />
               </span>
             </div>
@@ -383,6 +387,14 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="No result"
                 id="no-result-j"
+                values={Object {}}
+              />
+            }
+            notPresent={
+              <FormattedMessage
+                defaultMessage="No present"
+                id="no-present-j"
+                values={Object {}}
               />
             }
             onChange={[Function]}
@@ -512,6 +524,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="false"
                 id="admin.false"
+                values={Object {}}
               />
             }
             helpText={
@@ -530,6 +543,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="true"
                 id="admin.true"
+                values={Object {}}
               />
             }
             value={true}
@@ -589,6 +603,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="Setting Twelve"
                 id="label-l"
+                values={Object {}}
               />
             }
             createJobHelpText={
@@ -608,6 +623,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="false"
                 id="admin.false"
+                values={Object {}}
               />
             }
             helpText={
@@ -626,6 +642,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="true"
                 id="admin.true"
+                values={Object {}}
               />
             }
             value={false}
@@ -636,6 +653,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="false"
                 id="admin.false"
+                values={Object {}}
               />
             }
             helpText={
@@ -654,6 +672,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
               <FormattedMessage
                 defaultMessage="true"
                 id="admin.true"
+                values={Object {}}
               />
             }
             value={true}
@@ -671,6 +690,7 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
         <FormattedMessage
           defaultMessage="Save"
           id="save_button.save"
+          values={Object {}}
         />
       }
       disabled={true}
@@ -681,7 +701,6 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
     />
     <div
       className="error-message"
-      data-testid="errorMessage"
       onMouseOut={[Function]}
       onMouseOver={[Function]}
     >
@@ -702,7 +721,6 @@ exports[`components/admin_console/SchemaAdminSettings should match snapshot with
       placement="top"
       rootClose={false}
       show={false}
-      target={null}
     >
       <Tooltip
         bsClass="tooltip"

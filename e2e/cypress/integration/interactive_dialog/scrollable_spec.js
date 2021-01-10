@@ -29,7 +29,7 @@ describe('Interactive Dialog', () => {
         // # Create new team and create command on it
         cy.apiCreateTeam('test-team', 'Test Team').then(({team}) => {
             for (let i = 0; i < 20; i++) {
-                cy.apiCreateChannel(team.id, `channel-${i}`, `Channel ${i}`);
+                cy.apiCreateChannel(team.id, 'name' + i + Date.now(), 'name' + i + Date.now());
             }
 
             cy.visit(`/${team.name}`);
@@ -43,7 +43,7 @@ describe('Interactive Dialog', () => {
                 icon_url: '',
                 method: 'P',
                 team_id: team.id,
-                trigger: 'user_and_channel_dialog',
+                trigger: 'user_and_channel_dialog' + Date.now(),
                 url: `${webhookBaseUrl}/user_and_channel_dialog_request`,
                 username: '',
             };
@@ -55,7 +55,7 @@ describe('Interactive Dialog', () => {
         });
     });
 
-    it('MM-T2498 - Individual "User" and "Channel" screens are scrollable', () => {
+    it('ID21031 - Individual "User" and "Channel" screens are scrollable', () => {
         // # Post a slash command
         cy.postMessage(`/${createdCommand.trigger}`);
 

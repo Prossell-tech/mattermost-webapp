@@ -32,6 +32,7 @@ exports[`components/integrations/InstalledCommand should call onDelete function 
           <FormattedMessage
             defaultMessage="Regenerate Token"
             id="installed_integrations.regenToken"
+            values={Object {}}
           />
         </button>
          - 
@@ -41,6 +42,7 @@ exports[`components/integrations/InstalledCommand should call onDelete function 
           <FormattedMessage
             defaultMessage="Edit"
             id="installed_integrations.edit"
+            values={Object {}}
           />
         </Link>
          - 
@@ -135,6 +137,7 @@ exports[`components/integrations/InstalledCommand should call onRegenToken funct
           <FormattedMessage
             defaultMessage="Regenerate Token"
             id="installed_integrations.regenToken"
+            values={Object {}}
           />
         </button>
          - 
@@ -144,6 +147,7 @@ exports[`components/integrations/InstalledCommand should call onRegenToken funct
           <FormattedMessage
             defaultMessage="Edit"
             id="installed_integrations.edit"
+            values={Object {}}
           />
         </Link>
          - 
@@ -301,6 +305,7 @@ exports[`components/integrations/InstalledCommand should match snapshot, not aut
           <FormattedMessage
             defaultMessage="Unnamed Slash Command"
             id="installed_commands.unnamed_command"
+            values={Object {}}
           />
         </strong>
         <span

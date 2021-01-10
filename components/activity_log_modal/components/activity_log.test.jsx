@@ -73,6 +73,7 @@ describe('components/activity_log_modal/ActivityLog', () => {
             <FormattedMessage
                 defaultMessage='iPhone Native Classic App'
                 id='activity_log_modal.iphoneNativeClassicApp'
+                values={{}}
             />
         );
         const apple = {devicePicture: 'fa fa-apple', deviceTitle: localizeMessage('device_icons.apple', 'Apple Icon'), devicePlatform: appleText};
@@ -82,6 +83,7 @@ describe('components/activity_log_modal/ActivityLog', () => {
             <FormattedMessage
                 defaultMessage='Android Native Classic App'
                 id='activity_log_modal.androidNativeClassicApp'
+                values={{}}
             />
         );
         const android = {devicePicture: 'fa fa-android', deviceTitle: localizeMessage('device_icons.android', 'Android Icon'), devicePlatform: androidText};
@@ -91,6 +93,7 @@ describe('components/activity_log_modal/ActivityLog', () => {
             <FormattedMessage
                 defaultMessage='iPhone Native App'
                 id='activity_log_modal.iphoneNativeApp'
+                values={{}}
             />
         );
         const appleRN = {devicePicture: 'fa fa-apple', deviceTitle: localizeMessage('device_icons.apple', 'Apple Icon'), devicePlatform: appleRNText};
@@ -100,6 +103,7 @@ describe('components/activity_log_modal/ActivityLog', () => {
             <FormattedMessage
                 defaultMessage='Android Native App'
                 id='activity_log_modal.androidNativeApp'
+                values={{}}
             />
         );
         const androidRN = {devicePicture: 'fa fa-android', deviceTitle: localizeMessage('device_icons.android', 'Android Icon'), devicePlatform: androidRNText};

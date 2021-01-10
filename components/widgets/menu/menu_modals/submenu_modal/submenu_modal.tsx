@@ -13,7 +13,7 @@ import * as Utils from 'utils/utils.jsx';
 import './submenu_modal.scss';
 
 type Props = {
-    elements?: Array<React.ComponentProps<typeof SubMenuItem>>;
+    elements?: (React.ComponentProps<typeof SubMenuItem>)[];
     onHide: () => void;
 }
 

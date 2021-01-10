@@ -1,5 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,7 +13,7 @@ import Timestamp from 'components/timestamp';
 import OverlayTrigger from 'components/overlay_trigger';
 import UserSettingsModal from 'components/user_settings/modal';
 import {browserHistory} from 'utils/browser_history';
-import * as GlobalActions from 'actions/global_actions';
+import * as GlobalActions from 'actions/global_actions.jsx';
 import Constants, {ModalIdentifiers, UserStatuses} from 'utils/constants';
 import {t} from 'utils/i18n';
 import {intlShape} from 'utils/react_intl';
@@ -290,7 +291,6 @@ class ProfilePopover extends React.PureComponent {
                     key='user-popover-fullname'
                 >
                     <div
-                        data-testId={`popover-fullname-${this.props.user.username}`}
                         className='overflow--ellipsis text-nowrap'
                     >
                         <strong>{fullname}</strong>
@@ -376,8 +376,7 @@ class ProfilePopover extends React.PureComponent {
                     <Timestamp
                         useRelative={false}
                         useDate={false}
-                        userTimezone={this.props.user.timezone}
-                        useTime={{hour: 'numeric', minute: 'numeric', timeZoneName: 'short'}}
+                        timeZone={this.props.user.timezone}
                     />
                 </div>,
             );
@@ -462,6 +461,7 @@ class ProfilePopover extends React.PureComponent {
                         >
                             <ToggleModalButtonRedux
                                 accessibilityLabel={addToChannelMessage}
+                                ref='addUserToChannelModalButton'
                                 modalId={ModalIdentifiers.ADD_USER_TO_CHANNEL}
                                 role='menuitem'
                                 dialogType={AddUserToChannelModal}
@@ -534,3 +534,4 @@ class ProfilePopover extends React.PureComponent {
 delete ProfilePopover.propTypes.id;
 
 export default injectIntl(ProfilePopover);
+/* eslint-enable react/no-string-refs */

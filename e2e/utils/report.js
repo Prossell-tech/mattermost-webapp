@@ -104,13 +104,12 @@ const result = [
     {status: 'Failed', priority: 'high', cutOff: 0, color: '#F44336'},
 ];
 
-function generateTestReport(summary, isUploadedToS3, reportLink, environment, testCycleKey) {
+function generateTestReport(summary, isUploadedToS3, reportLink, environment) {
     const {
         BRANCH,
         BUILD_TAG,
         FULL_REPORT,
         PULL_REQUEST,
-        TEST_CYCLE_LINK_PREFIX,
         TYPE,
     } = process.env;
     const {statsFieldValue, stats} = summary;
@@ -130,6 +129,15 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
             testResult = result[i];
             break;
         }
+    }
+
+    let awsS3Fields;
+    if (isUploadedToS3) {
+        awsS3Fields = {
+            short: false,
+            title: 'Test Report',
+            value: `[Link to the report](${reportLink})`,
+        };
     }
 
     let dockerImageLink = '';
@@ -152,12 +160,6 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
     case 'MASTER_UNSTABLE':
         title = `E2E for Master Nightly Build (Unstable tests) ${dockerImageLink}`;
         break;
-    case 'CLOUD':
-        title = `E2E for Cloud Build (Prod tests) with [${BUILD_TAG}](https://hub.docker.com/r/mattermost/mm-cloud-ee/tags)`;
-        break;
-    case 'CLOUD_UNSTABLE':
-        title = `E2E for Cloud Build (Unstable tests) with [${BUILD_TAG}](https://hub.docker.com/r/mattermost/mm-cloud-ee/tags)`;
-        break;
     default:
         title = `E2E for Build ${dockerImageLink}`;
     }
@@ -165,24 +167,6 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
     const envValue = `cypress@${cypressVersion} | node@${nodeVersion} | ${browserName}@${browserVersion}${headless ? ' (headless)' : ''} | ${osName}@${osVersion}`;
 
     if (FULL_REPORT === 'true') {
-        let reportField;
-        if (isUploadedToS3) {
-            reportField = {
-                short: false,
-                title: 'Test Report',
-                value: `[Link to the report](${reportLink})`,
-            };
-        }
-
-        let testCycleField;
-        if (testCycleKey) {
-            testCycleField = {
-                short: false,
-                title: 'Test Execution',
-                value: `[Recorded test executions](${TEST_CYCLE_LINK_PREFIX}${testCycleKey})`,
-            };
-        }
-
         return {
             username: 'Cypress UI Test',
             icon_url: 'https://www.mattermost.org/wp-content/uploads/2016/04/icon.png',
@@ -198,8 +182,7 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
                         title: 'Environment',
                         value: envValue,
                     },
-                    reportField,
-                    testCycleField,
+                    awsS3Fields,
                     {
                         short: false,
                         title: `Key metrics (required support: ${testResult.priority})`,
@@ -215,11 +198,6 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
         quickSummary = `[${quickSummary}](${reportLink})`;
     }
 
-    let testCycleLink;
-    if (testCycleKey) {
-        testCycleLink = testCycleKey ? `| [Recorded test executions](${TEST_CYCLE_LINK_PREFIX}${testCycleKey})` : '';
-    }
-
     return {
         username: 'Cypress UI Test',
         icon_url: 'https://www.mattermost.org/wp-content/uploads/2016/04/icon.png',
@@ -229,7 +207,7 @@ function generateTestReport(summary, isUploadedToS3, reportLink, environment, te
             author_icon: 'https://www.mattermost.org/wp-content/uploads/2016/04/icon.png',
             author_link: 'https://www.mattermost.com/',
             title,
-            text: `${quickSummary} | ${(stats.duration / (60 * 1000)).toFixed(2)} mins ${testCycleLink}\n${envValue}`,
+            text: `${quickSummary} | ${(stats.duration / (60 * 1000)).toFixed(2)} mins\n${envValue}`,
         }],
     };
 }

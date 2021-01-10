@@ -13,7 +13,7 @@ export default class GroupProfile extends React.PureComponent {
         title: PropTypes.string.isRequired,
         titleDefault: PropTypes.string.isRequired,
         customID: PropTypes.string,
-        isDisabled: PropTypes.bool,
+        isDisabled: PropTypes.bool.isRequired,
         showAtMention: PropTypes.bool.isRequired,
         onChange: PropTypes.func,
     };

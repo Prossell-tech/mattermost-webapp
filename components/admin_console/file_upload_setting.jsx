@@ -1,5 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import $ from 'jquery';
 import PropTypes from 'prop-types';
@@ -31,12 +32,10 @@ export default class FileUploadSetting extends Setting {
             fileName: null,
             serverError: props.error,
         };
-        this.fileInputRef = React.createRef();
-        this.uploadButtonRef = React.createRef();
     }
 
     handleChange = () => {
-        const files = this.fileInputRef.current.files;
+        const files = this.refs.fileInput.files;
         if (files && files.length > 0) {
             this.setState({fileSelected: true, fileName: files[0].name});
         }
@@ -45,11 +44,11 @@ export default class FileUploadSetting extends Setting {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        $(this.uploadButtonRef.current).button('loading');
-        this.props.onSubmit(this.props.id, this.fileInputRef.current.files[0], (error) => {
-            $(this.uploadButtonRef.current).button('reset');
+        $(this.refs.upload_button).button('loading');
+        this.props.onSubmit(this.props.id, this.refs.fileInput.files[0], (error) => {
+            $(this.refs.upload_button).button('reset');
             if (error) {
-                Utils.clearFileInput(this.fileInputRef.current);
+                Utils.clearFileInput(this.refs.fileInput);
             }
         });
     }
@@ -86,7 +85,6 @@ export default class FileUploadSetting extends Setting {
                 <div>
                     <div className='file__upload'>
                         <button
-                            type='button'
                             className='btn btn-default'
                             disabled={this.props.disabled}
                         >
@@ -96,7 +94,7 @@ export default class FileUploadSetting extends Setting {
                             />
                         </button>
                         <input
-                            ref={this.fileInputRef}
+                            ref='fileInput'
                             type='file'
                             disabled={this.props.disabled}
                             accept={this.props.fileType}
@@ -104,11 +102,10 @@ export default class FileUploadSetting extends Setting {
                         />
                     </div>
                     <button
-                        type='button'
                         className={btnClass}
                         disabled={!this.state.fileSelected}
                         onClick={this.handleSubmit}
-                        ref={this.uploadButtonRef}
+                        ref='upload_button'
                         data-loading-text={`<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> ${this.props.uploadingText}`}
                     >
                         <FormattedMessage

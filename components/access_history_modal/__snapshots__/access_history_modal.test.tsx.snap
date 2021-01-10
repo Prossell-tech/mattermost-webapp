@@ -44,6 +44,7 @@ exports[`components/AccessHistoryModal should match snapshot when audits exist 1
       <FormattedMessage
         defaultMessage="Access History"
         id="access_history.title"
+        values={Object {}}
       />
     </ModalTitle>
   </ModalHeader>
@@ -75,6 +76,7 @@ exports[`components/AccessHistoryModal should match snapshot when audits exist 1
       <FormattedMessage
         defaultMessage="Close"
         id="general_button.close"
+        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -125,6 +127,7 @@ exports[`components/AccessHistoryModal should match snapshot when no audits exis
       <FormattedMessage
         defaultMessage="Access History"
         id="access_history.title"
+        values={Object {}}
       />
     </ModalTitle>
   </ModalHeader>
@@ -150,6 +153,7 @@ exports[`components/AccessHistoryModal should match snapshot when no audits exis
       <FormattedMessage
         defaultMessage="Close"
         id="general_button.close"
+        values={Object {}}
       />
     </button>
   </ModalFooter>

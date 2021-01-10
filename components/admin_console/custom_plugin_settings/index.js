@@ -36,7 +36,7 @@ function makeGetPluginSchema() {
                     let bannerType = '';
                     let type = setting.type;
                     let displayName = setting.display_name;
-                    let isDisabled = it.any(it.stateIsFalse(pluginEnabledConfigKey), it.not(it.userHasWritePermissionOnResource('plugins')));
+                    let isDisabled = it.stateIsFalse(pluginEnabledConfigKey);
 
                     if (customComponents[key]) {
                         component = customComponents[key].component;
@@ -46,7 +46,7 @@ function makeGetPluginSchema() {
                         type = Constants.SettingsTypes.TYPE_BANNER;
                         displayName = localizeMessage('admin.plugin.customSetting.pluginDisabledWarning', 'In order to view this setting, enable the plugin and click Save.');
                         bannerType = 'warning';
-                        isDisabled = it.any(it.stateIsTrue(pluginEnabledConfigKey), it.not(it.userHasWritePermissionOnResource('plugins')));
+                        isDisabled = it.stateIsTrue(pluginEnabledConfigKey);
                     }
 
                     return {
@@ -64,13 +64,7 @@ function makeGetPluginSchema() {
                 });
             }
 
-            const pluginEnableSetting = getEnablePluginSetting(plugin);
-            pluginEnableSetting.isDisabled = it.any(pluginEnableSetting.isDisabled, it.not(it.userHasWritePermissionOnResource('plugins')));
-            settings.unshift(pluginEnableSetting);
-
-            settings.forEach((s) => {
-                s.isDisabled = it.any(s.isDisabled, it.not(it.userHasWritePermissionOnResource('plugins')));
-            });
+            settings.unshift(getEnablePluginSetting(plugin));
 
             return {
                 ...plugin.settings_schema,

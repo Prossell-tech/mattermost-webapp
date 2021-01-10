@@ -128,7 +128,6 @@ export default class PostBody extends React.PureComponent {
     render() {
         const post = this.props.post;
         const parentPost = this.props.parentPost;
-        const parentPostUser = this.props.parentPostUser;
 
         let comment;
         let postClass = '';
@@ -139,7 +138,6 @@ export default class PostBody extends React.PureComponent {
             comment = (
                 <CommentedOn
                     post={parentPost}
-                    parentPostUser={parentPostUser}
                     onCommentClick={this.props.handleCommentClick}
                 />
             );

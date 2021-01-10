@@ -45,6 +45,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
       <FormattedMessage
         defaultMessage="Add Members"
         id="admin.team_settings.team_details.add_members"
+        values={Object {}}
       />
     </ModalToggleButton>
   }
@@ -74,12 +75,14 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
             "name": <FormattedMessage
               defaultMessage="Role"
               id="admin.user_grid.role"
+              values={Object {}}
             />,
             "values": Object {
               "system_admin": Object {
                 "name": <FormattedMessage
                   defaultMessage="System Admin"
                   id="admin.user_grid.system_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -87,6 +90,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Guest"
                   id="admin.user_grid.guest"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -94,6 +98,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Team Admin"
                   id="admin.user_grid.team_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -101,6 +106,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Member"
                   id="admin.user_item.member"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -146,9 +152,9 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
         },
       }
     }
-    onSearch={[Function]}
     removeUser={[Function]}
     scope="team"
+    search={[Function]}
     term=""
     totalCount={3}
     updateMembership={[Function]}
@@ -334,6 +340,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
       <FormattedMessage
         defaultMessage="Add Members"
         id="admin.team_settings.team_details.add_members"
+        values={Object {}}
       />
     </ModalToggleButton>
   }
@@ -363,12 +370,14 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
             "name": <FormattedMessage
               defaultMessage="Role"
               id="admin.user_grid.role"
+              values={Object {}}
             />,
             "values": Object {
               "system_admin": Object {
                 "name": <FormattedMessage
                   defaultMessage="System Admin"
                   id="admin.user_grid.system_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -376,6 +385,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Guest"
                   id="admin.user_grid.guest"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -383,6 +393,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Team Admin"
                   id="admin.user_grid.team_admin"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -390,6 +401,7 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
                 "name": <FormattedMessage
                   defaultMessage="Member"
                   id="admin.user_item.member"
+                  values={Object {}}
                 />,
                 "value": false,
               },
@@ -402,9 +414,9 @@ exports[`admin_console/team_channel_settings/team/TeamMembers should match snaps
     loadPage={[Function]}
     loading={true}
     memberships={Object {}}
-    onSearch={[Function]}
     removeUser={[Function]}
     scope="team"
+    search={[Function]}
     term=""
     totalCount={0}
     updateMembership={[Function]}

@@ -223,17 +223,6 @@ describe('components/MarketplaceItem', () => {
             expect(wrapper).toMatchSnapshot();
         });
 
-        test('should render with no plugin description', () => {
-            const props = {...baseProps};
-            delete props.description;
-
-            const wrapper = shallow(
-                <MarketplaceItem {...props}/>,
-            );
-
-            expect(wrapper).toMatchSnapshot();
-        });
-
         test('should render with no plugin icon', () => {
             const props = {...baseProps};
             delete props.iconData;

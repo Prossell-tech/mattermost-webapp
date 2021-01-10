@@ -39,7 +39,7 @@ describe('Interactive Dialog', () => {
                 icon_url: '',
                 method: 'P',
                 team_id: team.id,
-                trigger: 'boolean_dialog',
+                trigger: 'boolean_dialog' + Date.now(),
                 url: `${webhookBaseUrl}/boolean_dialog_request`,
                 username: '',
             };
@@ -51,7 +51,7 @@ describe('Interactive Dialog', () => {
         });
     });
 
-    it('MM-T2502 - Boolean element check', () => {
+    it('ID21034 - Boolean element check', () => {
         // # Post a slash command
         cy.postMessage(`/${createdCommand.trigger}`);
 

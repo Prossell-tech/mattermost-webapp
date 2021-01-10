@@ -11,9 +11,7 @@ type Props = {
 };
 
 class FilterCheckbox extends React.PureComponent<Props> {
-    toggleOption = (e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
+    toggleOption = () => {
         const {checked, name, updateOption} = this.props;
         updateOption(!checked, name);
     }
@@ -21,28 +19,16 @@ class FilterCheckbox extends React.PureComponent<Props> {
     render() {
         const {name, checked, label} = this.props;
         return (
-            <div
-                className='FilterList_checkbox'
-                onClick={this.toggleOption}
-            >
+            <div className='FilterList_checkbox'>
                 <label>
-                    {checked &&
-                        <input
-                            type='checkbox'
-                            id={name}
-                            name={name}
-                            defaultChecked={true}
-                        />
-                    }
+                    <input
+                        type='checkbox'
+                        id={name}
+                        name={name}
+                        checked={checked}
+                        onChange={this.toggleOption}
+                    />
 
-                    {!checked &&
-                        <input
-                            type='checkbox'
-                            id={name}
-                            name={name}
-                            defaultChecked={false}
-                        />
-                    }
                     {label}
                 </label>
             </div>

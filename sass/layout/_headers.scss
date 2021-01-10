@@ -108,8 +108,8 @@
             height: 20px;
             margin-right: 8px;
             font-size: 1.6rem;
-            fill: rgba(var(--center-channel-color-rgb), 0.56);
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            fill: v(center-channel-color-56);
+            color: v(center-channel-color-56);
 
             svg,
             img {
@@ -269,7 +269,6 @@
             .emoticon {
                 position: relative;
                 top: -1px;
-                overflow: hidden;
             }
         }
 
@@ -297,7 +296,8 @@
 
         .header-description__text {
             overflow: hidden;
-            display: block;
+            display: flex;
+            flex-direction: column;
 
             ul {
                 &:first-child {
@@ -331,7 +331,7 @@
             overflow: visible;
 
             button {
-                color: rgba(var(--center-channel-color-rgb), 0.64);
+                color: v(center-channel-color-64);
 
                 .button__edit {
                     color: v(link-color);

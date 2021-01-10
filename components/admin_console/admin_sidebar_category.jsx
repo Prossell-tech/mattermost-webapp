@@ -15,7 +15,6 @@ export default class AdminSidebarCategory extends React.PureComponent {
             parentLink: PropTypes.string,
             children: PropTypes.node,
             action: PropTypes.node,
-            definitionKey: PropTypes.string,
         };
     }
 
@@ -75,10 +74,7 @@ export default class AdminSidebarCategory extends React.PureComponent {
         }
 
         return (
-            <li
-                className='sidebar-category'
-                data-testid={this.props.definitionKey}
-            >
+            <li className='sidebar-category'>
                 {title}
                 {clonedChildren}
             </li>

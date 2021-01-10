@@ -356,11 +356,10 @@ exports[`components/ChannelHeaderDropdown should match snapshot with no plugin i
         text="Rename Channel"
       />
     </Connect(ChannelPermissionGate)>
-    <Connect(ChannelPermissionGate)
-      channelId="test-channel-id"
+    <Connect(TeamPermissionGate)
       permissions={
         Array [
-          "convert_public_channel_to_private",
+          "manage_team",
         ]
       }
     >
@@ -380,12 +379,12 @@ exports[`components/ChannelHeaderDropdown should match snapshot with no plugin i
             "type": [Function],
           }
         }
-        id="channelConvertToPrivate"
+        id="channelCovertToPrivate"
         modalId="convert_channel"
         show={false}
         text="Convert to Private Channel"
       />
-    </Connect(ChannelPermissionGate)>
+    </Connect(TeamPermissionGate)>
     <Connect(ChannelPermissionGate)
       channelId="test-channel-id"
       permissions={
@@ -841,11 +840,10 @@ exports[`components/ChannelHeaderDropdown should match snapshot with plugins 1`]
         text="Rename Channel"
       />
     </Connect(ChannelPermissionGate)>
-    <Connect(ChannelPermissionGate)
-      channelId="test-channel-id"
+    <Connect(TeamPermissionGate)
       permissions={
         Array [
-          "convert_public_channel_to_private",
+          "manage_team",
         ]
       }
     >
@@ -865,12 +863,12 @@ exports[`components/ChannelHeaderDropdown should match snapshot with plugins 1`]
             "type": [Function],
           }
         }
-        id="channelConvertToPrivate"
+        id="channelCovertToPrivate"
         modalId="convert_channel"
         show={false}
         text="Convert to Private Channel"
       />
-    </Connect(ChannelPermissionGate)>
+    </Connect(TeamPermissionGate)>
     <Connect(ChannelPermissionGate)
       channelId="test-channel-id"
       permissions={

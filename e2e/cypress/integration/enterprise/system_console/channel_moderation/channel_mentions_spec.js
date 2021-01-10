@@ -12,8 +12,8 @@
 import {checkboxesTitleToIdMap} from './constants';
 
 import {
-    disablePermission,
-    enablePermission,
+    disableChannelModeratedPermission,
+    enableChannelModeratedPermission,
     postChannelMentionsAndVerifySystemMessageExist,
     postChannelMentionsAndVerifySystemMessageNotExist,
     saveConfigForChannel,
@@ -50,7 +50,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
     it('Channel Mentions option for Guests', () => {
         // # Uncheck the Channel Mentions option for Guests and save
         visitChannelConfigPage(testChannel);
-        disablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_GUESTS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_GUESTS);
         saveConfigForChannel();
 
         visitChannel(guestUser, testChannel, testTeam);
@@ -62,7 +62,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         visitChannelConfigPage(testChannel);
 
         // # check the channel mentions option for guests and save
-        enablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_GUESTS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_GUESTS);
         saveConfigForChannel();
 
         visitChannel(guestUser, testChannel, testTeam);
@@ -76,7 +76,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         visitChannelConfigPage(testChannel);
 
         // # Uncheck the channel mentions option for guests and save
-        disablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
         saveConfigForChannel();
 
         visitChannel(regularUser, testChannel, testTeam);
@@ -88,7 +88,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         visitChannelConfigPage(testChannel);
 
         // # check the channel mentions option for guests and save
-        enablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
         saveConfigForChannel();
 
         visitChannel(regularUser, testChannel, testTeam);
@@ -102,7 +102,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         visitChannelConfigPage(testChannel);
 
         // # Uncheck the create posts option for guests
-        disablePermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
 
         // * Option to allow Channel Mentions for Guests should also be disabled when Create Post option is disabled.
         // * A message Guests can not use channel mentions without the ability to create posts should be displayed.
@@ -111,8 +111,8 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         cy.findByTestId(checkboxesTitleToIdMap.CHANNEL_MENTIONS_GUESTS).should('be.disabled');
 
         // # check the create posts option for guests and uncheck for members
-        enablePermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
-        disablePermission(checkboxesTitleToIdMap.CREATE_POSTS_MEMBERS);
+        enableChannelModeratedPermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CREATE_POSTS_MEMBERS);
 
         // * Option to allow Channel Mentions for Members should also be disabled when Create Post option is disabled.
         // * A message Members can not use channel mentions without the ability to create posts should be displayed.
@@ -121,7 +121,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
         cy.findByTestId(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS).should('be.disabled');
 
         // # Uncheck the create posts option for guests
-        disablePermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CREATE_POSTS_GUESTS);
 
         // * Ensure that channel mentions for members and guests is disabled
         // * Ensure message Guests & Members can not use channel mentions without the ability to create posts
@@ -133,7 +133,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
 
     it('Message when user without channel mention permission uses special channel mentions', () => {
         visitChannelConfigPage(testChannel);
-        disablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
         saveConfigForChannel();
 
         visitChannel(regularUser, testChannel, testTeam);
@@ -152,7 +152,7 @@ describe('MM-23102 - Channel Moderation - Channel Mentions', () => {
     it('Confirm sending notifications while using special channel mentions', () => {
         // # Visit Channel page and Search for the channel.
         visitChannelConfigPage(testChannel);
-        disablePermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
+        disableChannelModeratedPermission(checkboxesTitleToIdMap.CHANNEL_MENTIONS_MEMBERS);
         saveConfigForChannel();
 
         // # Set @channel and @all confirmation dialog to true

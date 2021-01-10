@@ -45,6 +45,7 @@ exports[`components/MoreChannels should match snapshot and state 1`] = `
       <FormattedMessage
         defaultMessage="More Channels"
         id="more_channels.title"
+        values={Object {}}
       />
     </ModalTitle>
     <Connect(TeamPermissionGate)
@@ -58,12 +59,13 @@ exports[`components/MoreChannels should match snapshot and state 1`] = `
       <button
         className="btn btn-primary channel-create-btn"
         id="createNewChannel"
-        onClick={[Function]}
+        onClick={[MockFunction]}
         type="button"
       >
         <FormattedMessage
           defaultMessage="Create Channel"
           id="more_channels.create"
+          values={Object {}}
         />
       </button>
     </Connect(TeamPermissionGate)>
@@ -117,6 +119,7 @@ exports[`components/MoreChannels should match snapshot and state 1`] = `
             <FormattedMessage
               defaultMessage="Click 'Create New Channel' to make a new one"
               id="more_channels.createClick"
+              values={Object {}}
             />
           </p>
         </Memo(Connect(TeamPermissionGate))>

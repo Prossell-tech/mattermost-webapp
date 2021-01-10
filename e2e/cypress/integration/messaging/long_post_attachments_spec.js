@@ -39,7 +39,7 @@ function postAttachments() {
     });
 }
 
-describe('MM-T105 Long post with mutiple attachments', () => {
+describe('M14322 Long post with multiple attachments', () => {
     let testTeam;
 
     beforeEach(() => {
@@ -97,11 +97,8 @@ describe('MM-T105 Long post with mutiple attachments', () => {
                 cy.findByTestId('fileCountFooter').contains(`File ${index} of 4`).should('exist');
             }
 
-            // * Verify that the preview modal opens
-            cy.get('div.modal-image__content').should('be.visible').trigger('mouseover');
-
-            // # Close the modal
-            cy.get('div.modal-close').should('exist').click({force: true});
+            // # click on close the preview
+            cy.get('.modal-close').should('be.visible').click();
         });
     });
 });
