@@ -4,6 +4,7 @@ BUILD_SERVER_DIR = ../prossell-server
 BUILD_WEBAPP_DIR = ../prossell-webapp
 MM_UTILITIES_DIR = ../prossell-utilities
 EMOJI_TOOLS_DIR = ./build/emoji
+export NODE_OPTIONS=--max-old-space-size=4096
 
 build-storybook: node_modules ## Build the storybook
 	@echo Building storybook
